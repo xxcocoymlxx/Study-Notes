@@ -1,0 +1,12 @@
+ca/utoronto/utsc/dagger2/VehiclesModule_ProvideEngineFactory.class
+ca/utoronto/utsc/dagger2/DaggerVehiclesComponent$1.class
+ca/utoronto/utsc/dagger2/Car.class
+ca/utoronto/utsc/dagger2/Brand.class
+ca/utoronto/utsc/dagger2/VehiclesModule_ProvideBrandFactory.class
+ca/utoronto/utsc/dagger2/Engine.class
+ca/utoronto/utsc/dagger2/Car_Factory.class
+ca/utoronto/utsc/dagger2/VehiclesModule.class
+ca/utoronto/utsc/dagger2/DaggerVehiclesComponent.class
+ca/utoronto/utsc/dagger2/UseCars.class
+ca/utoronto/utsc/dagger2/DaggerVehiclesComponent$Builder.class
+ca/utoronto/utsc/dagger2/VehiclesComponent.class
