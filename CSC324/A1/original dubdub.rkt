@@ -1,0 +1,154 @@
+#lang racket
+#| * CSC324 Fall 2019: Assignment 1 * |#
+#|
+Module: dubdub
+Description: Assignment 1: A More Featureful Interpreter
+Copyright: (c)University of Toronto, University of Toronto Mississauga 
+               CSC324 Principles of Programming Languages, Fall 2019
+
+The assignment handout can be found at
+
+    https://www.cs.toronto.edu/~lczhang/324/files/a1.pdf
+
+Please see the assignment guidelines at 
+
+    https://www.cs.toronto.edu/~lczhang/324/homework.html
+|#
+
+(provide run-interpreter)
+
+(require "dubdub_errors.rkt")
+
+
+;-----------------------------------------------------------------------------------------
+; Main functions (skeleton provided in starter code)
+;-----------------------------------------------------------------------------------------
+#|
+(run-interpreter prog) -> any
+  prog: datum?
+    A syntactically-valid Dubdub program.
+
+  Evaluates the Dubdub program and returns its value, or raises an error if the program is
+  not semantically valid.
+|#
+(define (run-interpreter prog)
+  (cond
+    [(equal? 0 (length prog))  (void)] ;no prog
+    [(equal? 1 (length prog))          (interpret (hash) (first prog))] ;only have <expr>
+    [else
+     (interpret (foldl (lambda (expr env) (interpret env expr)) (hash) (take prog (- (length prog) 1))) (last prog))] ;normal prog (<binding_or_contract> ... <expr>)
+    ))
+
+
+
+
+
+
+
+#|
+(interpret env expr) -> any
+  env: hash?
+    The environment with which to evaluate the expression.
+  expr: datum?
+    A syntactically-valid Dubdub expression.
+
+  Returns the value of the Dubdub expression under the given environment.
+|#
+(define (interpret env expr)
+  (cond
+    [(closure? expr) (if (closure-slovable env expr)                                                                                                          ;the expr is closure structrue                 Recursion / Return new closure  
+                      (interpret env (closure-body expr))
+                      (closure (closure-contract expr) env (closure-params expr) (closure-body expr)))]      
+
+    [(number? expr) expr]                                                                                                                                    ;the expr is <expr> a number                   return expr
+
+    [(boolean? expr) expr]                                                                                                                                    ;the expr is <expr> a boolean                  return expr
+
+    [(symbol? expr) (if (hash-has-key? env expr)                                                                                                             ;the expr is <expr> a symbol                   return Value / Error raised
+                    (hash-ref env expr)
+                    (report-error 'unbound-name expr))] 
+
+    [(equal? (first expr) 'define) (env-update env (second expr) (interpret env (third expr)))]                                                                             ;the expr is <binding>                         return new env / Error raised
+
+    [(equal? (first expr) 'define-contract) (env-update env (second expr) (closure (third expr) env (list) (list))) ]                                                                ;the expr is <contract>                        return new env
+
+    [(equal? (first expr) 'lambda) (closure (list) env (second expr) (third expr))]                                                                                         ;the expr is <expr> function expresssion       Return Clousre
+
+    [(builtin? (first expr)) (apply (hash-ref builtins (first expr))                                                                                                  ;the epxr is a bulitin funciton call           Recursion
+                              (foldl (lambda (expr ls) (append ls (list (interpret env expr)))) (list) (rest expr)))] 
+
+    [(equal? #f (or (builtin? (first expr)) (closure? (interpret env (first expr))))) (report-error 'not-a-function (first expr)) ]                                                                                            ;the expr is NOT A FUNCTION CALL,              Error raised
+
+    [else  (let ((clu (interpret env (first expr)))                                                                                                 ;the expr is <expr> a function call            Recursion
+ (arguments (foldl (lambda (exprsion results) (append results (list (interpret env exprsion)))) (list) (rest expr))))
+   (interpret (foldl (lambda (k v environment) (env-update environment k v))
+  (closure-environment clu)
+ (take (unknown-parms (closure-environment clu) (closure-params clu)) (length arguments))
+ arguments) clu))] 
+    ))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;-----------------------------------------------------------------------------------------
+; Helpers: Builtins and closures
+;-----------------------------------------------------------------------------------------
+; A hash mapping symbols for Dubdub builtin functions to their corresponding Racket value.
+(define builtins
+  (hash
+   '+ +
+   'equal? equal?
+   '< <
+   'integer? integer?
+   'boolean? boolean?
+   ; Note: You'll almost certainly need to replace procedure? here to properly return #t
+   ; when given your closure data structure at the end of Task 1!
+   'procedure? procedure?
+   ))
+
+; Returns whether a given symbol refers to a builtin Dubdub function.
+(define (builtin? identifier) (hash-has-key? builtins identifier))
+
+#|
+Starter definition for a closure "struct". Racket structs behave similarly to
+C structs (contain fields but no methods or encapsulation).
+Read more at https://docs.racket-lang.org/guide/define-struct.html.
+
+You can and should modify this as necessary. If you're having trouble working with
+Racket structs, feel free to switch this implementation to use a list/hash instead.
+|#
+(struct closure (contract environment params body))
+                                                  
+(define (env-update env key value) ;return a new env by adding key and value.
+  (if (closure? value)
+      (if (hash-has-key? env key) ;binding a function
+          (hash-set env key (closure (closure-contract (hash-ref env key)) (closure-environment value) (closure-params value) (closure-body value)))
+          (hash-set env key (closure (list) (closure-environment value) (closure-params value) (closure-body value))))
+      (if (hash-has-key? env key) ;binding a interger/boolean
+          (report-error 'duplicate-name key)
+          (hash-set env key value)) 
+      ))
+
+(define (closure-slovable env clu) ;return true iff all params in closure are defined 
+  (foldl (lambda (parm result) (and result (hash-has-key? env parm))) #t (closure-params clu)))
+
+(define (unknown-parms env parms) ;return a list of parms that do not have defined value in env
+  (foldl (lambda (parm result) (if (hash-has-key? env parm) (append result (list)) (append result (list parm)))) (list) parms))

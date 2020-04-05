@@ -1,0 +1,104 @@
+#lang racket #| CSC324 Fall 2019: Lab 8 |#
+
+(require (only-in racket/control reset))
+(require "streams.rkt")
+(require "amb.rkt")
+
+(provide make-change-gen)
+
+;-------------------------------------------------------------------------------
+; * Task 1: Making change *
+;-------------------------------------------------------------------------------
+#|
+(make-change n)
+  n: A non-negative integer.
+
+  Returns a choice of a list of 1's and 5's whose sum is n. The returned list
+  should be in *non-increasing order*, i.e., all 5's should appear before all 1's.
+
+  You might want to lookup the "make-list" function.
+|#
+(define (make-change n)
+  (do/-< (make-change-helper n)))
+
+; Helper function for `make-change` that uses `-<`
+(define (make-change-helper n)
+  (void))
+
+#;(module+ test
+  (require rackunit)
+  (require (only-in racket/control prompt))
+
+  (test-equal? "make-change 0"
+               (list->set (stream->list ((make-change 0))))
+               (set empty))
+  (test-equal? "make-change 1"
+               (list->set (stream->list ((make-change 1))))
+               (set (list 1)))
+  (test-equal? "make-change 5"
+               (list->set (stream->list ((make-change 5))))
+               (set (list 5) (list 1 1 1 1 1)))
+  (test-equal? "make-change 13"
+               (list->set (stream->list ((make-change 13))))
+               (set (list 5 5 1 1 1)
+                    (list 5 1 1 1 1 1 1 1 1)
+                    (list 1 1 1 1 1 1 1 1 1 1 1 1 1))))
+
+
+#|
+(make-change-gen coins n)
+  coins: A list of distinct positive integers, sorted in decreasing order.
+  n: An integer.
+
+  Returns a choice of a list of numbers in `coins` whose sum is `n`.
+  The list should be sorted in non-increasing order.
+  As before, coin values may be used more than once.
+
+  If no possible combinations in `coins` sums to n (including when n is negative),
+  *call (fail)*. (This is useful inside recursive calls.)
+  But return an *empty list* if n = 0. These are different cases!
+
+  Notes:
+    1. We have started the pattern-matching for you, and strongly recommend building
+       off of these patterns.
+    2. You might need to have the output choices come out in a different order
+       than in `make-change`. That's fine!
+|#
+(define (make-change-gen coins n)
+  (do/-< (make-change-gen-helper coins n)))
+
+
+(define (make-change-gen-helper coins n)
+  (cond
+    ; If n = 0, return an empty list.
+    [(equal? n 0) (void)]
+
+    ; If there are no more coins to choose from, backtrack by calling (fail).
+    [(empty? coins) (void)]
+    
+    ; What other choices are there?
+    ; Note: be careful *not* to call `make-change-gen-helper` inside an `-<`
+    ;      That is, do NOT call `(-< (... (make-change-gen-helper ...)) ...)`
+    ;      since it will interfere with the `(fail)` call.
+    ;      Instead, generate the arguments to the function using `-<`, then
+    ;      call the function after the choices are generated.
+    [else (void)]))
+
+
+#; (module+ test
+  (test-equal? "make-change-gen (10 3) 13"
+               (list->set (stream->list ((make-change-gen (list 10 3) 13))))
+               (set (list 10 3)))
+
+  (test-equal? "make-change-gen (5 1) 13"
+               (list->set (stream->list ((make-change-gen (list 5 1) 13))))
+               (set (list 5 5 1 1 1)
+                    (list 5 1 1 1 1 1 1 1 1)
+                    (list 1 1 1 1 1 1 1 1 1 1 1 1 1)))
+
+  ; A note about this test. It may seem weird that the expected output is (set)
+  ; and not (set 'done). The reason is that `all-choices` returns `empty` when
+  ; there are no more choices (see its implementation above).
+  (test-equal? "no combinations possible"
+               (list->set (stream->list ((make-change-gen (list 10 3) 17))))
+               (set)))

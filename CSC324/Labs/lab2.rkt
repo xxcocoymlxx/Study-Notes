@@ -1,0 +1,121 @@
+#lang racket #| CSC324 Fall 2018: Lab 2 |#
+
+;-------------------------------------------------------------------------------
+; * Task 1: num-pred *
+;-------------------------------------------------------------------------------
+(define (num-pred pred lst)
+  (cond
+    [(null? lst) 0]
+    [else
+     (let ([first-val (first lst)]
+           [num-rest-lst (num-pred pred (rest lst))])
+       (if (pred first-val)
+           (+ 1 num-rest-lst)
+           num-rest-lst))]))
+
+
+(module+ test
+  (require rackunit)
+  (require "ex1.rkt") ; replace with the relative path to your exercise 1
+  ;Returns the number of even elements in the list.
+
+  (test-equal? "num-pred/num-evens"
+               (num-evens (list 1 2 3 4 5))
+               (num-pred even? (list 1 2 3 4 5)))
+
+  ; TODO: replace the ellipsis with the appropriate predicate for this test to pass.
+  (test-equal? "num-pred/num-many-evens"
+               (num-many-evens (list (list 1 2 3 4 5) (list 2 4 6 10)))
+
+               (num-pred (lambda (x) (> (num-pred even? x) 2))
+                         (list (list 1 2 3 4 5) (list 2 4 6 10)))))
+
+
+;-------------------------------------------------------------------------------
+; Task 2: make-counter *
+;-------------------------------------------------------------------------------
+;the point of this function is not performing a function on a different list every time
+;we have a fixed list, we just want to do different operations on the same list
+(define (make-counter pred)
+  (lambda (lst) (num-pred pred lst)))
+
+; Uncomment and define these using `make-counter`.
+(define num-evens-1 (make-counter even?))
+(define num-many-evens-1 (make-counter (lambda (x) (> (num-pred even? x) 2))))
+
+
+
+;-------------------------------------------------------------------------------
+; * Task 3: Manipulating Racket expressions *
+;-------------------------------------------------------------------------------
+
+#|
+(extract-ints datum)
+  datum: A Racket datum (i.e., quoted expression).
+
+  Returns a list of all *integer* literals appearing in the expression.
+  The list should contain the literals in the left-to-right order they appear
+  in the text of the quoted expression.
+
+  Use the predicates `list?` or `null?` to check for whether a given expression
+  is a list or an empty list, respectively. You may assume that if the input
+  is not a list, then it is an atom (either a symbol or some sort of literal).
+
+  Hint: you may need a recursive helper function to accumulate the results of
+  calling extract-ints recursively. Or, look up the append, map, and append-map
+  list functions to see if you get any ideas!
+
+  While you may assume the program is syntactically valid, it is not necessarily
+  semantically valid. For example, it might produce type errors at runtime;
+  Your function should still correctly return all integer literals appearing in
+  the program. See tests for some examples.
+|#
+(define (extract-ints prog)
+  (cond [(null? prog) (list)];returns empty list
+        [(list? prog)
+         (let ([first-element (first prog)]
+               [rest-output (extract-ints (rest prog))])
+           (if (integer? first-element)
+               (append (list first-element) rest-output)
+               (append (extract-ints first-element) rest-output)))]
+        [(integer? prog) (list prog)]
+        [else
+         (list)]
+         ))
+
+
+(module+ test
+  (check-equal? (extract-ints '2) (list 2)) ; Note: '2 == 2, i.e., the ' is unnecessary.
+  (check-equal? (extract-ints '(+ 1 2)) (list 1 2))
+  (check-equal? (extract-ints '(list 1 2 3 4)) (list 1 2 3 4))
+  (check-equal? (extract-ints '(+ (- 9 7) (* 2 8))) (list 9 7 2 8))
+  (check-equal? (extract-ints 'ident) (list)))
+
+
+#|
+(replace-324 datum)
+  datum: A Racket datum (i.e., quoted expression).
+
+  Return a new datum that is the same as the input, except every occurrence
+  of the numeric literal 324 is replaced with 9000.
+|#
+(define (replace-324 datum)
+  (cond [(null? datum) null]
+        [(list? datum)
+         (let ([first-value (first datum)]
+               [rest-value (replace-324 (rest datum))])
+           (if (equal? first-value 324)
+               (cons 9000 rest-value)
+               (cons (replace-324 first-value) rest-value)))]
+        [(equal? 324 datum)
+         9000]
+        [else
+         datum]))
+
+
+(module+ test
+  (check-equal? (replace-324 "hello!") "hello!")
+  (check-equal? (replace-324 324) 9000)
+  (check-equal? (replace-324 '(+ 1 2)) '(+ 1 2))
+  (check-equal? (replace-324 '(list 1 2 324 4)) '(list 1 2 9000 4))
+  (check-equal? (replace-324 '(+ (- 324 7) (* 2 324))) '(+ (- 9000 7) (* 2 9000))))

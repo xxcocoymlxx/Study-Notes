@@ -1,0 +1,1 @@
+("7.4" racket ("e05fc7e5cc40b1ffb27e17c4f177c971f2fb15a2" . "052b88fea471c0c75c6927ee29a9cb602e099860") #"/Users/CYANG/Desktop/CSC324/Labs/Lab8/streams.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"control.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

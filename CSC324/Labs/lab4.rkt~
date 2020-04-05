@@ -1,0 +1,54 @@
+#lang racket #| * CSC324 Fall 2018: Lab 4 * |#
+
+;-------------------------------------------------------------------------------
+; * Task 1: Closures as objects *
+;-------------------------------------------------------------------------------
+#|
+(Point x y)
+  x: an integer (representing the x-coordinate of the point)
+  y: an integer (representing the y-coordinate of the point)
+
+  Returns a function representing the *point* (x, y).
+  Read the given code carefully to see how the returned function expects to
+  be called, and experiment in the interpreter!
+
+|#
+(define (Point x y)
+  (lambda (attr)
+    (cond
+      [(equal? attr 'x) x]
+      [(equal? attr 'y) y]
+      [(equal? attr 'scale)
+       (lambda (scale)
+         (Point (* scale x) (* scale y)))]
+      [else (error (format "Point has no attribute ~a." attr))])))
+
+(define (sum-coord p)
+  (+ (p 'x) (p 'y)))
+
+(define (distance p1 p2)
+  (let* ([x-diff (- (p1 'x) (p2 'x))]
+         [y-diff (- (p1 'y) (p2 'y))])
+    (sqrt (+ (* x-diff x-diff) (* y-diff y-diff)))))
+
+(define (n-points n)
+  (cond [(equal? n 0)
+         '()]
+        [else
+         (append (n-points (- n 1)) (list (Point (- n 1) (- n 1))))]))
+
+
+;-------------------------------------------------------------------------------
+; * Task 2: The attribute __dict__  *
+;-------------------------------------------------------------------------------
+(define (PointHash x y)
+  (lambda (attr)
+    (cond
+      [(equal? attr '__dict__)
+       (let* ([x-point (hash-set (hash) 'x x)]
+              [y-point (hash-set x-point 'y y)])
+         (hash-set y-point
+                   'scale
+                   (lambda (scale)
+         (PointHash (* scale x) (* scale y)))))]
+      [else (error (format "PointHash has no attribute ~a." attr))])))
