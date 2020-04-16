@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>promises</title>
+		<script type="text/javascript">
+			mySecondPromise = new Promise((resolve, reject) => {	
+				// (resolve,reject)=>{ ... } called immediately on Promise creation
+				// resolve and reject record final state and value of the Promise 
+				console.log("mySecondPromise before resolve");
+				resolve("mySecondPromise Success: Already happened!!"); 
+				console.log("mySecondPromise after resolve");
+			});
+
+			// .then: at any time (before or after the promise is settled (=resolved/rejected)) 
+			// you can register callbacks with the promise.
+			mySecondPromise.then(
+			  (successMessage) => {
+  				console.log("Yay!  " + successMessage);
+			}, (rejectMessage)=> { 
+  				console.log("Boo! " + rejectMessage);
+			});
+
+			myChainedPromise = new Promise((resolve, reject) => {	
+				console.log("myChainedPromise before resolve");
+				resolve("A resolve: 1");
+				// reject("A reject: 1");
+				console.log("myChainedPromise after resolve");
+			});
+
+			myChainedPromise.then(
+			  (successMessage) => {
+				return new Promise((resolve, reject) => {
+					resolve(successMessage+" B resolve: 2");
+					// reject(successMessage+" B reject: 2");
+				});
+			}, (rejectMessage)=> { 
+				return new Promise((resolve, reject) => {
+					// resolve(rejectMessage+" C resolve: 2");
+					reject(rejectMessage+" C reject: 2");
+				});
+			}).then(
+			  (successMessage) => {
+  				console.log(successMessage+" D 3");
+			}, (rejectMessage)=> { 
+  				console.log(rejectMessage+" E 3");
+			});
+
+			console.log("done");
+		</script>
+	</head>
+	<body>
+		Promises example: take a look at the source and developer tools.
+	</body>
+</html>

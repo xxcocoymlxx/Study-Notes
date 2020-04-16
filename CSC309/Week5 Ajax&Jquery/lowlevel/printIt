@@ -1,0 +1,9 @@
+#!/bin/bash
+rm out.txt
+for i in hello.html hello.php clienthint.html clienthint.js gethint.php sim1.html time.php sim2.html hello2.php
+do 
+	echo "------------------------" $i "------------------------" >> out.txt
+	cat $i >> out.txt
+done;
+mpage -s4 -2f out.txt > out.ps
+ps2pdf out.ps

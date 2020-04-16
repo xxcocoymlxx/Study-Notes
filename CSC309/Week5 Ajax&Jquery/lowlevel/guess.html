@@ -1,0 +1,60 @@
+<html>
+<head>
+
+<script type="text/javascript">
+function guess(param) {
+	var xmlHttp=GetXmlHttpObject(); // local
+	if (xmlHttp==null) {
+ 		alert ("Browser does not support HTTP Request");
+ 		return;
+ 	}
+
+	message = { "guess": param };
+
+	var url="guess.php";
+	url=url+"?request=" + JSON.stringify(message);
+	alert(url);
+
+	xmlHttp.onreadystatechange=function(){ guessStateChanged(xmlHttp); }; // anonymous function
+	xmlHttp.open("GET",url,true); // arg1=GET/POST, arg2=url, arg3=isAsynchronous
+	xmlHttp.send(null); // null is replaced with the body of POST
+}
+
+function guessStateChanged(xmlHttp) { 
+	if (xmlHttp.readyState==4) { 
+		var response = JSON.parse(xmlHttp.responseText);
+		if(response.error_message==""){
+ 			document.getElementById("guessMessage").innerHTML=response.response ;
+		}
+ 	} 
+}
+function GetXmlHttpObject() {
+	var xmlHttp=null;
+	try {
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp=new XMLHttpRequest();
+	} catch (e) {
+		//Internet Explorer
+		try {
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e)  {
+			xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	}
+	return xmlHttp;
+}
+</script>
+</head>
+
+<body>
+
+<form name="myForm">
+	Guess: <input type="text" name="userGuess" />
+	<input type="button" value="Press me" onclick="guess(document.myForm.userGuess.value)"; />
+</form>
+
+<div style="border:2px solid black;" id="guessMessage"> &nbsp; </div>
+
+</body>
+</html>
+

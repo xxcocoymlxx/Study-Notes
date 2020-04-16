@@ -1,0 +1,37 @@
+<!-- This alerts the reader of the document (typically the browser) of the specific type of
+HTML document to follow. There are a few different HTML standards. The <!DOCTYPE html> 
+directive tells the browser that the remainder of the document conforms to the 
+HTML5 standard Document Type Definition. Lets back up a second. HTML documents 
+are (now) actually XML documents that conform to particular, well known 
+Document Type Definitions. 
+
+There are a few options for 'html' documents
+Basically the difference between these is the set of tags
+the browser is willing to accept in a valid document. By accept I mean, 
+understands and can properly render as the author would hope. Operationally, 
+when the browser sees the directive, it could select a particular rendering 
+engine to read the rest of the document.-->
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Document Title</title>
+		<!-- command + "/" to auto-comment -->
+
+		<!-- This element is most commonly used to link to stylesheets (aka. CSS),
+			the CSS style is defined in the external stylesheet.
+
+		The rel stands for "relationship", and is probably one of the key features of the <link> element-->
+		<link rel="stylesheet" href="style.css">
+
+
+		<!-- Point to an external JavaScript file:
+		If you want to run the same JavaScript on several pages in a web site, you should create an external JavaScript file, instead of writing the same script over and over again. Save the script file with a .js extension, and then refer to it using the src attribute in the <script> tag. -->
+		<script src="script.js"></script>
+	</head>
+
+	<body>
+		Page Content Goes here!
+	</body>
+</html>

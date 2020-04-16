@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+		<meta charset="utf-8">
+                <script src="jquery-3.4.1.min.js"></script>
+                <script>
+			function hello(param){
+				$.get("hello.php", {name: param}, function(data){
+ 					$("#helloMessage").html(data);
+				});
+			}
+			$(function(){
+				$('#myForm input[type=text]').on('keyup', function(){
+					hello(this.value);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form id="myForm">
+			Name: <input type="text" id="username1" /> 
+			<input type="button" value="Press me" onclick="hello($('#username1').val())"; />
+			<br/>
+			<!-- Name: <input type="text" name="username2" onkeyup="hello(this.value)" /> -->
+			<br/>Name: <input type="text" name="username2" />
+			<br/>Name: <input type="text" name="username3" />
+			<br/>Name: <input type="text" name="username4" />
+		</form>
+		<div style="border:2px solid black;" id="helloMessage"> &nbsp; </div>
+	</body>
+</html>
+

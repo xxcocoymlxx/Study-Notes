@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>React Timer</title>
+ 
+  <script src="https://unpkg.com/react@15/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+ 
+  <script type="text/babel">
+ 
+    function zpad(val) {
+      let toPad = parseInt(val);
+      if (val < 10) {
+        toPad = `0${val}`;
+      }
+      return toPad;
+    }
+ 
+    function timeStr(totalSeconds) {
+      const separator = ':';
+ 
+      const hours = Math.trunc(totalSeconds / 3600);
+      const minutes = Math.trunc((totalSeconds % 3600) / 60);
+      const secs = Math.trunc(totalSeconds - ((hours * 3600) + (minutes * 60)));
+ 
+      return `${zpad(minutes)}${separator}${zpad(secs)}`;
+    }
+ 
+    const TimerDisplay = (props) => {
+      return (
+        <div className="timerDisplay">
+          {timeStr(props.timerVal)}
+        </div>
+      );
+    }
+ 
+    class TimerForm extends React.Component {
+ 
+      constructor(props) {
+        super(props);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
+	/**
+        this.handleTimeChange = (e)=> {
+        	this.props.updateTimeFn(e.target.value);
+	};
+	**/
+      }
+ 
+      handleTimeChange(e) {
+	console.log(this);
+        this.props.updateTimeFn(e.target.value);
+      } 
+ 
+      render() {
+        const timeValues = [5,10,15,20,25,30,35,40,45,50,55,60];
+        return (
+          <form>
+            <select
+              onChange={this.handleTimeChange}
+              value={this.props.time}
+            >
+            {
+              timeValues.map((val,idx) => (
+                <option key={idx} value={val}>{val}</option>
+              ))
+            }
+            </select>
+          </form>
+        );
+      }
+    }
+ 
+    class Timer extends React.Component {
+ 
+      constructor(props) {
+        super(props);
+        this.state = {
+          time: 5,
+          timeRemaining: 0,
+          timerIntRef: undefined
+        }
+ 
+        this.updateTime = this.updateTime.bind(this);
+        this.startTimer = this.startTimer.bind(this);
+        this.stopTimer = this.stopTimer.bind(this);
+        this.updateTimeRemaining = this.updateTimeRemaining.bind(this);
+      }
+ 
+      updateTime(timeValue) {
+        this.setState({
+          time: timeValue
+        });
+ 
+        this.stopTimer();
+        this.startTimer(timeValue);
+      }
+ 
+      updateTimeRemaining(){
+        const updatedTimeRemaining = this.state.timeRemaining - 1;
+ 
+        if (updatedTimeRemaining <= 0) {
+          new Audio('./crash-acoustic.wav').play();
+          this.stopTimer();
+        } else {
+          this.setState({
+            timeRemaining: updatedTimeRemaining
+          });
+        }
+      }
+ 
+      startTimer(timeMinutes) {
+        const intRef = setInterval(this.updateTimeRemaining, 1000);
+        this.setState({
+          timerIntRef: intRef,
+          timeRemaining: timeMinutes * 60
+        });
+      }
+ 
+      stopTimer() {
+        clearInterval(this.state.timerIntRef);
+        this.setState({
+          timeRemaining: 0,
+          timerIntRef: undefined
+        });
+      }
+ 
+      componentDidMount() {
+        this.startTimer(this.state.time);
+      }
+ 
+      render() {
+        return (
+          <div>
+            <TimerDisplay timerVal={this.state.timeRemaining} />
+            <TimerForm time={this.state.time} updateTimeFn={this.updateTime} />
+          </div>
+        );
+      }
+    }
+ 
+    ReactDOM.render(
+      <Timer />,
+      document.getElementById("timer-content")
+    );
+ 
+  </script>
+</head>
+<body>
+  <div id="timer-content"></div>
+</body>
+</html>

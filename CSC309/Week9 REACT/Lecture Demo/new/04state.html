@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>State</title>
+ 
+  <script src="lib/react.js"></script>
+  <script src="lib/react-dom.js"></script>
+  <script src="lib/babel.min.js"></script>
+ 
+  <script type="text/babel">
+    // https://reactjs.org/docs/state-and-lifecycle.html
+    class MySimpleButton extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+      render(){
+        return (
+             <button>I am a simple button</button>
+        );
+      }
+    }
+
+    class MyButton extends React.Component {
+      // State: instead of keeping state as instance variables, React prefers that
+      // Component state is in this.state.KEY
+      constructor(props) {
+        super(props);
+        this.state = { 
+          clickCount : 0 , 
+          isPrime : false
+        }
+        this.buttonClickHandler = this.buttonClickHandler.bind(this);
+      }
+      buttonClickHandler(e){
+        // tempting: this.state.clickCount = this.state.clickCount + 1;
+        // this.state.clickCount = ">0"; 
+
+        // but this is not the way React works!!
+
+        // Issue 1: this in the above is not defined, who is actually calling buttonClick?
+        // Solutions: 
+        //     1) use an arow function to bind the event handler to this instance
+        //     2) explicitly bind this to this instance for the call to the buttonClickHandler
+
+        // Surprise! React will re-render a component when its state has changed.
+        // Issue 2: So why didn't this re-render with the update to the button label?
+        // Solution: 
+        //     1) Do not modify state directly, instead use setState, giving just the key value
+        //        pairs you want to change.
+        //     2) If new state depends on old state and props, don't do the above, instead
+        //        supply a function as in example below...
+        //        https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly
+
+	/**
+          var oldClickCount = this.state.clickCount;
+	  this.setState({ clickCount : oldClickCount + 1 });
+	**/
+
+        // Bad idea! React batches updates to state, so in a more complex example, 
+        // we may not have a complete picture of old state here!!
+
+        // var oldClickCount = this.state.clickCount;
+        // this.setState({ clickCount : oldClickCount+1 }); 
+
+        // Instead: can always do the following:
+        this.setState( (prevState, props) => {
+          var oldClickCount = prevState.clickCount;
+	  console.log(props);
+	  return { clickCount : oldClickCount + 1 };
+	});
+      }
+      render(){
+        return (
+          <button onClick={this.buttonClickHandler} >
+	    I have been clicked {this.state.clickCount} times.
+	  </button>
+        );
+      }
+    }
+
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+
+      render(){
+          // Yea, this is not HTML!!
+          return (  
+            <div style={{border:"1px solid black"}} > 
+	      <MyButton sid="something" />
+	      <MyButton />
+	      <MyButton />
+	      <MyButton />
+	    </div>
+          );
+      }
+    }
+
+    ReactDOM.render( <MyComponent />, document.getElementById("C1"));
+  </script>
+</head>
+<body>
+  <div id="C1"></div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>promises</title>
+		<script type="text/javascript">
+			function wait(ms){
+				return new Promise((resolve,reject) => setTimeout(resolve, ms));
+			}
+			wait(1000).then(()=>console.log("promise done"));
+
+			function promiseNestedCallbacks(){
+				var which="promiseNestedCallbacks:";
+				var z = 0;
+				wait(3000).then(()=>{
+					z = z + 1;
+					console.log(which+"First z="+z+" done");
+					return wait(2000);
+				}).then(()=>{
+					z = z + 1;
+					console.log(which+"Second z="+z+" done");
+					return wait(1000);
+				}).then(()=>{
+					z = z + 1;
+					console.log(which+"Third z="+z+" done");
+				});
+			}
+			promiseNestedCallbacks();
+
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+			/**
+			An async function can contain an await expression that 
+			pauses the execution of the async function and waits for 
+			the passed Promise's resolution, and then resumes the async 
+			function's execution and returns the resolved value. 
+			Remember, the await keyword is only valid inside async functions.
+
+			From: https://hackernoon.com/understanding-async-await-in-javascript-1d81bb079b2c
+			**/
+			async function aNestedCallbacks(){
+				try {
+					var which="aNestedCallbacks:";
+					var z = 0;
+					console.log(which+"Zero z="+z+" done");
+
+					await wait(3000);
+					z = z + 1;
+					console.log(which+"First z="+z+" done");
+
+					// await Promise.reject(new Error("rejected"));
+	
+					await wait(2000);
+					z = z + 1;
+					console.log(which+"Second z="+z+" done");
+					
+					await wait(1000);
+					z = z + 1;
+					console.log(which+"Third z="+z+" done");
+
+				} catch(error) {
+					alert(error); // To handle any rejected promises
+				}
+			}
+			console.log("before aNestedCallbacks");
+			aNestedCallbacks();
+			console.log("after aNestedCallbacks");
+
+		</script>
+	</head>
+	<body>
+		Promises example: take a look at the source and developer tools.
+	</body>
+</html>

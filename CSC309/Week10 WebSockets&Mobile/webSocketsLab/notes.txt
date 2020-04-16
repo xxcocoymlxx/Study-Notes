@@ -1,0 +1,32 @@
+# On 142.1.200.148 , not on the lab systems!!!!!
+
+# 1) Remember, you have a collection of ports from a2, you need to use
+#    two of them, call them p1 and p2
+# 2) setup the application by 
+npm init
+npm install --save express
+npm install --save ws
+npm install --save JSON
+
+# 3) Put p1 in express-static
+# 4) Put p2 in echoServerSimple.js and in echoClient.html, make sure the 
+#    URL inside echoClient.html is correct, you are connecting to 142.1.200.148.
+# 5) Explain why you did this?
+# 6) Run express-static and echoServerSimple (both at the same time)
+
+nodejs express-static.js & # run this one in the background
+nodejs echoServerSimple.js
+
+# 7) Bring up a browser and visit http://142.1.200.148:p1/echoClient.html
+# 8) Play with this a bit. Try with two browsers.
+# 9) Fix scribble.html (HINT: it needs the correct port)
+# 9) Now fix echoServerBroadcast so that it works (you will need to unsort it)
+#    if you dont have time, just use .original
+# 10) Now try running just ...
+
+nodejs express-static.js & # run this one in the background
+nodejs echoServerBroadcast.js
+
+# 11) Run scribble.html in your browser, open a few windows.
+# 12) Modify both echoServerBroadcast.js and scribble.js so that each
+#     connection has its own colour.

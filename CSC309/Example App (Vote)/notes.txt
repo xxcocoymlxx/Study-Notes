@@ -1,0 +1,36 @@
+# Do all of this on the lab systems (you don't need to login to cslinux)
+# If you want to tunnel to the lab system execute the following on your local ubuntu
+# system ...
+
+# ssh [UTORID]@dh2020pcXX.utm.utoronto.ca -L 8000:dh2020pcXX.utm.utoronto.ca:8000
+# then on my local browser
+
+# http://localhost:8000/...
+# -------------------------------------------------------------------------
+# Setup for the files here, though we already created a package.json file
+# so you can actually get away with executing 
+npm install
+
+# -------------------------------------------------------------------------
+# Here is what we did to set this all up...
+npm init
+# npm init creates a package.json
+# http://browsenpm.org/package.json
+# https://docs.npmjs.com/files/package.json
+# Take the defaults here
+
+# We are adding libraries, they will be in our local node_modules
+
+npm install --save express
+
+# for post https://scotch.io/tutorials/use-expressjs-to-get-url-and-post-parameters
+npm install --save body-parser 
+
+# http://www.sqlitetutorial.net/sqlite-nodejs/
+npm install --save sqlite3
+
+# check out the package.json now
+# check out node_modules
+
+nodejs counter_node.js
+

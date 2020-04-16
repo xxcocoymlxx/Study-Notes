@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>promises</title>
+		<script type="text/javascript">
+			myChainedPromise = new Promise((resolve, reject) => {	
+				console.log("myChainedPromise before resolve");
+				resolve("resolve: first part of chain");
+				console.log("myChainedPromise after resolve");
+			}).then(
+			  (successMessage) => {
+  				console.log(successMessage);
+				return new Promise((resolve, reject) => {
+					resolve("resolve: second part of chain");
+					// reject("reject: second part of chain");
+				});
+			}).then(
+			  (successMessage) => {
+  				console.log(successMessage);
+				return new Promise((resolve, reject) => {
+					resolve("resolve: third part of chain");
+				});
+			}).then(
+			  (successMessage) => {
+  				console.log(successMessage);
+			});
+
+			console.log("done");
+		</script>
+	</head>
+	<body>
+		Promises example: take a look at the source and developer tools.
+	</body>
+</html>

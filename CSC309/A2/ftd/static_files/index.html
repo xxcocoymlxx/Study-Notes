@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta HTTP-EQUIV="EXPIRES" CONTENT="-1">
+		<title>Computing Science 309</title>
+
+		<script src="jquery-3.3.1.min.js"></script>
+		<script src="ftdClient.js"></script>
+		<script language="javascript" src="model.js" > </script>
+		<script language="javascript" src="controller.js" > </script>
+		<link rel="stylesheet" href="./stylesheet.css" />
+		
+	</head>
+
+	<body bgcolor=ffffff onload="var worldObj=setupGame(); startGame();">
+		<!--User Navigation Block-->
+		<div id="navbar" style="display:none">
+			<nav>
+			<input type="button" class="navbutton" value="Game" id="playgameNavButton"/>
+			<input type="button" class="navbutton" value="User Profile" id="userprofileNavButton"/>
+			<input type="button" class="navbutton" value="Game Stats" id="gamestatsNavButton"/>
+			<input type="button" class="navbutton" value="Logout" id="logoutNavButton"/>
+			</nav>
+		</div>
+
+		<div id="ui_login" class="loginContainer">
+			<td style="padding-right: 200px;">
+					<h1>Login</h1>
+					<label for="username"><b>Username</b></label>
+					<input type="text" id="usernameLogin" placeholder="Username" pattern="[A-Za-z0-9]+" autofocus required title="Alpha-Numeric Only"></input>
+					<br><br>
+					<label for="password"><b>Password</b></label>
+					<input type="password" id="passwordLogin" placeholder="Password" required title="Valid Password Only"></input>
+					<br><br>
+					<input type="button" class="LOGINbutton" value="Login" id="loginButton"/>
+					<br><hr>
+					<div class="container signin">
+					<p style="color:black;">Not a member?</p>
+					<input type="button" class="goToRegisterbutton" value="Register" id="registerButton"/>
+					</div>
+			</td>
+		</div>
+
+		<div id="ui_register" style="display:none">
+			<div class="container">
+				<h1>Create New Account</h1>
+				<h3>Please fill in this form to create an account.</h3>
+				<hr>
+			
+				<label for="username"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" id="username-register" required pattern="[A-Za-z0-9]+" title="Alpha-Numeric Only" minlength="4">
+			
+				<br><br>
+			
+				<label for="psw"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" id="password-register" required minlength="6">
+			
+				<br><br>
+			
+				<label for="psw-repeat"><b>Repeat Password</b></label>
+				<input type="password" placeholder="Repeat Password" id="password-repeat-register" required minlength="6" >
+				
+				<br><br>
+
+				<label for="email"><b>Email</b></label>
+				<input type="text" placeholder="Enter Email" id="email-register" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Enter Valid Email" minlength="6" >
+			
+				<br><br>
+
+				<label for="firstname"><b>First Name</b></label>
+				<input type="text" placeholder="Enter First Name" id="firstname-register" required  pattern="[A-Za-z]+" title="Letters Only" minlength="2" >
+
+				<br><br>
+			
+				<label><b>Gender</b></label>
+				<select id="gender-register" value="gender" required>
+								<option value="male"> Male </option>
+								<option value="female"> Female </option>
+								<option value="Unknown "> Unknown </option>
+				</select>
+						
+				<br><br>
+				<input type="button" class="registerbtn" id = "registerSubmitButton" name="register" value="Register" />
+				
+				<hr>
+
+				<div class="container signin">
+				<p class="headings" style="color:black;">Already registered?</p>
+				<input type="button" class="GoToLoginButton" value="Login" id="goBackLogin"/>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- user profile page -->
+		<div id="ui_userprofile" style="display:none">
+			<div class="container">
+				<h2>User Profile</h2>
+				<h3>You can modify and update your account info here.</h3>
+				<hr>
+			
+				<label for="username"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" id="username-profile" required minlength="4" value="" readonly>
+				
+				<br>
+
+				<label for="firstname"><b>First Name</b></label>
+				<input type="text" placeholder="Enter First Name" id="firstname-profile" required pattern="[A-Za-z]+" title="Letters Only" minlength="2" value="">
+
+				<br>
+			
+				<label for="psw"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" id="password-profile" required minlength="6" value="">
+			
+				<br>
+			
+				<label for="psw-repeat"><b>Repeat Password</b></label>
+				<input type="password" placeholder="Repeat Password" id="password-repeat-profile" required minlength="6" value="">
+				
+				<br>
+
+				<label for="email"><b>Email</b></label>
+				<input type="text" placeholder="Enter Email" id="email-profile" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Enter Valid Email" minlength="6" value="">
+				
+				<br>
+			
+				<label><b>Gender</b></label>
+				<select id="gender-profile" value="gender">
+								<option value="male"> Male </option>
+								<option value="female"> Female </option>
+								<option value="Unknown "> Unknown </option>
+				</select>
+			
+				<br><br>
+				<hr>
+				<input type="button" id = "updateProfileButton" class = "updateProfileButton" name="updateprofile" value="Update Profile" />
+
+				<br><br>
+				<input type="button" id = "deleteAccountButton" class="deleteAccountButton" name="deleteaccount" value="Delete Account" />
+
+				<br><br>
+			</div>
+		</div>
+
+		<!-- game stats page -->
+		<div id="gamestats" style="display:none">
+			<div id="displaystats" class="statsContainer">
+				<center>
+				<table id="topTenHighScores">
+					<h2 class="headings" style="text-align:center;font-size:20px;">Top 10 Best Scores</h2>
+					<hr>
+					<tr>
+						<th> Username</th>
+						<th> Score </th>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row1username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row1" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row2username" readonly></td>
+						<td><input type="text" style="text-align:center;"value="" id="row2" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row3username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row3" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row4username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row4" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row5username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row5" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row6username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row6" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row7username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row7" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row8username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row8" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row9username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row9" readonly></td>
+					</tr>
+					<tr>
+						<td><input type="text" style="text-align:center;" value="" id="row10username" readonly></td>
+						<td><input type="text" style="text-align:center;" value="" id="row10" readonly></td>
+					</tr>
+				</table>
+			</center>
+				
+			</div>
+
+
+		</div>
+
+		<div id="canvas" style="display:none" class="canvasContainer">
+			<center>
+				<h1>Fornite Game</h1>
+				<canvas id="stage" width="1400" height="600" style="border:1px solid black;"> </canvas>
+			</center>
+		<div>
+	</body>
+</html>
+

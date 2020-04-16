@@ -1,0 +1,8 @@
+# http://142.1.200.148:PORT_NUMBER/...
+# -------------------------------------------------------------------------
+# See setup.bash for complete re-installation
+# we already created a package.json file
+# so you can actually get away with executing 
+
+npm install
+nodejs counter_node.js # Make sure you fix port before running this!!!

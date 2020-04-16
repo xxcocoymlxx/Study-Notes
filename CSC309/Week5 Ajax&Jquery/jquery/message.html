@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+		<meta charset="utf-8">
+         <script src="jquery-3.4.1.min.js"></script>
+	
+	<script>
+			var intervalId=0;
+
+
+			function putMessage(param){
+				$.getJSON("put_message.php", {message: param}, function(data){
+					if(data['status']=='ok'){
+ 						$("#putMessageResponse").html('Sent message');
+					} else {
+ 						$("#putMessageResponse").html('Error sending message');
+					}
+					$("#message").val("");
+					getMessage();
+				});
+			}
+			function getMessage(){
+				$.getJSON("get_message.php", function(data){
+					if(data['status']=='ok'){
+						var html="";
+						for(var i=0;i<data['messages'].length;i++){
+							html+="<br/>"+i+" "+data['messages'][i];
+						}
+					}
+					$("#messages").html(html);
+				});
+			}
+			$(function(){
+				intervalId=setInterval(getMessage,5000);
+
+				/*
+				$('#messageForm :button').on('click',function(){
+					putMessage($('#message').val());
+				});
+				*/
+
+				$('#messageForm input[type=button][value=send]').on('click',function(){
+					putMessage($('#message').val());
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h3>Chat</h3>
+		<div id="messages"></div>
+		<form id="messageForm"> 
+			<input type="text" id="message" /> 
+			<!-- <input type="button" value="send" onclick="putMessage($('#message').val());" /> -->
+			<input type="button" value="send" />
+			<div id="putMessageResponse"></div>
+		</form>
+	</body>
+</html>

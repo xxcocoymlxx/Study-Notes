@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>promises</title>
+		<script type="text/javascript">
+			function notNestedCallbacks(){
+				var which="notNestedCallbacks:";
+				var z = 0;
+				setTimeout(function(){
+					z = z + 1;
+					console.log(which+"First z="+z+" done");
+				},3000);
+				setTimeout(function(){
+					z = z + 1;
+					console.log(which+"Second z="+z+" done");
+				},2000);
+				setTimeout(function(){
+					z = z + 1;
+					console.log(which+"Third z="+z+" done");
+				},1000);
+			}
+			notNestedCallbacks();
+
+			function nestedCallbacks(){
+				var which="nestedCallbacks:";
+				var z = 0;
+				setTimeout(function(){
+					z = z + 1;
+					console.log(which+"First z="+z+" done");
+					setTimeout(function(){
+						z = z + 1;
+						console.log(which+"Second z="+z+" done");
+						setTimeout(function(){
+							z = z + 1;
+							console.log(which+"Third z="+z+" done");
+						},1000);
+					},2000);
+				},3000);
+			}
+			nestedCallbacks();
+		</script>
+	</head>
+	<body>
+		Promises example: take a look at the source and developer tools.
+	</body>
+</html>

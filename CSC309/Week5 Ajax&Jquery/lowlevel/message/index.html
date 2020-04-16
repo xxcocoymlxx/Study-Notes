@@ -1,0 +1,74 @@
+<html>
+	<head>
+	<script type="text/javascript">
+			var intervalId=0;
+			
+			function putMessage(param) {
+				var xmlHttp=GetXmlHttpObject(); // local
+				if (xmlHttp==null) {
+					alert ("Browser does not support HTTP Request");
+					return;
+				}
+			
+				var url="put_message.php";
+				url=url+"?message=" + param;
+				xmlHttp.onreadystatechange=function(){ putMessageStateChanged(xmlHttp); }; // anonymous function
+				xmlHttp.open("GET",url,true); // arg1=GET/POST, arg2=url, arg3=isAsynchronous
+				xmlHttp.send(null); // null is replaced with the body of POST
+			}
+			
+			function getMessage(){
+				var xmlHttp=GetXmlHttpObject();
+				if (xmlHttp==null) {
+					alert ("Browser does not support HTTP Request");
+					return;
+				}
+			
+				var url="get_message.php";
+				xmlHttp.onreadystatechange=function(){ getMessageStateChanged(xmlHttp); };
+				xmlHttp.open("GET",url,true); // arg1=GET/POST, arg2=url, arg3=isAsynchronous
+				xmlHttp.send(null); // null is replaced with the body of POST
+			}
+			
+			function getMessageStateChanged(xmlHttp) { 
+				if (xmlHttp.readyState==4) { 
+					document.getElementById("messages").innerHTML=xmlHttp.responseText ;
+				} 
+			}
+			
+			function putMessageStateChanged(xmlHttp) { 
+				if (xmlHttp.readyState==4) { 
+					document.getElementById("putMessageResponse").innerHTML=xmlHttp.responseText ;
+					document.messageForm.message.value="";
+					getMessage();
+				} 
+			}
+			function GetXmlHttpObject() {
+				var xmlHttp=null;
+				try {
+					// Firefox, Opera 8.0+, Safari
+					xmlHttp=new XMLHttpRequest();
+				} catch (e) {
+					//Internet Explorer
+					try {
+						xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+					} catch (e)  {
+						xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+				}
+				return xmlHttp;
+			}
+			intervalId=setInterval("getMessage()",5000);
+		</script>
+	</head>
+	<body>
+		<h3>Chat</h3>
+		<!-- <div style="border:solid 2px #ff0000; background : #000000; color : #ffffff; padding : 4px; width : 200px; height : 50px; overflow : auto;" id="messages"></div>
+-->
+		<div id="messages"></div>
+		<form name="messageForm"> 
+			<input type="text" name="message" /> <input type="button" value="send" onclick="putMessage(document.messageForm.message.value)"; />
+			<div id="putMessageResponse"></div>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Lifting State</title>
+ 
+  <script src="lib/react.js"></script>
+  <script src="lib/react-dom.js"></script>
+  <script src="lib/babel.min.js"></script>
+ 
+  <script type="text/babel">
+    class MyButton extends React.Component {
+      constructor(props) {
+	super(props);
+      }
+      render(props){
+	return (
+             	<button onClick={this.props.buttonClickHandler} >
+			I have been clicked {this.props.clickCount} times.
+		</button>
+        );
+      }
+    }
+    class MyMessage extends React.Component {
+      constructor(props) {
+	super(props);
+      }
+      render(props){
+	return (
+             	<span> {this.props.message} </span>
+        );
+      }
+    }
+
+    class MyPrimeComponent extends React.Component {
+      // State of children gathered here so we can manage it all
+      constructor(props) {
+	super(props);
+        this.state = { 
+		clickCount : 0 , 
+		isPrime : "Not a prime number"
+	}
+	this.buttonClickHandler = this.buttonClickHandler.bind(this);
+      }
+      checkPrime(n){
+		if(n<2) return false;
+		for(var i=2;i<n;i++){
+			if(n%i==0)return false;
+		}
+		return true;
+      }
+      buttonClickHandler(e){
+	this.setState( (prevState, props) => {
+		var oldClickCount = prevState.clickCount;
+		var newClickCount = prevState.clickCount + 1;
+		var isPrimeMessage = "Not a prime number";
+		if(this.checkPrime(newClickCount)){
+			isPrimeMessage = "A prime number";
+		} 
+		return { clickCount : newClickCount, isPrime : isPrimeMessage };
+	});
+      }
+
+      render(){
+          return (  
+		<div style={{border:"1px solid black"}} > 
+			<MyButton buttonClickHandler={this.buttonClickHandler} clickCount={this.state.clickCount} />
+			<MyMessage message={this.state.isPrime} />
+		</div>
+          );
+      }
+    }
+
+    ReactDOM.render( <MyPrimeComponent />, document.getElementById("C1"));
+  </script>
+</head>
+<body>
+  <div id="C1"></div>
+</body>
+</html>

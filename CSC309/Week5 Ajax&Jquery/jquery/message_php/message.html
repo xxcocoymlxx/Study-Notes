@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+		<meta charset="utf-8">
+        <script src="jquery-2.1.0.js"></script>
+			
+			
+		<script>
+			var intervalId=0;
+			//handler function below
+			function putMessage(param){
+				$.get("put_message.php", {message: param}, function(data){
+ 					$("#putMessageResponse").html(data);
+					$("#message").val("");
+					getMessage();
+				});
+			}
+
+			function getMessage(){
+				$.get("get_message.php", function(data){
+					$("#messages").html(data);
+				});
+			}
+
+			$(function(){
+				intervalId=setInterval(getMessage,5000);
+			});
+		</script>
+	</head>
+
+	
+	<body>
+		<h3>Chat</h3>
+		<!-- <div style="border:solid 2px #ff0000; background : #000000; color : #ffffff; padding : 4px; width : 200px; height : 50px; overflow : auto;" id="messages"></div>
+-->
+		<div id="messages"></div>
+		<form name="messageForm"> 
+			<input type="text" id="message" /> 
+			<input type="button" value="send" onclick="putMessage($('#message').val());" />
+			<div id="putMessageResponse"></div>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head >
+		<meta name = "viewport" content = "width=device-width, user-scalable=no" >
+		<title> Touch, Orientation, Acceleration and Geolocation </title>
+		<script> 
+			function updateTouch (eventType, event) {
+				var html=eventType;
+				event.preventDefault();
+				//touches is collection of fingers
+				for (var i = 0; i < event.touches.length ; i++) {
+			    		var touch = event.touches[i];// i is one finger on the screen
+					html+=" ("+i+","+touch.pageX+","+touch.pageY+")";
+			  	}
+				document.getElementById('touch').innerHTML=html;
+			}
+
+			function round(a){
+				// return Math.round(100*a)/100;
+				return Math.round(a);
+			}
+			function ol(){//onload event handler
+				// touch
+				canvas = document.getElementById ('canvas');
+				canvas.addEventListener ('touchend', function (event) { updateTouch("touchend", event); });
+				canvas.addEventListener ('touchmove', function (event) { updateTouch("touchmove", event); });
+
+				//when your finger touch on screen
+				canvas.addEventListener ('touchstart', function (event) { updateTouch("touchstart", event) ;});
+
+				function displayError(error) {
+					var errors = { 1: 'Permission denied', 2: 'Position unavailable', 3: 'Request timeout' };
+					document.getElementById("geolocation").innerHTML="Error: " + errors[error.code];
+				}
+				function displayPosition(position) {
+					document.getElementById("geolocation").innerHTML="Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude;
+				}
+
+				// geolocation: must be from an https site
+				var timeoutVal = 10 * 1000 * 1000;
+				navigator.geolocation.getCurrentPosition(
+					displayPosition, 
+					displayError,
+					{ enableHighAccuracy: true, timeout: timeoutVal, maximumAge: 0 }
+				);
+				grantPermissions(); // NOTE: This does not work, you mus grant permissions as a result of user interaction
+			}
+			
+			function grantPermissions() {
+				// accelerometer
+				DeviceMotionEvent.requestPermission().then(response => {
+  					if (response == 'granted') {
+						  //whenever your divece has a motion, this event handler gets called
+						window.addEventListener('devicemotion', (event) => {
+							// this is the ag(x,y,z) in the html
+	       						agx = round(event.accelerationIncludingGravity.x);
+	       						agy = round(event.accelerationIncludingGravity.y);
+	       						agz = round(event.accelerationIncludingGravity.z);
+		
+								// a(x,y,z) without acceleration
+	       						ax = round(event.acceleration.x);
+	       						ay = round(event.acceleration.y);
+	       						az = round(event.acceleration.z);
+	       						document.getElementById("motion").innerHTML = 
+	       							"ag=(" + agx + "," + agy + "," + agz+")"+
+	       							"a=(" + ax + "," + ay + "," + az+")";
+       						});
+					}
+				}).catch(console.error);
+
+
+				// gyroscope (orientation of the phone)
+				DeviceOrientationEvent.requestPermission().then(response => {
+  					if (response == 'granted') {
+						window.addEventListener('deviceorientation', function(eventData) {
+							// alpha is the compass direction the device is facing in degrees
+							// alpha is rotation
+							var dir = round(eventData.alpha);
+
+							// beta is the front-to-back tilt in degrees, where front is positive
+							var tiltFrontBack = round(eventData.beta);
+
+							// gamma is the left-to-right tilt in degrees, where right is positive
+							var tiltLeftRight = round(eventData.gamma);
+
+								   document.getElementById("orientation").innerHTML = 
+								   //                alpha          beta                  gamma
+		       						"orientation=(" + dir + "," + tiltFrontBack + "," + tiltLeftRight +")";
+						});
+					}
+				}).catch(console.error);
+			}
+		</script>
+	</head>
+	<body onload="ol();">
+		<h2>Permissions</h2>
+		<ul>
+		<li> For Geolocation: site must be https
+		<li> For Gyroscope and Accelerometer you must actively ask for permissions
+			using the API, and this must be as a result of user interaction
+			<button type="button" onclick="grantPermissions();">Grant Permissions</button>
+		</ul>
+		<h2>Examples</h2>
+		<ul>
+		<li> <a href="mobile/flys2.html">Flys</a>
+		<li> <a href="accel/ballOO.html">Bouncing Balls</a>
+		<li> <a href="accel/pothole.html">Potholes</a>
+		</ul>
+		
+		<h2>References</h2>
+		<ul>
+		<li> <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Orientation_and_motion_data_explained">Orientation and Motion Data</a>
+			<br/><img src=https://mdn.mozillademos.org/files/3401/axes.png />
+			<br/><img src=https://mdn.mozillademos.org/files/3402/alpha.png />
+			<br/><img src=https://mdn.mozillademos.org/files/3403/beta.png />
+			<br/><img src=https://mdn.mozillademos.org/files/3404/gamma.png />
+		<li> <a href="https://developer.mozilla.org/en-US/docs/Web/Reference/Events/devicemotion">devicemotion</a> (accelerometer)
+		<li> <a href="https://developer.mozilla.org/en-US/docs/Web/Reference/Events/deviceorientation">deviceorientation</a> (gyroscope and compas)
+		<li> <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Touch_events">touch</a>
+		<li> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation">Geolocation</a>
+		<li> <a href="https://support.brightcove.com/debugging-mobile-devices">Debugging on Mobile Devices</a>
+		<li> <a href="">Geolocation</a>
+		</ul>
+
+		<div id="geolocation"> </div>
+		<div id="motion"> </div>
+		<div id="orientation"> </div>
+		<div id="touch"> </div>
+		<canvas id = "canvas" width = "700" height = "300" style ="border:1px solid black;" > < /canvas > 
+	</body >
+</html >

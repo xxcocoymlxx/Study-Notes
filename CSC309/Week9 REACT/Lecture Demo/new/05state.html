@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>State Again</title>
+ 
+  <script src="lib/react.js"></script>
+  <script src="lib/react-dom.js"></script>
+  <script src="lib/babel.min.js"></script>
+ 
+  <script type="text/babel">
+    class MySimpleButton extends React.Component {
+      constructor(props) {
+	super(props);
+      }
+      render(props){
+	return (
+             <button>I am a simple button</button>
+        );
+      }
+    }
+
+    class MyButton extends React.Component {
+      constructor(props) {
+	super(props);
+        this.state = { 
+		clickCount : 0 , 
+		isPrime : "Not a prime number"
+	}
+	this.buttonClickHandler = this.buttonClickHandler.bind(this);
+      }
+      checkPrime(n){
+		if(n<2) return false;
+		for(var i=2;i<n;i++){
+			if(n%i==0)return false;
+		}
+		return true;
+      }
+      buttonClickHandler(e){
+	this.setState( (prevState, props) => {
+		var oldClickCount = prevState.clickCount;
+		var newClickCount = prevState.clickCount + 1;
+		var isPrimeMessage = "Not a prime number";
+		if(this.checkPrime(newClickCount)){
+			isPrimeMessage = "A prime number";
+		} 
+		return { clickCount : newClickCount, isPrime : isPrimeMessage };
+	});
+      }
+      render(){
+	return (
+             	<button onClick={this.buttonClickHandler} >
+			I have been clicked {this.state.clickCount} times. {this.state.isPrime}
+		</button>
+        );
+      }
+    }
+
+    class MyComponent extends React.Component {
+      constructor(props) {
+	super(props);
+      }
+
+      render(){
+          // Yea, this is not HTML!!
+          return (  
+		<div style={{border:"1px solid black"}} > 
+			<MyButton />
+			<MyButton />
+			<MyButton />
+			<MyButton />
+		</div>
+          );
+      }
+    }
+
+    class MySuperComponent extends React.Component {
+      constructor(props) {
+	super(props);
+      }
+
+      render(){
+          // Yea, this is not HTML!!
+          return (  
+		<div style={{border:"1px solid black"}} > 
+			<MyComponent />
+			<MyButton />
+			<MyComponent />
+		</div>
+          );
+      }
+    }
+
+    ReactDOM.render( <MySuperComponent />, document.getElementById("C1"));
+  </script>
+</head>
+<body>
+  <div id="C1"></div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Components</title>
+ 
+  <script src="lib/react.js"></script>
+  <script src="lib/react-dom.js"></script>
+  <script src="lib/babel.min.js"></script>
+ 
+  <script type="text/babel">
+    // https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/
+    // https://reactjs.org/docs/jsx-in-depth.html
+    // https://reactjs.org/docs/dom-elements.html
+
+    class MySimpleButton extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+      // JSX in render is not HTML, though it looks like it
+      render(){
+        return (
+             <button>I am a simple button</button>
+        );
+      }
+    }
+
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+
+      render(){
+        // must return a single JSX element!!!
+        return (  
+          <div style={{border:"1px solid black", backgroundColor: "blue" }} > 
+            <MySimpleButton />
+            <MySimpleButton />
+            <MySimpleButton />
+            <MySimpleButton />
+            <MySimpleButton />
+          </div>
+        );
+      }
+    }
+
+    // React element attributes: https://reactjs.org/docs/dom-elements.html
+    // JSX gotchas (from http://www.lukefabish.com/react-introduction/)
+    /**
+    - HTML tags like div, span, and h1 must appear in lowercase. 
+    <H1> for instance, is invalid.
+
+    - Attributes passed to JSX elements must appear in camelCase. 
+      Notice that in our TimerDisplay example, the div‘s class is defined 
+      with a className Similarly, event handlers like onclick and 
+      onchange become onClick and onChange.
+
+    - JSX elements must be wrapped in an enclosing tag, so you return
+      a single element (which could have elements inside).
+
+    - Pass values down via props (this.props.KEY)
+
+    - Pass values back...well you shouldn't
+      To accomplish this, typically give a component a callback. The component
+      uses the callback to interact with outside components.
+    **/
+
+    ReactDOM.render( <MySimpleButton />, document.getElementById("C1"));
+    ReactDOM.render( <MyComponent />, document.getElementById("C2"));
+    ReactDOM.render( <MyComponent />, document.getElementById("C3"));
+  </script>
+</head>
+<body>
+  <div id="C1"></div>
+  <div id="C2"></div>
+  <div id="C3"></div>
+</body>
+</html>

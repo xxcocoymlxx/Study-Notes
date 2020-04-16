@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="generator" content=
+		"HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org">
+		<meta charset="utf-8">
+	
+		<title>Images and Image Maps</title>
+	</head>
+	
+	<body>
+		<h1>A Plain Image</h1>
+		<img src="images/Pizza.gif" height="220" width="320" alt="UML Diagram">
+
+		<!---------------------------------------------------------------------->
+	
+		<h1>An Image With Alignment</h1>
+		<p>
+			<img src="images/family.jpg" width="100" height="100" align="right" hspace="40" border="2" alt="Family"> 
+			Here is the family just after we got home from the hospital. Amber and Patches decided to check out the new addition.
+		</p>
+		<!---------------------------------------------------------------------->
+	
+		<h1>An Image Inside a Link</h1>
+	
+		<p>Click on 
+			<a href="examples/e2.html">
+				<img align="middle" src="images/Pizza.gif" height="110" width="160" alt= "Kira in B/W">
+			</a> 
+			to get to example 2.
+		</p>
+		<!---------------------------------------------------------------------->
+		<h1>A Client-Side Image Map</h1>
+		<!-- An image-map, with clickable areas, you specify the areas in an image -->
+		<p>
+			<img src="images/shapes.gif" width="200" height="100" alt="shapes" usemap="#mainmap"> 
+			<map name="mainmap">
+				<area shape="rect" coords="50,50,100,100" href="examples/e2.html">
+				<area shape="circle" coords="50,50,25" href="examples/e1.html">
+				<area shape="rect" coords="0,0,100,100" href="index.html">
+			</map>
+		</p>
+
+		<pre>
+			another example:
+			<img src="planets.gif" width="145" height="126" alt="Planets" usemap="#planetmap">
+
+			<map name="planetmap">
+  				<area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
+  				<area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury">
+  				<area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus">
+			</map>
+		</pre>
+		
+	</body>
+</html>

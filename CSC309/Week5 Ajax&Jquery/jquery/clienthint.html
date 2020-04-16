@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+		<meta charset="utf-8">
+                <script src="jquery-3.4.1.min.js"></script>
+                <script>
+			/*
+			With the jQuery AJAX methods, you can request text, 
+			HTML, XML, or JSON from a remote server using both HTTP
+			 Get and HTTP Post - And you can load the external data 
+			 directly into the selected HTML elements of your web page!
+			*/
+			function showHint(str){
+				if(str.length==0){
+					$('#txtHint').html("");
+				} else {
+					//The jQuery get() and post() methods are used to request 
+					//data from the server with an HTTP GET or POST request.
+					//syntax: $.get(URL,callback);
+					//callback: name of a function to be executed if the request succeeds.
+					$.get("gethint.php", {q: str}, function(data){
+ 						$("#txtHint").html(data);
+					});
+				}
+			}
+
+			//Jquery: $(selector).action()
+			$(function(){
+				$('#txt1').on('keyup', function(){
+					showHint(this.value);
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form> 
+		<!-- First Name: <input type="text" id="txt1" onkeyup="showHint(this.value)"> -->
+		First Name: <input type="text" id="txt1" />
+		</form>
+		<p>Suggestions: <span id="txtHint"></span></p> 
+	</body>
+</html>

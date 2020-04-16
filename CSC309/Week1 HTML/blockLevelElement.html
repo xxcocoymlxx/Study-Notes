@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Block Level Elements</title>
+	</head>
+
+	<body>
+		<h3>Some Block Level Elements</h3>
+		A Block level element is one that occupies the width of its container.
+		View the page source to see how it's done.
+		Examples below are from Netscape.
+
+		<hr/><!--a horizontal rule, a horizontal line-->
+		<!---------------------------------------------------------------------->
+
+		<h3>Headings Example</h3>
+
+		<!-- attribute within the start tag, add a border around the heading-->
+		<H1 style="border: 1px solid black;" >
+			Heading 1 this is something
+		</H1> 
+
+		<!-- Note: the bigger the font size, smaller the font size -->
+		<H2>Heading 2</H2> 
+		<H3>Heading 3</H3>
+		<H4>Heading 4</H4>
+		<H5>Heading 5</H5> 
+		<H6>Heading 6</H6>
+
+		<hr/>
+		<!---------------------------------------------------------------------->
+
+		<h3>Address Example</h3>
+		<address>
+			Netscape Communications Corporation<br/>
+			501 East Middlefield Road<br/>
+			Mountain View, CA 94043<br/>
+		</address>
+		<!-- Note: <br/> is a line break -->
+
+		<hr/>
+		<!---------------------------------------------------------------------->
+
+		<h3>Blockquote Example</h3>
+		<!-- The <blockquote> tag specifies a section that is quoted from another source. Browsers usually indent <blockquote> elements. -->
+		<P>Here is an extract from a press release about Netscape Netcaster. </P>
+
+		<!-- Note: <P> doesn't have indent, <blockquote> has indent. -->
+		<blockquote>
+			On August 13 1997, Netscape Communications announced the
+			availability of Netscape Netcaster push client software as part of
+			Netscape Communicator. Netscape Netcaster is the first push software
+			based on open Internet standards, such as HTML, Java and JavaScript,
+			allowing virtually any Web site to become a "channel"
+			that delivers up-to-date information directly to the desktop.
+		</blockquote>
+	
+		<blockquote>
+			Bob Lisbonne, vice president of client product marketing at Netscape said:
+			<!-- nested <blockquote>, nested indent -->
+			<blockquote>
+				"Networked enterprises can begin to deploy Webtops as
+				consistent corporate computing interfaces that span
+				all platforms and can be updated dynamically."
+			</blockquote>
+		</blockquote>
+
+		<hr/>
+		<!---------------------------------------------------------------------->
+
+		<!-- The <div> tag defines a division or a section in an HTML document.
+		The <div> element is often used as a container for other HTML elements to style them with CSS or to perform certain tasks with JavaScript. -->
+		<div align="right">
+			<!-- This section will then align right. Paragraphs outside of this <div> will NOT align right. -->
+			<h3>Aligning a Block of Content to the Right (the old way)</h3>
+			<P>You can use a DIV tag to align a block of content to the right.</P>
+			<P>The content can include anything you like, including tables, images, lists, 
+			and so on. Note, however, that right-aligned lists often do not look very 
+			neat.</P>
+			<b>Note:</b> The way it is done here is deprecated in HTML4 and not supported in HTML5
+		</div>
+
+
+		<div style="border:1px solid black; text-align:right;">
+			<h3>Aligning a Block of Content to the Right (the new, HTML5 way)</h3>
+			<P>You can use a DIV tag to align a block of content to the right.</P>
+			<P>The content can include anything you like, including tables, images, lists, 
+			and so on. Note, however, that right-aligned lists often do not look very 
+			neat.</P>
+			<b>Note:</b> The way it is done here is the new, suggested HTML5 way.
+		</div>
+
+		<hr/>
+		<!---------------------------------------------------------------------->
+
+		<h3>Paragraph Example</h3>
+		<P>Use the P tag to display paragraphs. The P element starts on a new line, and is preceded by extra space. 
+		<P>You can also use the P tag to insert a line break with extra space. In most, but not all cases, it is OK to omit the closing tag. </P>
+
+		<hr/>
+	<!---------------------------------------------------------------------->
+
+<!-- Text in a pre element is displayed in a fixed-width font, and it preserves both spaces and line breaks. The <pre> tag defines preformatted text. Text in a <pre> element is displayed in a fixed-width font (usually Courier), and it preserves both spaces and line breaks. 适用于在web上展示code -->
+		<h3>PRE Example</h3>
+		The example below preserves formatting, but the rendering engine will
+		look inside and render html elements! Otherwise the rendering engine will ignore whitespace and flow text continuously. 
+
+<!-- 注意接下来这段话的formatting，html没有omit掉space和line break -->
+<pre>
+
+To: Lee Smith
+
+From: Chris Brown
+
+Subject: Meeting schedule and agenda for Web Site team
+Date: Thurs, 14 Aug 1997 22:00:05
+
+9/20/97 8:00 a.m.Room 218
+9/21/97 9:00 a.m.Room 218
+9/22/97 2:00 p.m.Room 111
+
+At the first meeting, we should discuss how to use
+
+the &lt;STYLE&gt; tag to make our home page more interesting.
+
+</pre>
+	
+<hr/>
+<!---------------------------------------------------------------------->
+
+<!-- The <xmp> renders text between the start and end tags without interpreting the HTML in between and using a monospaced font. 简单来说就是不管你写在<xmp> tag里的东西
+是不是code，都会被原模原样展示出来-->
+<h3>XMP Example</h3>
+<p> An xmp element (not supported in HTML5) displays exactly the text in the element body.
+For example: The basic structure of an HTML document is:</p>
+
+<xmp>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Document Title</title>
+	</head>
+	<body>
+		Page Content Goes here!
+	</body>
+</html>
+</xmp>
+<!---------------------------------------------------------------------->
+
+	</body>
+</html>

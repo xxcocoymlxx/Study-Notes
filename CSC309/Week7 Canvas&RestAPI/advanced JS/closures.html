@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>closures</title>
+		<script type="text/javascript">
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
+
+			function closureExample(x){
+				// x is in scope of the function definition for y
+				// each call to closureExample defines a new function
+				// variables not parameters come from the containing
+				// lexical scope (except this)
+				return function(y){ return x+y; };
+			}
+			var f1 = closureExample(1); // this is essentially f1(y){ return 1+y; }
+			var f2 = closureExample(2);
+			var f3 = closureExample(3);
+			var f4 = closureExample(4); // this is essentially f4(y){ return 4+y; }
+
+			var z = 7;
+			console.log("Changed z to 7");
+			var ff = function(y){ return z+y; }
+			console.log("ff(12)="+ff(12)); // 19
+			console.log("ff(20)="+ff(20)); // 27
+			z = 2;
+			console.log("Changed z to 2");
+			console.log("ff(12)="+ff(12)); // 14
+			console.log("ff(20)="+ff(20)); // 22
+
+
+			console.log(f1(7));
+			console.log(f2(7));
+			console.log(f3(7));
+			console.log(f4(7));
+
+			function closureExampleThis(x){
+				// this is different!! Note that this is window
+				// when we simply execute closureExampleThis(x)
+				return function(y){ 
+					console.log(this);
+					return x+y; 
+				};
+			}
+
+			var f1this = closureExampleThis(1); // this is essentially f1(y){ console.log(this); return 1+y; }
+			var f2this = closureExampleThis(2);
+			var f3this = closureExampleThis(3);
+			var f4this = closureExampleThis(4); // this is essentially f4(y){ console.log(this); return 4+y; }
+			console.log(f1this(7));
+			console.log(f2this(7));
+			console.log(f3this(7));
+			console.log(f4this(7)); 
+
+			var mc3 = {
+				whoAmI : "I'm an mc3", 
+				method: f4this
+			};
+                        console.log(mc3.method(7));
+			// hey I thought you said it wasn't bound to window?
+			// yes, thats correct, but what is this bound to during the above particular call?
+
+			// Note: closing over let vs var
+			fns=[];
+
+                        function closureExample(x){
+				// Swap below with let vs var to see the difference
+                                for(let i=0;i<10;i++){ 
+					// let i behaves as if a new local created on each loop iteration
+                                        fns.push(()=> { console.log(i); });
+                                }
+                        }
+                        closureExample(12);
+                        fns[3]();
+                        fns[5]();
+                        fns[1]();
+
+		</script>
+	</head>
+	<body>
+		Closure example: take a look at the source and developer tools.
+
+	</body>
+</html>

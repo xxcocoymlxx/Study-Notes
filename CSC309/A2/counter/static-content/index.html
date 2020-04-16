@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta HTTP-EQUIV="EXPIRES" CONTENT="-1">
+		<script src="jquery-3.3.1.min.js"></script>
+		<script src="counterClient.js"></script>
+		<style>
+			#ui_login {
+				display: true;
+			}
+			#ui_counter {
+				display: false;
+			}
+		</style>
+		<title>Demo</title>
+	</head>
+	<body bgcolor="ffffff">
+		<!-- 两个不同的div分隔开了 -->
+		<!-- 一开始进入这个界面显示的是login这个div, counter的div是被hide起来的 -->
+		<div id="ui_login">
+			<div>
+				<!-- https://www.tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/ -->
+				<input type="text" name="user" placeholder="User Name" />
+				<input type="password" name="password" placeholder="Password" />
+				<input type="submit" id="loginSubmit" value="Login">
+			</div>
+		</div>
+
+		<!-- you dont see the rest of the js when you are not logged in-->
+		<div id="ui_counter">
+			<table>
+				<!-- first row of table -->
+				<tr>
+					<td></td>
+					<td><input type="text" id="createCounterName" placeholder="Counter Name" /></td>
+					<td><input type="submit" id="createCounterSubmit" value="create"></td>
+				</tr>
+
+				<!-- seconde row of table 
+				前两个位置是空的,只有最后一个位置有个retrive的button-->
+				<tr>
+
+					<td></td>
+					<td></td>
+					<td><input type="submit" id="retrieveCounterSubmit" value="retrieve"></td>
+				</tr>
+
+				<!-- 3rd row of table -->
+				<tr>
+					<td><input type="text" id="updateCounterName" placeholder="Counter Name" /></td>
+					<td><input type="text" id="updateCounterAmount" placeholder="Amount" /></td>
+					<td><input type="submit" id="updateCounterSubmit" value="update"></td>
+				</tr>
+
+				<!-- 4th row of table -->
+				<tr>
+					<!-- 这一行的第一个位置是空的 -->
+					<td></td>
+					<td><input type="text" name="deleteCounterName" placeholder="Counter Name" /></td>
+					<td><input type="submit" id="deleteCounterSubmit" value="delete"></td>
+				</tr>
+			</table>
+
+			
+			<!-- This div is used to display messagges/data got back from the server -->
+			<div id="allCounters"></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+# Do all of this on the lab systems (you don't need to login to cslinux)
+# If you want to tunnel to the lab system:
+# ssh [UTORID]@dh2020pcXX.utm.utoronto.ca -L 8000:dh2020pcXX.utm.utoronto.ca:8000
+# then on my local browser
+
+# http://localhost:8000/...
+
+# Setup for the files here
+
+npm init
+# npm init creates a package.json
+# http://browsenpm.org/package.json
+# https://docs.npmjs.com/files/package.json
+
+# We are adding the ws libraries, they will be in our local node_modules
+npm install --save express
+npm install --save pug
+npm install --save url
+npm install --save http
+npm install --save body-parser
+
+# check out the package.json now
+# check out node_modules
+
+nodejs hello-http.js
+# http://localhost:8000
+
+nodejs guessGame1.js
+# http://localhost:8000?guess=6
+
+nodejs guessGame2.js
+# http://localhost:8000?guess=6
+# play with this game from two different browsers
+# explore how sessions was implemented
+
+nodejs hello-express.js
+# Play with the routes
+
+nodejs pug-express.js
+# How do you run this, change the webpage
+
+nodejs express-static.js
+# play with different routes, fetch the static content
+
+nodejs rest.js
+# play with different routes, add some key/value pairs and retrieve them

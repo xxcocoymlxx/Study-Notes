@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>The 2D Canvas</title>
+		<script src="jquery-3.1.1.min.js"></script>
+		<script type="text/javascript">
+	
+			var socket;
+
+			$(function(){
+				// socket = new WebSocket("ws://cslinux.utm.utoronto.ca:10000");
+				socket = new WebSocket("ws://localhost:10000");
+				socket.onopen = function (event) {
+					$('#sendButton').removeAttr('disabled');
+					console.log("connected");
+				};
+				socket.onclose = function (event) {
+					alert("closed code:" + event.code + " reason:" +event.reason + " wasClean:"+event.wasClean);
+				};
+				socket.onmessage = function (event) {
+					var point=JSON.parse(event.data);
+
+					var context = document.getElementById('theCanvas').getContext('2d');
+					context.fillStyle = 'rgba(255,0,0,1)';
+		   			context.fillRect(point.x, point.y, 2, 2);
+				}
+
+				$('#theCanvas').mousemove(function(event){
+					var x=event.pageX-this.offsetLeft;
+					var y=event.pageY-this.offsetTop;
+					socket.send(JSON.stringify({ 'x': x, 'y': y} ));
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<canvas style="border:1px solid black;" id="theCanvas" width="400" height="400" />
+	</body>
+</html>
+

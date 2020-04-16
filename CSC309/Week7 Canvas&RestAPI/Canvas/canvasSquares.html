@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>The 2D Canvas</title>
+		<script type="text/javascript">
+
+			var width=0, height=0;
+			var context;
+
+			function randint(n){
+				return Math.round(Math.random()*n);
+			}
+
+			function drawSquare(){
+				// draw a random square with a random colour and transparency
+				// Position
+				var sx=randint(width);
+				var sy=randint(height);
+
+				var sw=randint(width-sx);
+				var sh=randint(height-sy);
+				
+				// Colour
+				var red=randint(255);
+				var green=randint(255);
+				var blue=randint(255);
+				var alpha=Math.random();
+
+				// The rectangle
+				context.fillStyle = 'rgba('+red+','+green+','+blue+','+alpha+')';
+   				context.fillRect(sx, sy, sw, sh);
+
+			}
+			function ol(){
+				// set a timer to call draw square every once in a while
+				var theCanvas=document.getElementById("theCanvas");
+				context=theCanvas.getContext("2d");
+
+				width=context.canvas.width;
+				height=context.canvas.height;
+
+				setInterval(drawSquare,200);
+			}
+		</script>
+	</head>
+	<body onload="ol();" >
+		<canvas id="theCanvas" width="400" height="400" />
+	</body>
+</html>

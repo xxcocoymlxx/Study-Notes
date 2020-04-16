@@ -1,0 +1,46 @@
+<html lang="en">
+  <head>
+    <title>GuessGame</title>
+  </head>
+  <body>
+    <div id="hello-div"></div>
+
+    <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script type="text/babel">
+
+    class HelloWorld extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {message: 'hello'};
+      }
+    
+      render() {
+        return (
+          <div>
+            <h3>Hello World</h3>
+	
+	    My message is { this.state.message } my props are 
+	    <ul>
+            <HelloWorldPiece myMessage={'first message'} />
+            <HelloWorldPiece myMessage={'second message'} />
+	    </ul>
+          </div>
+        );
+      }
+    
+    }
+
+    class HelloWorldPiece extends React.Component {
+      render() {
+        return (
+          <li> { this.props.myMessage } </li>
+        );
+      }
+    }
+    
+    ReactDOM.render(<HelloWorld m1={'first prop'} m2={'second prop'} />, document.getElementById('hello-div'));
+    </script>
+  </body>
+</html>

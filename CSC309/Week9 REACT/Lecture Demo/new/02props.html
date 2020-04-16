@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Props</title>
+ 
+  <script src="lib/react.js"></script>
+  <script src="lib/react-dom.js"></script>
+  <script src="lib/babel.min.js"></script>
+ 
+  <script type="text/babel">
+    // https://reactjs.org/docs/components-and-props.html
+    class MySimpleButton extends React.Component {
+      constructor(props) {
+         super(props);
+      }
+      render(){
+         return (
+            <button>I am a simple button</button>
+         );
+      }
+    }
+
+    class MyLabelledButton extends React.Component {
+      constructor(props) {
+         super(props);
+      }
+      // Inside JSX, can write a bit of javascript inside { }
+      render(){
+         return (
+            <button> 
+               {this.props.buttonLabel}
+               {console.log(this.props.buttonLabel)}
+            </button>
+        );
+      }
+    }
+
+    class MyComponent extends React.Component {
+      constructor(props) {
+         super(props);
+      }
+
+      render(){
+          // Yea, this is not HTML!! Note: style takes an object, that is not css.
+          return (  
+            <div style={{border:"1px solid black"}} > 
+               <MySimpleButton />
+               <MySimpleButton />
+               <MySimpleButton />
+               <MySimpleButton />
+               <MyLabelledButton buttonLabel="Labelled button 0" />
+               <MyLabelledButton buttonLabel="Labelled button 1" />
+               <MyLabelledButton buttonLabel="Labelled button 2" />
+               <MyLabelledButton buttonLabel="Labelled button 3" />
+            </div>
+         );
+      }
+    }
+
+    ReactDOM.render( <MySimpleButton />, document.getElementById("C1"));
+    ReactDOM.render( <MyLabelledButton buttonLabel="A first labelled button" />, document.getElementById("C3"));
+    ReactDOM.render( <MyComponent />, document.getElementById("C2"));
+  </script>
+</head>
+<body>
+   <div id="C1"></div>
+   <div id="C3"></div>
+   <div id="C2"></div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<head>
+<script type="text/javascript">
+xmlHttp=null;
+
+/*
+xmlHttp.open(): Sets up a new request to a server.
+xmlHttp.send(): Sends a request to a server.
+xmlHttp.abort(): Bails out of the current request.
+xmlHttp.readyState: Provides the current HTML ready state.
+xmlHttp.responseText: The text that the server sends back to respond to a request.
+xmlHttp.status: can be any of ...  http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+xmlHttp.status==200 means OK
+		400 means URL does not exist
+		404 not found
+		500 internal server error
+*/
+
+function guess(param) {
+	xmlHttp=GetXmlHttpObject();
+	if (xmlHttp==null) {
+ 		alert ("Browser does not support HTTP Request");
+ 		return;
+ 	}
+
+	var url="guess2.php";
+	url=url+"?guess=" + param;
+	xmlHttp.onreadystatechange=stateChanged ;
+	xmlHttp.open("GET",url,true); // arg1=GET/POST, arg2=url, arg3=isAsynchronous
+	xmlHttp.send(null); // null is replaced with the body of POST
+}
+
+
+function stateChanged() { 
+	// alert("state="+xmlHttp.readyState);
+	if (xmlHttp.readyState==4 || xmlHttp.readyState=="complete") { 
+ 		document.getElementById("response").innerHTML=xmlHttp.responseText ;
+ 	} 
+	/*
+	possible values for xmlHttp.readyState
+	0	The request is not initialized
+	1	The request has been set up
+	2	The request has been sent
+	3	The request is in process
+	4	The request is complete
+	*/
+}
+
+function GetXmlHttpObject() {
+	var xmlHttp=null;
+	try {
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp=new XMLHttpRequest();
+	} catch (e) {
+		//Internet Explorer
+		try {
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e)  {
+			xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	}
+	return xmlHttp;
+}
+</script>
+</head>
+	<body>
+		<form>
+			<input id="guessedNumber" type="number" min="1" max="10" />
+			<input type="button" value="guess" onclick="guess(document.getElementById('guessedNumber').value);" />
+		</form>
+		<div id="response" > </div>
+	</body>
+</html>
+
+
+<html>
+<body>
+

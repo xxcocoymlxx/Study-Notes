@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>ABC Cabinet</title>
+</head>
+
+<body>
+	<header>
+		<h2>ABC Cabinet</h2>
+	</header>
+	<hr/>
+
+	<h3>Navigation</h3>
+	<a href="main.html">Main Page</a>
+	<br>
+	<a href="order.html">Order Page</a>
+	<hr/>
+
+	<h3>Order Form</h3>
+
+	<form action="forexample.php" method="POST">
+		<!--action: submit the forms to a php page in our server-->
+		<!--method: usually "POST" for forms, meaning we are making a post request to the server, it do stuff like add data to a database-->
+		<!--method: can be "GET", oppsed to "POST", you'll see the data filled in in the url, which is not very safe-->
+			<div>
+				<label>Name:</label>
+				<input type="text" name="Name">
+			</div>
+
+			<br>
+
+			<div>
+				<label>Address:</label>
+				<br>
+				<textarea name="messages"> </textarea>
+			</div>
+
+			<br>
+
+			<div>
+				Method of Payment:
+				<br>
+					<label>
+						<input type="radio" name="category" value="liv" /> 
+						Master Card
+					</label>
+                            
+                    <br>
+
+                    <label>
+                    	<input type="radio" name="category" value="din" CHECKED="checked"/> 
+                    	Visa 
+                    </label>
+                    
+                    <br>
+
+                    <label>
+                    	<input type="radio" name="category" value="bed" /> 
+                    	Amex
+                    </label>
+				
+ 
+			</div>
+
+			<br>
+
+			<div>
+				<label>Credit Card #:</label>
+				<input type="number" name="creditcard">
+			</div>
+			<br>
+
+			<div>
+				Items:
+				<br>
+
+				<label>
+					<input type="checkbox" name="singleCabinet" /> 
+					Single Cabinet $30.00
+				</label>
+                               
+                 <br/>
+
+                 <label>
+                 	<input type="checkbox" name="doubleCabinet" /> 
+                 	Double Cabinet $50.00
+                 </label>
+                               
+                <br/>
+                
+                <label>
+                	<input type="checkbox" name="drawer" CHECKED="checked" /> 
+                	Drawer $20.00
+                </label>
+			</div>
+
+			<br>
+
+			<div>
+				<label>Color</label>
+				<select name="color">
+					<option value="white"> White </option>
+					<option value="black"> Black </option>
+					<option value="brown"> Brown </option>
+				</select>
+				<!--note: it's Select and option-->
+			</div>
+
+			<br>
+
+			<input type="reset" value="Reset Form"/>
+			<input type="submit" value="Submit Form"/>
+
+	</form>
+
+
+</body>
+</html>

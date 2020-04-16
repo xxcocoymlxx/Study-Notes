@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <title>GuessGame</title>
+  </head>
+  <body>
+    <div id="hello-div"></div>
+
+    <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script type="text/babel">
+
+    class HelloWorld extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {message: 'hello', num: 0};
+	/**
+ 	setInterval(()=>{
+		var newNum = this.state.num+1;
+		this.setState({ num: newNum });
+	}, 2000);
+	**/
+      }
+    
+      render() {
+        return (
+          <div>
+            <h3>Hello World</h3>
+	    My message is { this.state.message } my 
+	    num is { this.state.num } and my props are 
+              { this.props.m1 } and { this.props.m2 }
+          </div>
+        );
+      }
+    
+    }
+    
+    ReactDOM.render(<HelloWorld m1={'first prop'} m2={'second prop'} />, document.getElementById('hello-div'));
+    </script>
+  </body>
+</html>

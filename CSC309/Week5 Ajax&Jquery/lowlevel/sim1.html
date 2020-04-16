@@ -1,0 +1,79 @@
+<html>
+<body>
+
+<script type="text/javascript">
+var xmlHttpHello, xmlHttpTime;
+var intervalId=0;
+
+function hello(param) {
+	xmlHttpHello=GetXmlHttpObject();
+	if (xmlHttpHello==null) {
+ 		alert ("Browser does not support HTTP Request");
+ 		return;
+ 	}
+
+	var url="hello.php";
+	url=url+"?name=" + param;
+	xmlHttpHello.onreadystatechange=helloStateChanged ;
+	xmlHttpHello.open("GET",url,true); // arg1=GET/POST, arg2=url, arg3=isAsynchronous
+	xmlHttpHello.send(null); // null is replaced with the body of POST
+}
+
+function displayTime(){
+	xmlHttpTime=GetXmlHttpObject();
+	if (xmlHttpTime==null) {
+ 		alert ("Browser does not support HTTP Request");
+ 		return;
+ 	}
+
+	var url="time.php";
+	xmlHttpTime.onreadystatechange=timeStateChanged ;
+	xmlHttpTime.open("GET",url,true); // arg1=GET/POST, arg2=url, arg3=isAsynchronous
+	xmlHttpTime.send(null); // null is replaced with the body of POST
+}
+
+function timeStateChanged() { 
+	if (xmlHttpTime.readyState==4) { 
+ 		document.getElementById("time").innerHTML=xmlHttpTime.responseText ;
+ 	} 
+}
+
+function helloStateChanged() { 
+	if (xmlHttpHello.readyState==4) { 
+ 		document.getElementById("helloMessage").innerHTML=xmlHttpHello.responseText ;
+ 	} 
+}
+
+function GetXmlHttpObject() {
+	var xmlHttp=null;
+	try {
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp=new XMLHttpRequest();
+	} catch (e) {
+		//Internet Explorer
+		try {
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e)  {
+			xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	}
+	return xmlHttp;
+}
+
+intervalId=setInterval("displayTime()",500);
+
+</script>
+
+<form name="myForm">
+	Name: <input type="text" name="username1" /> <input type="button" value="Press me" onclick="hello(document.myForm.username1.value)"; />
+	<br/>
+	Name: <input type="text" name="username2" onkeyup="hello(document.myForm.username2.value)" />
+	<input type="button" value="clearInterval(intervalId)" onclick="clearInterval(intervalId)"; />
+</form>
+
+<div style="border:2px solid black;" id="time"> &nbsp; </div>
+<div style="border:2px solid black;" id="helloMessage"> &nbsp; </div>
+
+</body>
+</html>
+

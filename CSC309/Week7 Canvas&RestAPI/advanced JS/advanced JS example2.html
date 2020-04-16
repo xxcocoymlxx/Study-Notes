@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>this, arrow functions, variable scoping</title>
+		<script type="text/javascript">
+
+			// let is for block scope
+			// var is for function scope
+			// no var is global scope
+			console.log("demo 1 ##################################");
+			global = "I'm a global var";
+			function scoping(arg){
+				var v = "I'm scoped to this function";
+				let v2 = "I'm scoped to my block";
+				for(i = 0; i<1000;i++){
+					var j = i+1; // scoped to this function no matter where it is defined
+					let v2 = "I'm scoped to my inner block"; // like java!
+					var v = "Overwriting the function scoped variable";
+					console.log(v2);
+				}
+				console.log(global);
+				console.log(j);
+				console.log(v);
+				console.log(v2);
+			}
+			scoping(44);
+
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this
+
+			function thisExample(arg){
+				console.log("New call to this Example -------------------------------------");
+				console.log("arg="+arg+" this.whoAmI="+this.whoAmI);
+				console.log(this);
+
+			}
+			console.log(this); // is the window by default in Mozilla, is global (object) in node
+			console.log("demo 2 ##################################");
+
+			thisExample(23);
+			
+			var a1 = { whoAmI : "I'm an a1" };
+			var a2 = { whoAmI : "I'm an a2" };
+			console.log("demo 3 ##################################");
+			thisExample.call(a1,"1"); // bind this to a1
+			thisExample.call(a2,"2"); // bind this to a2
+
+			function MyClass(something) {
+				this.whoAmI = something;
+				this.method = thisExample;
+			}
+
+			console.log("demo 4 ##################################");
+			var mc1 = new MyClass("mc1");
+			var mc2 = new MyClass("mc2");
+
+			mc1.method("3");
+			mc2.method("4");
+
+			thisExample.call(mc1, "3"); // same as mc1.method("3");
+
+			// Alternate way to define an 'instance', though not declared as an instance of myClass
+
+			var mc3 = {
+				whoAmI : "I'm an mc3", 
+				method: thisExample
+			};
+
+			console.log("demo 5 ##################################");
+			mc3.method(5);
+			// thisExample.call(mc3, 5); // same as above
+
+			// https://spin.atomicobject.com/2014/10/20/javascript-scope-closures/
+
+			// Arrow functions
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+			// Same as anonymous function EXCEPT this is bound and fixed by the enclosing context
+
+			function NonArrow() {
+  				// The constructor defines `this` as an instance of itself.
+  				this.attribute = 17;
+
+				// remember the actual function won't be called by the instance!!
+  				setInterval( function () { console.log(this); console.log(this.attribute); } , 1000);
+			}
+
+			function Arrow() {
+  				// The constructor defines `this` as an instance of itself.
+  				this.attribute = 18;
+
+				// remember the actual function won't be called by the instance!!
+				// for an arrow function, this is bound to the countext in which it was defined
+
+				// this has a value !!
+
+  				setInterval( () => { console.log(this); console.log(this.attribute); } , 1000);
+				// vs 
+				/**
+  				setInterval( 
+					function (){ console.log(this); console.log(this.attribute); } 
+				, 1000);
+				**/
+			}
+			console.log("demo 6 ##################################");
+			var na = new NonArrow();
+			// var aa = new Arrow();
+			// var a2 = new Arrow(); a2.attribute = 23;
+
+		</script>
+	</head>
+	<body>
+		This example: take a look at the source and developer tools.
+
+	</body>
+</html>

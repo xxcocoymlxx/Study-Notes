@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>MY FIRST HTML FILE</title>
+
+	</head>
+
+	<body>
+		<!-- this direct readers to blog.html -->
+		<!-- this is how navigation works -->
+		<a href="blog.html"> GO TO blog.html </a>
+
+		<hr>
+		<!--This is a comment in HTML-->
+		<!--headings-->
+		<h1>Heading 1</h1>
+		<h2>Heading 2</h2>
+		<h3>Heading 2</h3>
+		<h4>Heading 2</h4>
+		<h5>Heading 2</h5>
+		<h6>Heading 2</h6 >
+		<br>
+
+		<!--This is paragraphs-->
+		<P>
+			<!--type "lorem" and then TAB to generate dummy paragraphs-->
+			<!--strong: bold-->
+			<!--em: emphasis, xie ti-->
+			<!--a: hyperlink, "href" can be local like "about.html" or external like "http://google", "target": open up a new tab for the hyperlink -->
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor <strong>incididunt ut labore et dolore</strong> magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco <em>laboris nisi ut aliquip</em> ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. <a href="http://google.com" target="_blank"> Excepteur sint occaecat</a> cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<!--tag attributes: all tags can have attributes, provide info about an element, placed within the start tag, key/value pairs, the value is always in "" like (key="value")-->
+		</P>
+
+		<!--unordered list-->
+		<ul>
+			<li>list item 1</li>
+			<li>list item 2</li>
+			<li>list item 3</li>
+			<li>list item 4</li>
+		</ul>
+
+		<!--ordered list-->
+		<ol>
+			<li>list item 1</li>
+			<li>list item 2</li>
+			<li>list item 3</li>
+			<li>list item 4</li>
+		</ol>
+
+		<!--table-->
+		<table>
+			
+			<thead> <!--colunm names for each column-->
+				<!--tr: table row 1-->
+				<tr>
+					<th>Name</th><!--th: table headings-->
+					<th>Email</th>
+					<th>Age</th>
+
+				</tr>
+			</thead>
+
+			<tbody>
+				<!--tr: table row 2-->
+				<tr>
+					<td>Coco</td><!--td: table data-->
+					<td>cocoyml92@gmail.com</td>
+					<td>18</td>
+				</tr>
+				
+				<!--tr: table row 3-->
+				<tr>
+					<td>Stanley</td>
+					<td>iamstanley@gmail.com</td>
+					<td>40</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+		<br>
+		<hr>
+		<br>
+
+		<!--forms-->
+		<form action="forexample.php" method="POST">
+		<!--action: submit the forms to a php page in our server-->
+		<!--method: usually "POST" for forms, meaning we are making a post request to the server, it do stuff like add data to a database-->
+		<!--method: can be "GET", oppsed to "POST", you'll see the data filled in in the url, which is not very safe-->
+			<div>
+				<label>first name</label>
+				<input type="text" name="firstName" value="enter first name"><!--type: specify the input type, name: has to do with server side programming, how you deal with the data you get -->
+			</div>
+			<div>
+				<label>last name</label>
+				<input type="text" name="lastName" placeholder="enter last name">
+			<!--lable and input are both inline-->
+			<!--<div> is block level element, you can put a <div> around each lable element so that they will be in different lines-->
+			</div>
+
+			<div>
+				<label>Email</label>
+				<input type="email" name="email">
+				<!--note the type is now email, verifies the format without programing-->
+			</div>
+
+			<div>
+				<label>messages</label>
+				<textarea name="messages"> </textarea>
+				<!--note: it's NOT input anymore, it's TEXTAREA-->
+			</div>
+
+			<div>
+				<label>gender</label>
+				<select name="gender">
+					<option value="male"> Male </option>
+					<option value="female"> Female </option>
+					<option value="Unknown "> Unknown </option>
+				</select>
+				<!--note: it's Select and option-->
+			</div>
+
+			<br>
+			<div>
+				<label>Age:</label>
+				<!--note: value here is the default age-->
+				<input type="number" name="age" value="30">
+			</div>
+			<br>
+			<div>
+				<label>Birthday:</label>
+				<input type="date" name="Birthday">
+			</div>
+			<br>
+
+			<input type="submit" name="submit" value="submit">
+		</form>
+
+		<!--buttoms outside of the forms-->
+		<!--not gonna do anything yet, to link an action you need javascript-->
+		<button click="some functions">click me</button>
+
+
+		<!--images: self closing tags-->
+		<!--local image found in the same folder as your index.html-->
+		<!--alt" if the image can't be displayed, it's gonna show whatever is in "alt"-->
+		<div>
+			<a href="pic.jpeg"><!--set a hyperlink to the image-->
+				<img src="pic.jpeg" alt="pic does not exist" width="200">
+				<!--the height is set to auto, can also set height="100", image can become wierd-->
+			</a>
+		</div>
+
+
+		<!--Quotations-->
+		<blockquote cite="http://google.com">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</blockquote>
+
+		<p> The 
+			<abbr title="world wide web"> www </abbr> 
+			is awesome
+		</p>
+
+		<p>
+			<cite>HTML crash course </cite> by brad
+			<!--let the readers know that this is something being cited-->
+		</p>
+
+
+		<!--put a lot of spaces at the bottom of the web page, so we can scroll down-->
+		<div style="margin-top:500px"></div>
+
+	</body>
+
+</html>
+
+
+

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Javascript (JS) and Forms</title>
+    <script>
+      // Note: Throughout this example, we are using the documents HTMLCollection (see https://developer.mozilla.org/en/docs/Web/API/HTMLCollection)
+      function pressMeHandler03(){
+        document.form03.pressMeCount.value=eval(document.form03.pressMeCount.value)+1;
+      }
+      
+      function radioChoice(c){ 
+        alert("you choose "+c); 
+        var radioButtons=document.form05.category;
+        var i;
+        for(i=0;i<radioButtons.length;i++){
+          if(radioButtons[i].checked)alert(radioButtons[i].value);
+        }
+      }
+      
+      function selectionChanged(){
+        var s=""; 
+        var choices=document.form05.fruit_choices.options;
+        for(var i=0;i<choices.length; i++){
+          if(choices[i].selected)s=s+" "+choices[i].value;
+        }
+        alert(s);
+      }
+      function checkCheckboxes(){
+        var cbs=document.form05;
+        if(cbs.musicpref_rnb.checked)alert("r and b");
+        if(cbs.musicpref_jazz.checked)alert("jazz");
+        if(cbs.musicpref_blues.checked)alert("blues");
+        if(cbs.musicpref_newage.checked)alert("newage");
+        return(true);
+      }    
+  </script>
+  </head>
+  <body>
+    <h3>Javascript (JS) and Forms</h3>
+    <h4>Simple events and locating javascript code</h4>
+    <ul>
+    <li> Connecting events, buttons, javascript and text inputs
+      <form name="form01">
+      <input type="button" value="pressMe" onclick="document.form01.pressMeCount.value=document.form01.pressMeCount.value+1";>
+      <input type="text" name="pressMeCount" value="0">
+      </form>
+      <br> Points:
+      <ul>
+      <li> Practically any JS can appear in the event
+      <li> JS does auto type conversion (+ means concat with strings)
+      <li> Using the DOM
+      </ul>
+    <li> Connecting events, buttons, javascript and text inputs (again)
+      <form name="form02">
+      <input type="button" value="pressMe" onclick="document.form02.pressMeCount.value=
+		eval(document.form02.pressMeCount.value) +1";> 
+      <input type="button" value="pressMe" onclick="document.form02.pressMeCount.value=parseInt(document.form02.pressMeCount.value)+1";> 
+      <input type="text" name="pressMeCount" value="0">
+      </form>
+      <br> Points:
+      <ul>
+      <li> You can use eval to evaluate an expression (ANY JAVASCRIPT expression!!).
+      <li> In this case, better to use parseInt
+      </ul>
+    <li> As above, but defining JS handler elsewhere in this document
+      <form name="form03">
+      <input type="button" value="pressMe" onclick="pressMeHandler03();" >
+      <input type="text" name="pressMeCount" value="0">
+      </form>
+    
+    <li> As above, but defining JS handler in a separate document
+      <form name="form04">
+      <input type="button" value="pressMe" onclick="pressMeHandler04();" >
+      <input type="text" name="pressMeCount" value="0">
+      </form>
+      <script language="javascript" src="Forms.js"> </script>
+    </ul>
+    <li> <a href="javascriptArrays.html">Predefined Javascript Arrays</a>
+    <li> Different input types. <i>Note:</i> A single form with many inputs follows.
+    <form name="form05" method="post" action="http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi" >
+      <ul>
+      <li> Checkboxes
+        <p>Specify your music preferences (check all that apply):</p>
+        <p><input TYPE="checkbox" NAME="musicpref_rnb" > R and B
+         <br/><input TYPE="checkbox" NAME="musicpref_jazz" CHECKED> Jazz
+         <br/><input TYPE="checkbox" NAME="musicpref_blues" CHECKED> Blues
+         <br/><input TYPE="checkbox" NAME="musicpref_newage" CHECKED> New Age
+    
+      <li> Radio buttons
+      <p>Choose a Category of Room:
+      <ol>
+        <li><input TYPE="radio" NAME="category" VALUE="liv" onclick="radioChoice('liv');" > Living <br/>
+        <li><input TYPE="radio" NAME="category" VALUE="din" onclick="radioChoice('din');" > Dining <br/>
+        <li><input TYPE="radio" NAME="category" VALUE="bed" onclick="radioChoice('bed');" > Bedroom
+      </ol>
+    
+        <li> Selection (allow multiple, display 4)
+      <p>Choose a fruit:
+      <select name="fruit_choices" multiple="multiple" size="4" onchange="selectionChanged()">
+        <option value="app">Apples</option>
+        <option value="ban" selected="selected">Bananas</option>
+        <option value="che" >Cherries</option>
+        <option value="ora">Oranges</option>
+        <option value="pin">Pineapple</option>
+        <option value="fig">Figs</option>
+        <option value="gua">Guava</option>
+      </select>
+      </ul>
+      <input type=button value="Submit all this stuff!" onclick="checkCheckboxes();">
+      <input type=submit value="Submit all this stuff!" onclick="checkCheckboxes(); return(true);">
+      Change the above to return true and see what happens.
+    </form>
+  </body>
+</html>

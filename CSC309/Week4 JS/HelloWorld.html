@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Hello With Events</title>
+		<script>
+			function sayHello(){
+				md=document.getElementById("mydiv1");
+				alert("hello World");
+				md.innerHTML="<h3>Hello World</h3><a href=Forms.html>Forms</a>";
+			}
+		</script>
+	</head>
+	<body onload="sayHello();">
+		<h1>This is something</h1>
+		<div style="border:1px solid black" id="mydiv1"> div 1</div>
+		<div style="border:1px solid black" id="mydiv2"> div 2</div>
+		<div style="border:1px solid black" id="mydiv3"> div 3</div>
+	</body>
+</html>

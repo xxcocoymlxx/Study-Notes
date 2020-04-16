@@ -1,0 +1,76 @@
+Preliminary checklist for A1:
+
+Advice: If you have all 'Y' on this, you are probably one day away from   
+completing the assignment!!!! You should still clean it up, lock it down,
+simplify it, re-architect it so that the code is better organized, 
+simplify the UI for the games, add some features that make the user 
+experience better (grey out things that can't be clicked for example),    
+compare your application with others on the web, to see if you agree with
+web standards. Verify that we can run your application based on your setup
+script!!
+
+Setup:
+[YN] The setup script has been modified to correctly install the DB and 
+prepare the application so we can easily mark the assignment.
+[YN] All members info is correct and in members.txt
+
+Front Controller:
+[YN] All requests go through games/index.php (except for things like
+     images)
+[YN] No HTML redirects
+
+Controller:
+[YN] Front controller implements a simple state machine (you might
+     do something more for the navigation) as a controller
+[YN] Controller validates input
+[YN] Controller updates model as appropriate
+[YN] Controller updates state and view
+[YN] Back button does not cause backend resubmissions (see page tokens)
+[YN] Reload button does not cause backend resubmissions (see page tokens)
+
+Model:
+[YN] Model code knows nothing about view and controller, nor session,
+though Model classes may be stored in the session.
+[YN] Database accessed only through the model
+[YN] Database schema simple and effective
+[YN] SQL Queries are simple and effective
+[YN] No SQL injection possible (use of prepared queries).
+[YN] Model code is simple and powerful (that is, it does a lot, but with
+tight code)
+
+View:
+[YN] Each view page is simple, pulling data from Model as stored in the
+session, or pulling from $_REQUEST for example.
+[YN] No updates to model in view code.
+[YN] Each page looks almost like simple HTML with a bit of <?php ?> as
+needed. 
+
+[YN] Pages load for the first time properly (ie register new user)
+[YN] Pages preload properly as appropriate (ie registration information)
+[YN] Pages redisplay data properly when invalid input is presented.
+[YN] Good errors indicated when page has error
+[YN] Validation done on front end
+
+Navigation: 
+[YN] Navigation appears on all logged in pages
+[YN] Navigation is links
+[YN] Navigation works, jumps between
+
+Security:
+[YN] Directory permissions setup properly
+[YN] SQL Queries dont allow SQL injection   
+[YN] All inputs are checked on the backend
+
+Functionality (let your neighbour play it)
+[YN] Navigation matches page names
+[YN] GuessGame works and is easy to play, has all features
+[YN] 15 Puzzle is simple, easy to play, has all features
+[YN] Peg puzzle is simple and easy to play, has all features
+[YN] Mastermind is simple and easy to play, has all features
+
+Code Quality:
+[YN] Code is simple (done do complicated things unnecessarily)
+[YN] Code is clear (naming, easy to understand, well organized)
+[YN] Code is concise (short, removed replicated code)
+
+Note: You might have re-organized to simplify the code a bit.

@@ -1,0 +1,259 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<!-- 1 week llt -->
+<h4>Relational Model</h4>
+<ul>
+<li> You can find the lecture as a <a href=examples.sql><b>postgresql</b> script</a>
+<li>First published by E.F. Codd in 1970
+<li>A relational database consists of a collection of tables
+<li>A table consists of rows and columns
+<li>each row represents a record
+<li>each column represents an attribute of the records contained in the table
+</ul>
+<h4>Exmple: The Suppliers and Parts Database</h4>
+A DB with three tables (SUPPLIER, PART, SELLS): 
+	<ol>
+	<li> SUPPLIER has attributes: number (SNO), the name (SNAME) and the city (CITY) 
+	<li> PART has attributes: number (PNO) the name (PNAME) and the price (PRICE) 
+	<li> SELLS has attributes: part (PNO) and supplier (SNO). SELLS connects SUPPLIER and PART. 
+	</ol>
+<PRE>
+SUPPLIER:                   SELLS:
+ SNO |  SNAME  |  CITY       SNO | PNO
+----+---------+--------     -----+-----
+ 1  |  Smith  | London        1  |  1
+ 2  |  Jones  | Paris         1  |  2
+ 3  |  Adams  | Vienna        2  |  4
+ 4  |  Blake  | Rome          3  |  1
+                              3  |  3
+                              4  |  2
+PART:                         4  |  3
+ PNO |  PNAME  |  PRICE       4  |  4
+----+---------+---------
+ 1  |  Screw  |   10
+ 2  |  Nut    |    8
+ 3  |  Bolt   |   15
+ 4  |  Cam    |   25
+</PRE>
+<h4>Example Continued</h4>
+<ul>
+<li> Row (1,Smith, London) in SUPPLIER represents a supplier with
+	supplier number 1 whose name is Smith and which is based in London.
+<li> Row (2,Nut,8) in PART represents a part with part number 2, part name Nut and
+	price 8.
+<li> Row (1,2) in SELLS represents 
+</ul>
+<h4>Entities and Relations</h4>
+<ul>
+<li> An <i>entity</i> represents something real
+<li> A <i>relation</i> represents a connection between entities
+<li> The tables PART and SUPPLIER may be regarded as <i>entities</i>
+<li> SELLS may be regarded as a <i>relationship</i> between a particular part and a particular supplier. 
+</ul>
+<h4>Some Formalities</h4>
+<ul>
+<li>A <b>domain</b> is a set of values. The set of integers is a domain, so is the set of all strings.
+<li>The <b>cartesian product</b> of domains D<sub>1</sub> x D<sub>2</sub> x ... x D<sub>k</sub> is 
+	the set of all k-tuples  (v<sub>1</sub>,...,v<sub>k</sub>) where
+	v<sub>1</sub> is in D<sub>1</sub>,..., v<sub>k</sub> is in D<sub>k</sub> 
+	<p><b>Example:</b> If k=2 and D<sub>1</sub>={0,1} and D<sub>2</sub>={a,b,c} then D<sub>1</sub> × D<sub>2</sub> is {(0,a),(0,b),(0,c),(1,a),(1,b),(1,c)}. 
+<!-- relation scheme omitted -->
+</ul>
+<h4>Structured Query Language (SQL)</h4>
+<ul>
+<li> Used on a RDBMS to create, search and modify tables.
+<li> Table creation (by example): Executing the following causes the
+creation of the Suppliers and Parts database above.
+<pre>
+CREATE TABLE SUPPLIER (SNO INTEGER, SNAME VARCHAR(20), CITY VARCHAR(20));
+CREATE TABLE PART (PNO INTEGER, PNAME VARCHAR(20), PRICE DECIMAL(4,2));
+CREATE TABLE SELLS (SNO INTEGER, PNO INTEGER); 
+</pre>
+</ul>
+<h4>SQL Data types</h4>
+Some SQL Data types your database may support
+<ul>
+<li>INTEGER: signed fullword binary integer 
+<li>DECIMAL (p[,q]): signed packed decimal number of up to p digits, with q digits to the right of the decimal point. If q is omitted it is assumed to be 0. 
+MSAccess supports NUMBER instead of DECIMAL
+<li>FLOAT: signed doubleword floating point number. 
+<li>CHAR(n): fixed length character string of length n. 
+<li>VARCHAR(n): varying length character string of maximum length n
+<li>DATE: A date attribute in a DBMS-specific format. 
+</ul>
+<h4>A note about NULL</h4>
+SQL allows the <b>NULL</b> value to appear in tuples (table rows).
+A NULL indicates a non-initialized attribute in a row. This can be disallowed
+by adding a <b>NOT NULL</b> constraint in table creation
+<pre>
+CREATE TABLE SUPPLIER (SNO INTEGER, 
+	SNAME VARCHAR(20) NOT NULL, 
+	CITY VARCHAR(20));
+</pre>
+When adding a row to the SUPPLIER table, an SNAME must be specified!
+<h4>Searching using SQL (by example)</h4>
+The result of a SQL search is a table.
+<ul>
+<li>(Query1) SELECT * FROM PART;
+<br>Results in the whole PART table.
+<li>(Query2) SELECT * FROM PART WHERE PRICE &gt; 10;
+<br><b>Results:</b>
+<pre>
+ PNO |  PNAME  |  PRICE
+-----+---------+--------
+  3  |  Bolt   |   15
+  4  |  Cam    |   25
+</pre>
+<li>(Query3) SELECT PNAME, PRICE FROM PART WHERE PRICE &gt; 10;
+<br><b>Results:</b>
+<pre>
+ PNAME  |  PRICE
+--------+--------
+ Bolt   |   15
+ Cam    |   25
+</pre>
+<li> 
+<pre>
+(Query4) SELECT PNAME, PRICE FROM PART WHERE PNAME = 'Bolt' AND
+         (PRICE = 0 OR PRICE &lt;= 15);
+</pre>
+<br><b>Results:</b>
+<pre>
+ PNAME  |  PRICE
+--------+--------
+ Bolt   |   15
+</pre>
+</ul>
+<h4>Cartesian products</h4>
+<pre>
+(Query5) SELECT * FROM SUPPLIER, PART;
+</pre>
+The above example forms the table SUPPLIER x PART
+with rows of the form (s,p) where s is a row in SUPPLIER, p is a row in PART.
+In total SUPPLIER x PART has a total of 4*4 rows.
+<h4>Cartesian products cont.</h4>
+<pre>
+(Query6) SELECT * FROM SUPPLIER S1, SUPPLIER S2;
+</pre>
+The above example forms the table SUPPLIER x SUPPLIER
+with rows of the form (s,p) where s and p are rows in SUPPLIER.
+This table has 4*4 rows. 
+<br>Notice that we have aliased (SUPPLIER S1) the tables so we can identify
+where attributes are from.
+<br><b>Results:</b>
+<pre>
+S1.SNO    S1.SNAME    S1.CITY    S2.SNO    S2.SNAME    S2.CITY
+1         Smith       London     1         Smith       London
+2         Jones       Paris      1         Smith       London
+3         Adams       Vienna     1         Smith       London
+4         Blake       Rome       1         Smith       London
+1         Smith       London     2         Jones       Paris
+2         Jones       Paris      2         Jones       Paris
+3         Adams       Vienna     2         Jones       Paris
+4         Blake       Rome       2         Jones       Paris
+1         Smith       London     3         Adams       Vienna
+2         Jones       Paris      3         Adams       Vienna
+3         Adams       Vienna     3         Adams       Vienna
+4         Blake       Rome       3         Adams       Vienna
+1         Smith       London     4         Blake       Rome
+2         Jones       Paris      4         Blake       Rome
+3         Adams       Vienna     4         Blake       Rome
+4         Blake       Rome       4         Blake       Rome
+</pre>
+<h4>Joins</h4>
+Matching up rows in tables based on the same value for columns.
+<p>
+For each supplier, we want a list of the parts they sell. 
+Join SUPPLIER and SELLS on SNO, join SELLS and PART on PNO.
+<pre>
+(Query7) SELECT S.SNAME, P.PNAME
+    FROM SUPPLIER S, PART P, SELLS SE
+    WHERE S.SNO = SE.SNO AND P.PNO = SE.PNO;
+</pre>
+<br><b>Note:</b> The tables have been aliased in the above query.
+SUPPLIER is also known as S, PART as P etc. S.SNO is the SNO attribute
+of the SUPPLIER table.
+<br><b>Results:</b>
+<pre>
+ SNAME | PNAME
+-------+-------
+ Smith | Screw
+ Smith | Nut
+ Jones | Cam
+ Adams | Screw
+ Adams | Bolt
+ Blake | Nut
+ Blake | Bolt
+ Blake | Cam
+</pre>
+<b>Exercise:</b> Modify the above query to list all suppliers of Bolts.
+<h4>Order By</h4>
+<pre>
+(Query7-1) SELECT S.SNAME, P.PNAME
+    FROM SUPPLIER S, PART P, SELLS SE
+    WHERE S.SNO = SE.SNO AND P.PNO = SE.PNO
+    ORDER BY S.SNAME;
+</pre>
+<br><b>Results:</b>
+<pre>
+ SNAME | PNAME
+-------+-------
+ Adams | Bolt
+ Adams | Screw
+ Blake | Cam
+ Blake | Bolt
+ Blake | Nut
+ Jones | Cam
+ Smith | Nut
+ Smith | Screw
+</pre>
+<b>Exercise:</b> Write a query to simplify finding the cheapest
+supplier of Bolts.
+
+<h4>Data Manipulation</h4> 
+Add a row to SUPPLIER
+<pre>
+(Query8)
+INSERT INTO SUPPLIER (SNO, SNAME, CITY) VALUES (1, 'Smith', 'London');
+</pre>
+Update rows in a table
+<pre>
+(Query9)
+UPDATE PART SET PRICE = 15 WHERE PNAME = 'Screw';
+</pre>
+Delete rows from a table
+<pre>
+(Query10)
+DELETE FROM SUPPLIER WHERE SNAME = 'Smith';
+</pre>
+<h4>Creating tables and indexes</h4>
+<pre>
+(createSupplier)
+CREATE TABLE SUPPLIER (SNO INTEGER, SNAME VARCHAR(20), CITY VARCHAR(20));
+
+(supplierIndex)
+CREATE UNIQUE  INDEX supplierIndex
+ON supplier (SNO);
+</pre>
+
+<h4>Etc...</h4>
+A relational database is a powerfull tool. We have not covered...
+<ul>
+<li> Transaction processing
+<li> Concurrent access
+<li> Aggregate queries
+<li> Stored procedures (PL/SQL, embedded Java)
+<li> Integrity constraints
+<li> Design
+<li> Indexes
+<li> Fault tolerence
+<li> Online backups
+<li> Database distribution
+<li> etc...
+</ul>
+We have just scratched the surface.
+</body>
+</html>

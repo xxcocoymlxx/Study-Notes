@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Vote</title>
+		
+		<!-- Keep these two together!! -->
+		<script type="text/javascript"> var global = {}; </script>
+		<script src="lib/constants.js"> </script>
+
+		<script src="lib/jquery-3.3.1.min.js"></script>
+
+		<script src="lib/react.js"></script>
+		<script src="lib/react-dom.js"></script>
+		<script src="lib/babel.min.js"></script>
+
+		<script type="text/javascript">
+        
+                        var socket;
+
+                        $(function(){
+                                // socket = new WebSocket("ws://cslinux.utm.utoronto.ca:10001");
+								alert(global.wwWsURL);
+                                socket = new WebSocket(global.wwWsURL);
+                                socket.onopen = function (event) {
+                                        console.log("connected");
+                                };
+                                socket.onclose = function (event) {
+                                        alert("closed code:" + event.code + " reason:" +event.reason + " wasClean:"+event.wasClean);
+                                };
+                                socket.onmessage = function (event) {
+                                        var votes=JSON.parse(event.data);
+					$("#VoteCount").html("Yes:"+votes.yes+" "+"No:"+votes.no);
+                                        // socket.send(JSON.stringify({ 'x': x, 'y': y} ));
+
+                                        // var context = document.getElementById('theCanvas').getContext('2d');
+                                        // context.fillStyle = 'rgba(255,0,0,1)';
+                                        // context.fillRect(point.x, point.y, 2, 2);
+                                };
+                        });
+                </script>
+
+
+		<script type="text/javascript">
+			function sendVote(vote){
+        			$.ajax({
+                			method: "PUT",
+                			url: "/api/vote/"+vote
+        			}).done(function(data){
+                			console.log("Got back:"+JSON.stringify(data));
+        			});
+			}
+		</script>
+ 		
+		<script type="text/babel">
+			class VoteButton extends React.Component {
+				constructor(props) {
+					super(props);
+				}
+				render(props){
+					return (
+						<button onClick={this.props.clickHandler} > { this.props.label } </button>
+					);
+				}
+			}
+			class VoteComponent extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = { }
+					this.yesClickHandler = this.yesClickHandler.bind(this);
+					this.noClickHandler = this.noClickHandler.bind(this);
+				}
+				yesClickHandler(e){
+					sendVote("yes");
+					console.log("yes");
+				}
+				noClickHandler(e){
+					sendVote("no");
+					console.log("no");
+				}
+				render(){
+					return (  
+						<div style={{border:"1px solid black"}} > 
+							{ this.props.proposition }
+							<VoteButton clickHandler={this.yesClickHandler} label="yes" />
+							<VoteButton clickHandler={this.noClickHandler} label="no" />
+						</div>
+					);
+				}
+			}
+			ReactDOM.render( <VoteComponent proposition="Want a poll?"/>, document.getElementById("VOTE"));
+		</script>
+	</head>
+	<body>
+		<div id="VOTE"></div>
+		<div id="VoteCount"></div>
+	</body>
+</html>

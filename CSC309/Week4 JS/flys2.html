@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+
+		<meta name = "viewport" content = "width=device-width, user-scalable=no" >
+		<style type = "text/css"> 
+			body { margin:0px; overflow:hidden; }
+			canvas { border:1px solid black; }
+		</style > 
+
+		<title>Flys</title>
+
+		<script type="text/javascript" src="ball.js"></script>
+		<script type="text/javascript">
+
+			function randint(n){ return Math.round(Math.random()*n); }
+			function rand(n){ return Math.random()*n; }
+
+			var width=0, height=0;
+			var context;
+			var finger=new Pair(-1,-1); // (-1,-1)=no touch
+
+			var balls=[];
+
+			function updateFinger (event) {
+				finger.x=event.touches[0].pageX;
+				finger.y=event.touches[0].pageY;
+			}
+			
+			function update(){
+				// clear the screen 
+				context.clearRect (0, 0, width, height);
+				
+				// Move the balls and draw the world
+				for(i in balls){
+					var b=balls[i];
+					b.headTo(finger);
+					b.move(4);
+					context.fillStyle = b.colour;
+   					context.fillRect(b.position.x, b.position.y, 5,5);
+				}
+
+				// draw the finger
+				var px = finger.x;
+			    	var py = finger.y;
+					
+			    	context.beginPath ();
+			    	context.arc (px, py, 20, 0, 2 * Math.PI, true);
+					
+			    	context.fillStyle = "rgba(0, 0, 200, 0.2)";
+			    	context.fill ();
+					
+			    	context.lineWidth = 2.0;
+			    	context.strokeStyle = "rgba(0, 0, 200, 0.8)";
+			    	context.stroke ();
+			}
+
+			function ol(){
+				var canvas=document.getElementById("canvas");
+				context=canvas.getContext("2d");
+
+				width = window.innerWidth;
+				height = window.innerHeight;
+			
+			    	canvas.style.width = width + 'px';
+			    	canvas.style.height = height + 'px';
+			    	canvas.width = width;
+			    	canvas.height = height;
+
+				worldWidth=width; // =context.canvas.width;
+				worldHeight=height; // =context.canvas.height;
+
+				// create the world (50 balls)
+				for(i=0;i<50;i++){
+					var b=new Ball(new Pair(rand(width), rand(height)), new Pair(rand(1), rand(1)));
+					console.log(b.toString());
+					// Colour
+					var red=randint(255);
+					var green=randint(255);
+					var blue=randint(255);
+					var alpha=Math.random();
+	
+					// The color
+					// b.colour= 'rgba(0,0,255,1)';
+					b.colour= 'rgba('+red+','+green+','+blue+','+alpha+')';
+					
+					balls.push(b);
+				}
+				// let the world run
+				setInterval(update,100);
+
+				canvas.addEventListener('touchend', function (event) { 
+					// context.clearRect (0, 0, w, h); 
+					finger.x=-1; 
+					finger.y=-1;
+				});
+				canvas.addEventListener('touchmove', 
+					function (event) { event.preventDefault(); updateFinger(event); });
+				canvas.addEventListener('touchstart', function (event) { console.log ('start');});
+
+			}
+		</script>
+	</head>
+	<body onload="ol();" >
+		<canvas id = "canvas" width = "300" height = "300" style = "top:0px; left:0px; width: 300px; height: 300px;" >
+	</body>
+</html>

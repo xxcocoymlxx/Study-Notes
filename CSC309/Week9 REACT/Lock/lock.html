@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Lock</title>
+ 		
+		<script src="lib/react.js"></script>
+		<script src="lib/react-dom.js"></script>
+		<script src="lib/babel.min.js"></script>
+ 		
+		<script type="text/babel">
+			class LockButton extends React.Component {
+				constructor(props) {
+					super(props);
+				}
+				render(props){
+					return (
+						<button onClick={this.props.clickHandler} value={this.props.num} > {this.props.num} </button>
+					);
+				}
+			}
+			class LockResult extends React.Component {
+				constructor(props) {
+					super(props);
+				}
+				render(props){
+					return (
+						<span> {this.props.message} </span>
+					);
+				}
+			}
+			
+			class Lock extends React.Component {
+				constructor(props) {
+					super(props);
+					this.state = { 
+						currentCombo :  "",
+						lockStatus: "Locked"
+					}
+					this.lockButtonClickHandler = this.lockButtonClickHandler.bind(this);
+				}
+				lockButtonClickHandler(e){
+					var value = e.target.value;
+					console.log(value);
+					this.setState( (prevState, props) => {
+						var newCombo = prevState.currentCombo+value;
+						console.log(newCombo);
+						return { currentCombo : newCombo };
+					});
+				}
+			
+				render(){
+					return (  
+						<div style={{border:"1px solid black"}} > 
+							<LockButton clickHandler={this.lockButtonClickHandler} num={1} />
+							<LockButton clickHandler={this.lockButtonClickHandler} num={2} />
+							<LockButton clickHandler={this.lockButtonClickHandler} num={3} />
+							<LockButton clickHandler={this.lockButtonClickHandler} num={4} />
+							<LockButton clickHandler={this.lockButtonClickHandler} num={5} />
+							<LockResult message={this.state.lockStatus} />
+						</div>
+					);
+				}
+			}
+			ReactDOM.render( <Lock combo="13145" />, document.getElementById("LOCK"));
+		</script>
+	</head>
+	<body>
+		<div id="LOCK"></div>
+	</body>
+</html>

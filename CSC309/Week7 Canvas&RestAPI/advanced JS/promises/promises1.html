@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>promises</title>
+		<script type="text/javascript">
+			console.log("begin: creating the promise");
+			myFirstPromise = new Promise((resolve, reject) => {
+				console.log("First promise before setTimeout");
+    				// resolve("Success!"); // Yay! Everything went well!
+  				setTimeout(function(){
+    					// resolve("Success!"); // Yay! Everything went well!
+    					reject("My First Promise Failed!"); // No! it failed!
+  				}, 5000);
+				console.log("First promise after setTimeout");
+			});
+			console.log("end: creating first promise");
+ 			// could take some time...
+
+			console.log("begin: binding first callback");
+			myFirstPromise.then(
+			  (successMessage) => {
+  				console.log("Yay 1! " + successMessage);
+			}, (rejectMessage)=> { 
+  				console.log("Boo 1! " + rejectMessage);
+			});
+			console.log("end: binding first callback");
+			console.log("begin: binding second callback");
+			
+			// Binding a second callback to the promise.
+			myFirstPromise.then(
+			  (successMessage) => {
+  				console.log("Yay 2! " + successMessage);
+			}, (rejectMessage)=> { 
+  				console.log("Boo 2! " + rejectMessage);
+			});
+			console.log("end: binding second callback");
+			console.log("after myFirstPromise two callbacks bound");
+
+			// What happens if we register a callback after the Promise resolves or rejects??
+			function thenLater(){
+				myFirstPromise.then(
+			  	(successMessage) => {
+  					console.log("Yay! " + successMessage);
+				}, (rejectMessage)=> { 
+  					console.log("Boo! " + rejectMessage);
+				});
+			}
+			// So the promise remembers its final state
+		</script>
+	</head>
+	<body>
+		<button type="button" onclick="thenLater()">then a 'finished promise'</button>
+		<ul>
+		<li> Promises execute code on creation
+		<li> Promises store their final state
+		<li> No matter when a .then binds a callback, the callback is performed
+			after the promise is completed
+		</ul>
+	</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+function getStats(param) {
+	var xmlHttp=GetXmlHttpObject(); // local
+	if (xmlHttp==null) {
+ 		alert ("Browser does not support HTTP Request");
+ 		return;
+ 	}
+
+	message = { "numbers": param.split(" ") };
+
+	var url="stats.php";
+	url=url+"?request=" + JSON.stringify(message);
+	alert(url);
+	xmlHttp.onreadystatechange=function(){ statsStateChanged(xmlHttp); }; // anonymous function
+	xmlHttp.open("GET",url,true); // arg1=GET/POST, arg2=url, arg3=isAsynchronous
+	xmlHttp.send(null); // null is replaced with the body of POST
+}
+
+function statsStateChanged(xmlHttp) { 
+	if (xmlHttp.readyState==4) { 
+ 		document.getElementById("stats").innerHTML=xmlHttp.responseText ;
+		var response = JSON.parse(xmlHttp.responseText);
+		if(response.error_message==""){
+ 			document.getElementById("sum").innerHTML=response.sum ;
+ 			document.getElementById("num").innerHTML=response.num;
+ 			document.getElementById("average").innerHTML=response.average;
+		}
+ 	} 
+}
+
+function GetXmlHttpObject() {
+	var xmlHttp=null;
+	try {
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp=new XMLHttpRequest();
+	} catch (e) {
+		//Internet Explorer
+		try {
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e)  {
+			xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	}
+	return xmlHttp;
+}
+
+</script>
+
+<form name="myForm">
+	Numbers: <input type="text" name="numbers" /> <input type="button" value="Get Stats" onclick="getStats(document.myForm.numbers.value)"; />
+	<br/>
+</form>
+
+<div style="border:2px solid black;" id="stats"> &nbsp; </div>
+<br/> Sum: <span style="border:2px solid black;" id="sum"> &nbsp; </span>
+<br/> Num: <span style="border:2px solid black;" id="num"> &nbsp; </span>
+<br/> Average: <span style="border:2px solid black;" id="average"> &nbsp; </span>
+
+</body>
+</html>
+

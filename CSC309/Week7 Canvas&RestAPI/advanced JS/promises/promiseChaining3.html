@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>promises</title>
+		<script type="text/javascript">
+			myChainedPromise = new Promise((resolve, reject) => {	
+				console.log("myChainedPromise before resolve");
+				//reject(1);
+				resolve(1);
+			});
+
+			myChainedPromise
+			.then((value) => {
+  				console.log(value);
+				return value+1; // If I don't return a promise inside .then, a promise created for me
+			}).then((value) => {
+  				console.log(value);
+				throw value; // like reject from a promise, but inside a Thenable
+				return value+1;
+			}).then((value) => {
+  				console.log(value);
+				return value+1;
+			}).then((value) => {
+  				console.log(value);
+				return value+1;
+			}).then((value) => {
+  				console.log(value);
+			}).catch((value)=> {
+				console.log("caught exception "+value);
+			});
+
+			console.log("done");
+		</script>
+	</head>
+	<body>
+		Promises example: take a look at the source and developer tools.
+	</body>
+</html>

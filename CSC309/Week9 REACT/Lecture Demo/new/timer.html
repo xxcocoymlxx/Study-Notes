@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>React Timer</title>
+ 
+  <script src="https://unpkg.com/react@15/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+ 
+  <script type="text/babel">
+ 
+    const TimerDisplay = (props) => {
+      return (
+        <div className="timerDisplay">
+          {props.timerVal}
+        </div>
+      );
+    }
+ 
+    class TimerForm extends React.Component {
+ 
+      constructor(props) {
+        super(props);
+        this.handleTimeChange = this.handleTimeChange.bind(this);
+      }
+ 
+      handleTimeChange(e) {
+        this.props.updateTimeFn(e.target.value);
+      }
+ 
+      render() {
+        const timeValues = [5,10,15,20,25,30,35,40,45,50,55,60];
+        return (
+          <form>
+            <select
+              onChange={this.handleTimeChange}
+              value={this.props.time}
+            >
+            {
+              timeValues.map((val,idx) => (
+                <option key={idx} value={val}>{val}</option>
+              ))
+            }
+            </select>
+          </form>
+        );
+      }
+    }
+ 
+    class Timer extends React.Component {
+ 
+      constructor(props) {
+        super(props);
+      }
+ 
+      updateTime(timeValue) {
+        console.log(timeValue);
+      }
+ 
+      render() {
+        return (
+          <div>
+            <TimerDisplay timerVal="What's the time?'" />
+            <TimerForm time={5} updateTimeFn={this.updateTime} />
+          </div>
+        );
+      }
+    }
+ 
+    ReactDOM.render(
+      <Timer />,
+      document.getElementById("timer-content")
+    );
+ 
+  </script>
+</head>
+<body>
+  <div id="timer-content"></div>
+</body>
+</html>

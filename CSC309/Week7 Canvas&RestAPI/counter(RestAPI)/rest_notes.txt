@@ -1,0 +1,74 @@
+REST Web Services
+Representational State Transfer
+
+---------------------------------------------------------
+Rest is an architecture, a way of organizing
+your application to work closely with the HTTP protocol.
+
+A Restful architecture is Stateless, Client-Server, Layered,
+supporting caching. 
+
+Designing an application in this way takes advantage of the web
+architecture to naturally make your application more scalable.
+
+Def: Stateless - URI provides enough information to carry out
+     request. This helps with scalability (lowers requirements
+     on server).
+
+Def: Client-Server - so can separate concerns, ie data from 
+     application
+
+
+Def: Layered - client may not be directly connected to 
+     resource but can take advantage of this (ie cache, 
+     load balancing)
+
+---------------------------------------------------------
+Properties of HTTP requests
+
+Def: Idempotent - repeat request, get same result
+      http://www.restapitutorial.com/lessons/idempotency.html
+
+Def: Safe - no side effects
+
+Def: Cachable - enables caching in client, along the way,
+     to scale application
+
+---------------------------------------------------------
+"USE"   Http method Properties
+
+read    GET - Safe, Idempotent, Cachable
+
+update  PUT - Idempotent
+
+delete  DELETE - Idempotent
+
+create  POST
+
+preview HEAD - Safe, Idempotent
+header
+
+Examples: 
+http://coreymaynard.com/blog/creating-a-restful-api-with-php/
+https://www.leaseweb.com/labs/2015/10/creating-a-simple-rest-api-in-php/
+
+References:
+https://restfulapi.net/http-methods/
+https://restfulapi.net/http-status-codes/
+https://www.youtube.com/watch?v=7YcW25PHnAA
+https://www.youtube.com/watch?v=YCcAE2SCQ6k
+http://restcookbook.com/
+http://www.restapitutorial.com/
+https://www.restapitutorial.com/lessons/httpmethods.html
+https://www.programmableweb.com/apis/directory
+https://medium.com/@jeffandersen/building-a-node-js-rest-api-with-express-46b0901f29b6
+
+Tools:
+chrome: postman restclient
+firefox: restclient
+https://apigee.com/console
+
+https://nordicapis.com/5-lightweight-php-frameworks-build-rest-apis/
+https://www.slimframework.com/
+
+https://stackoverflow.com/questions/11722711/url-routing-regex-php

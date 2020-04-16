@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>Javascript Basics</title>
+<script language="javascript">
+// Global declarations. Available to all functions in the script.
+
+var jj; // use var to define locals in functions.
+jj=12;
+
+// Code executed one time (on document load).
+alert("<br>Hey there jj="+jj+"<br>\n");
+console.log("<br>Hey there jj="+jj+"<br>\n");
+
+// See objects below
+var app23=new apple("Big Red",12);
+
+// Creating a new (named window)
+var formWin=window.open("Forms.html")
+
+// Function definitions are below. Note that no return
+// type is specified. Functions can return something if they want.
+
+function types(){
+    // Types are number, string, boolean, object (for reference)
+    var i; // Can hold anything, determined by use
+    i=3; // i is a number (could have been float)
+    i=i+1;
+    i=i+"=four"; // i is now a string (note + is string concat here)
+        // implicit type conversion is done!
+    var j=i; // a local 
+    var jj=7;
+    alert("jj="+jj);
+    // var jj; override global jj
+    // Most java numeric operators understood (ie +,*, ...)
+
+    i=document.getElementById("second"); // i is a reference
+    i.innerHTML="<b>j has the value <xmp>"+j+"</xmp>"
+    i.innerHTML+="<b>i has type <xmp>"+typeof(i)+"</xmp>";
+}
+
+function conditionals(){
+    // As in java
+    var i=3; var j="3"; var result;
+    if(i==j && 3>2){ 
+        result="first test true";
+    } else {
+        result="first test false";
+    }
+
+    // another type of equals
+    // a===z if and only if they have the same type and value
+        
+    if(i===j && 3>2)result+="<br> second test true";
+    else result+="<br> second test false";
+
+    document.getElementById('second').innerHTML=result+"<br>";
+}
+
+// A recursive function with a return value
+function sum(i){
+    if(i<=0)return(0);
+    return(i+sum(i-1));
+}
+
+function iteration(){
+    // As in java (for and while)
+    var d=document.getElementById('third');
+    var s='<table border="border">';
+    for(var i=0;i<10;i++){
+        s+="<tr>";
+        for(var j=0;j<5;j++){    
+            s+="<td>("+i+","+j+","+sum(j)+")</td>";
+        }
+        s+="</tr>";
+    }
+    s+="</table>";
+    d.innerHTML=s;
+}
+
+function objects(){
+    var a1=new apple("Red",12);
+    var a2=new apple("Blue",5);
+
+    alert(a1.toString2());
+    alert(a2.toString2());
+
+    // Adding a property to an instance. You can
+    // do this at any time. You can't do this in Java.
+    a2.tastes="Great"; 
+    a2.s=sum;
+
+    alert("a2.tastes="+a2.tastes);
+    alert("a2.s(3)="+a2.s(3));
+    alert("a2.sid="+a2.sid); // a2 does not have a sid attribute
+}
+
+// Note: For Navigator, I could not define this function as toString
+// and use it in the definition of apple below!!
+// function toStringF(){
+function toString(){
+    return("I am an apple with color="+this.color+ " and size="+ this.size);
+}
+
+// Constructors are just functions
+function apple(c, s){
+    // After execution of new apple(...,...) an instance
+    // will exist. It will have the properties (instance vars)
+    // created below.
+
+    // Add properties to this instance
+    this.color=c;
+    this.size=s;
+
+    // Associating a function with this instance. AKA method.
+
+    this.toString=toString;
+    // Similar to, but not the same as...
+    this.toString2=function(){
+        return("I am an apple with color="+this.color+ " and size="+ this.size);
+    };
+}
+
+
+</script>
+
+</head>
+<body>
+    <div id="first" style="border:1px solid black;"  > 
+    <form>
+    <ul>
+        <li> Take a look at the Math, String and Number classes
+        <li>
+                <input type=button value="types" onclick="types()">
+                <input type=button value="conditionals" onclick="conditionals()">
+                <input type=button value="iteration" onclick="iteration()">
+        <li> Objects
+            <input type=button value="objects" onclick="objects()">
+            <input type=button value="objects in another window" 
+		onclick="formWin.document.form01.pressMeCount.value=app23.toString()">
+    </ul>
+    </form>
+    </div>
+    <div id="second" style="border:1px solid black;"  > </div>
+    <div id="third" style="border:1px solid black;" ></div>
+</body>
+</html>

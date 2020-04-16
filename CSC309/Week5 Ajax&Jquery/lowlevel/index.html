@@ -1,0 +1,65 @@
+<html>
+	<body>
+		<h1>Ajax</h1>
+		<ul>
+		<li> <a href=hello.html>Hello</a>
+		<li> <a href=clienthint.html>client hint</a>
+		<li> Polling: client continually asks the server 
+<xmp>
+connect 'anything new' disconnect
+process
+sleep
+
+connect 'anything new' disconnect
+process
+sleep
+
+connect 'anything new' disconnect
+process
+sleep
+
+...
+</xmp>
+		server always immediately responds.
+		<li> <a href=sim1.html>simultaneous requests 1</a> polling
+		<li> <a href=sim2.html>simultaneous requests 2</a> polling
+		<li> <a href=message/index.html>A simple broadcast message service (via polling)</a>
+		</ul>
+		<h1>For more responsive communication</h1>
+		In some cases, we don't want the client to poll the server, we would prefer the server push data to the client.
+		For this we need longer lived connections. There are a few approaches to this on the web...
+		<ul>
+		<li> Long Polling:
+			The idea is that the client makes a request to the server and the server keeps the connection open
+			until it has something to respond. The client immediately processes the responce and then polls again.
+			The difference here is that the client is not sleeping, instead it is waiting for the server to 
+			respond.
+<xmp>
+connect 'anything new' 
+wait for responce 
+disconnect
+process
+
+connect 'anything new' 
+wait for responce 
+disconnect
+process
+
+connect 'anything new' 
+wait for responce 
+disconnect
+process
+
+...
+</xmp>
+			Server does not necessarily immediately respond.
+			<a href=http://en.wikipedia.org/wiki/Comet_%28programming%29>Comet Programming (especially Long Polling)</a>
+			<a href=http://en.wikipedia.org/wiki/Push_technology>Push Technology (Long Polling)</a>
+		<li> Server sent events: 
+			<a href=http://www.html5rocks.com/en/tutorials/eventsource/basics/>at html5rocks</a>
+			<a href=http://www.w3.org/TR/eventsource/>at w3</a>
+			<a href=http://www.w3schools.com/html/html5_serversentevents.asp>at w3schools</a>
+		<li> <a href=http://www.html5rocks.com/en/tutorials/websockets/basics/>WebSockets</a>
+		</ul>
+	</body>
+</html>

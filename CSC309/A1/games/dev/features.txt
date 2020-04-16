@@ -1,0 +1,65 @@
+Features: For each feature you implement, move to the Implemented section and
+explain who did it (utorid) and how you did it. You can consider these as 
+almost user stories, if you just add a bit to them. Add more features/user stories at the bottom.
+Move them up when completed.
+
+------------------------------------------------------------------------------------
+Implemented: 
+------------------------------------------------------------------------------------
+0) Login
+   Done by: arnold
+   Explanation: created schema, including appuser table, populated with 
+   default user. Also created handler for login state as well as login page.
+
+1) Registration
+   Done by: yangme16
+   Explanation: created view for registration (including checkbox, radiobuttons, and date, etc), 
+   conducted validation check on the front-end and back end. Also add all the information to 
+   the database. Also added handler for registration state as well as login page.
+   
+
+2) User Profile
+   Done by: yangme16
+   Explanation: Created view for user profile, got all the information from the database
+   and populated all the fields with information got from the database. Also conducted validation 
+   check if the user wants to update their user profile. And update the database with all the changes
+   the user has made.
+
+3) Navigation
+   Done by: yangme16
+   Explanation: Created the navigation inks and added navigation bar to all the views of our application.
+
+4) Game Stats
+   Done by: yangme16
+   Explanation: Created view for game stats, retrieved all the information from the database.
+   Created all the tables for storing game stats in the database.
+
+5) Guess Game Integration
+   Done by: yangme16
+   Explanation: integrated guess game with our application.
+
+6) 15 Puzzles Game
+   Done by: yangme16
+   Explanation: Created model, view and controller for the 15 puzzles game.
+
+7) Peg Solitare Game
+   Done by: tianjia3
+   Explanation: Created model, view and controller for the Peg Solitare Game.
+
+8) Master Mind Game
+   Done by: tianjia3, yangme16
+   Explanation: yangme16 created the view. tianjia3 created the model and controller.
+
+9) user class
+Done by: yangme16
+Explanation: created user class to better manage information
+
+9) database class
+Done by: yangme16
+Explanation: created database class to better manage information
+
+
+
+------------------------------------------------------------------------------------
+Unimplemented:
+------------------------------------------------------------------------------------

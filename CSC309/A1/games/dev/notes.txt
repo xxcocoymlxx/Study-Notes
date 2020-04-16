@@ -1,0 +1,6 @@
+./setup.sh UTORID 142.1.200.132 UTORID_309 libraryBarcode[-7:-2]
+
+# DB_HOST = 142.1.200.132
+# DB_USER = YOUR UTORID
+# DB_PASSWORD = libraryBarcode[-7:-2] % in python notation
+# DB_NAME = UTORID_309

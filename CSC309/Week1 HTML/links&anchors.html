@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title> Links and anchors examples </title>
+	</head>
+
+	<body>
+		Look at the source for this page!!
+
+		<!-- This is the tag associated with "go back to top of this page" -->
+		<a name="anchor1" />
+
+		<!-- 
+		1. The <span> tag is used to group inline-elements in a document.
+		2. The <span> tag provides no visual change by itself.
+		3. (重点) The <span> tag provides a way to add a hook to a part of a text or a part of a document. -->
+		<span id="sid" />
+
+		<ul>
+		<li> 
+			<a href="http://www.w3.org/html/wg/drafts/html/master/infrastructure.html#document-base-url">
+			Document Base URL
+			</a> 
+		(can be set in the head)
+		</li> 
+
+		<!-- 区分Absolute URL 和 Relative URL -->
+		<li> Absolute URL in a Link:
+			<a href="http://www.cs.toronto.edu/~arnold/cp3101b/lectures/htmlIntro/index.html">
+			Main Index to the week 01 lecture notes
+			</a> 
+		</li> 
+
+		<li> Relative URL in a Link: 
+			<a href="examples/e2.html">e2.html</a>
+
+		<pre>
+		I need some wasted space here...
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</pre> 
+
+		</li> 
+
+
+		<li> Using anchors to parts of a document:
+			<ul>
+			<li> return to the <a href="#anchor1">top of this page</a></li> 
+			<li> return to the <a href="#sid">sid of this page</a></li> 
+			<li> return to the <a href="examples/e2.html#mid">middle of example 2</a>
+		</li> 
+
+
+		</ul>
+		<li> Links can also specify protocols other than http. For example
+			<ul>
+			<li><a href="telnet://credit.erin.toronto.edu">telnet to credit</a></li> 
+			<li><a href="ftp:dvp.cs.toronto.edu">ftp connection to dvp</a></li> 
+			<li> <a href="mailto:arnold@cs.toronto.edu">mail arnold</a></li> 
+			</ul>
+		</ul>
+	</body>
+</html>

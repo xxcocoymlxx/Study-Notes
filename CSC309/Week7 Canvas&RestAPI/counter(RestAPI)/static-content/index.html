@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta HTTP-EQUIV="EXPIRES" CONTENT="-1">
+		<script src="jquery-3.3.1.min.js"></script>
+		<script src="counterClient.js"></script>
+		<style>
+			#ui_login {
+				display: true;
+			}
+			#ui_counter {
+				display: false;
+			}
+		</style>
+		<title>Demo</title>
+	</head>
+	<body bgcolor="ffffff">
+		<div id="ui_login">
+			<div>
+				<!-- https://www.tjvantoll.com/2013/01/01/enter-should-submit-forms-stop-messing-with-that/ -->
+				<input type="text" name="user" placeholder="User Name" />
+				<input type="password" name="password" placeholder="Password" />
+				<input type="submit" id="loginSubmit" value="Login">
+			</div>
+		</div>
+		<div id="ui_counter">
+			<table>
+				<tr>
+					<td></td>
+					<td><input type="text" id="createCounterName" placeholder="Counter Name" /></td>
+					<td><input type="submit" id="createCounterSubmit" value="create"></td>
+				</tr>
+				<tr>
+
+					<td></td>
+					<td></td>
+					<td><input type="submit" id="retrieveCounterSubmit" value="retrieve"></td>
+				<tr>
+					<td><input type="text" id="updateCounterName" placeholder="Counter Name" /></td>
+					<td><input type="text" id="updateCounterAmount" placeholder="Amount" /></td>
+					<td><input type="submit" id="updateCounterSubmit" value="update"></td>
+				</tr>
+				<tr>
+
+					<td></td>
+					<td><input type="text" name="deleteCounterName" placeholder="Counter Name" /></td>
+					<td><input type="submit" id="deleteCounterSubmit" value="delete"></td>
+				</tr>
+			</table>
+			<div id="allCounters"></div>
+		</div>
+	</body>
+</html>

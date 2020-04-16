@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Tags that appear in the HTML header</title>
+		
+		<!-- the following is for search engines -->
+
+<!-- Metadata is data (information) about data.
+
+The <meta> tag provides metadata about the HTML document. Metadata will not be displayed on the page, but will be machine parsable.
+
+Meta elements are typically used to specify page description, keywords, author of the document, last modified, and other metadata.
+
+The metadata can be used by browsers (how to display content or reload page), search engines (keywords), or other web services. -->
+
+		<META NAME="description" CONTENT="Free Web tutorials">
+		<META NAME="keywords" CONTENT="HTML, tags, attributes,JavaScript">
+		<meta name="author" content="John Doe">
+
+<!-- Setting The Viewport
+
+HTML5 introduced a method to let web designers take control over the viewport, through the <meta> tag.
+
+The viewport is the user's visible area of a web page. It varies with the device, and will be smaller on a mobile phone than on a computer screen.
+
+You should include the following <meta> viewport element in all your web pages:
+A <meta> viewport element gives the browser instructions on how to control the page's dimensions and scaling.
+
+The width=device-width part sets the width of the page to follow the screen-width of the device (which will vary depending on the device).
+
+The initial-scale=1.0 part sets the initial zoom level when the page is first loaded by the browser. -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- Can set http response headers -->
+		<!-- The http-equiv attribute provides an HTTP header for the information/value of the content attribute. -->
+		<!-- The http-equiv attribute can be used to simulate an HTTP response header. -->
+
+		<!-- This "nextdoc.html" is in the current folder. -->
+		<!-- Refresh document every 10 seconds and go to nextdoc.html (redirecting) -->
+		<META HTTP-EQUIV="Refresh" CONTENT="10;URL=nextdoc.html">
+
+		<!-- You can also set an expiration date to ensure that the browser will show the file that’s fresh from the server, rather than from the cache.The meta data above means that document is considered expired after the specified date and time. If you set it to “0“, the browser will check for a fresh new document on each visit. -->
+		<META HTTP-EQUIV="expires" CONTENT="Sun, 28 Dec 2020 09:32:45 GMT">
+
+
+		<!-- Similar to cache, cookies is a small piece of data that is stored in the browser by the websites you’ve visited. Websites may reuse the cookies to tailor some website functionalities. A real everyday example is when you shop in an online store. If you’ve added a few items to the basket, as long as you have not yet checked out, the items will remain in the basket even though you have left the browser for several days.name=data is the name of the cookies which determines the values set in it. path is the path of document. Whereas, the value of expired indicates the time and date when cookies are deleted from your computer. If you leave the expired date empty, the cookies will be deleted once you quit the browser. -->
+		<META HTTP-EQUIV="Set-Cookie" CONTENT="beenHereBefore=abc;expires=Friday, 31-Dec-06 23:59:59 GMT; path=/">
+	</head>
+
+	<body>
+		Better be quick!...
+		The content of this document
+		<a href=examples/e1.html>The first example</a>
+		<a href=examples/e2.html>The second example</a>
+	</body>
+
+</html>

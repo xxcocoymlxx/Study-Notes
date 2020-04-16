@@ -1,0 +1,8 @@
+An itemized list of additional features:
+
+1) Material UI
+2) React code was modularly broken down into components
+3) used JSON web tokens for authentication
+4)
+5)
+6)

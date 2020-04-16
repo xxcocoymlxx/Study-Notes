@@ -1,0 +1,8 @@
+An itemized list of additional features:
+
+1)boarder for restrict the player
+2)player coordinater
+3)enemy can trace the player
+4)check user's authorization using JWT for REST API
+5)
+6)

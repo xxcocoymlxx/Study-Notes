@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"> 
+	<head>
+		<meta charset="UTF-8" />
+		<title>The 2D Canvas</title>
+		<script type="text/javascript">
+
+			var width=0, height=0;
+			var context;
+
+			function randint(n){
+				return Math.round(Math.random()*n);
+			}
+
+			function drawLine(){
+				// draw a random line with a random colour and transparency
+				// Position
+				var x1=randint(width);
+				var y1=randint(height);
+
+				var x2=randint(width);
+				var y2=randint(height);
+				
+				// Colour
+				var red=randint(255);
+				var green=randint(255);
+				var blue=randint(255);
+				var alpha=Math.random();
+
+				// The line
+				context.beginPath(); // start a new path (take this out and see what happens).
+				context.strokeStyle = 'rgba('+red+','+green+','+blue+','+alpha+')';
+				context.lineWidth=randint(5);
+				context.moveTo(x1,y1);
+				context.lineTo(x2,y2);
+   				context.stroke();
+			}
+
+			function drawPolyLine(){
+				// draw a random line with a random colour and transparency
+				// Position
+				var n=randint(20);
+				points=[];
+				for(var i=0;i<n;i++){
+					points.push({x: randint(width), y: randint(height)});
+				}
+
+				// Colour
+				var red=randint(255);
+				var green=randint(255);
+				var blue=randint(255);
+				var alpha=Math.random();
+
+				// The polyline
+				context.beginPath(); // start a new path
+				context.strokeStyle = 'rgba('+red+','+green+','+blue+','+alpha+')';
+				// context.fillStyle = 'rgba('+red+','+green+','+blue+','+alpha+')';
+				context.lineWidth=randint(5);
+				for(var i=0;i<=n;i++){
+					if(i==0)context.moveTo(points[i].x,points[i].y);
+					else context.lineTo(points[i%n].x,points[i%n].y);
+				}
+   				context.stroke();
+   				// context.fill();
+				console.log("got here");
+			}
+			
+			function ol(){
+				// set a timer to call draw square every once in a while
+				var theCanvas=document.getElementById("theCanvas");
+				context=theCanvas.getContext("2d");
+
+				width=context.canvas.width;
+				height=context.canvas.height;
+
+				setInterval(drawPolyLine,500);
+			}
+		</script>
+	</head>
+	<body onload="ol();" >
+		<canvas id="theCanvas" width="400" height="400" />
+	</body>
+</html>

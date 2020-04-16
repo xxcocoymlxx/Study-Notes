@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>Javascript Basics</title>
+<script language="javascript">
+// Global declarations. Available to all functions in the script.
+// Code executed one time (on document load).
+
+// Create instances of the testers
+var primeTester=new numberTester(primeTest);
+var evenTester=new numberTester(evenTest);
+var squareTester=new numberTester(squareTest);
+
+// This will hold a reference to the current tester
+// based on user choices in testNumberForm below
+var currentTest=primeTester;
+
+// Function definitions are below. Note that no return
+// type is specified. Functions can return something if they want.
+
+function checkNumber(){
+	var num=document.testNumberForm.number.value;
+	var answer=document.testNumberForm.answer;
+	// alert(currentTest.report(num));
+	answer.value=currentTest.report(num);
+}
+
+function primeTest(num){
+	var i;
+	for(i=2;i<num;i++){
+		if(num%i==0)return false;
+	}
+	return true;
+}
+
+function evenTest(num){
+	var i;
+	if(num%2==0)return true;
+	else return false;
+}
+
+function squareTest(num){
+	var i;
+	for(i=0;i<=num;i++){
+		if(i*i==num)return true;
+	}
+	return false;
+}
+
+function report(num){
+	var s; // a local variable
+	this.numberTested=this.numberTested+1;
+	
+	if(this.testFunction(num)){
+		s="YES";
+	} else {
+		s="NO";
+	}
+	s=s+" ("+this.numberTested+" asked so far)";
+	return s;
+}
+
+// Constructors are just functions
+function numberTester(f){
+	// After execution of new numberTester(...,...) an instance
+	// will exist. It will have the properties (instance vars)
+	// created below.
+
+	// Add properties to this instance
+	this.numberTested=0;
+
+	// Associating a function with this instance. AKA method.
+	this.testFunction=f;
+	this.report=report;
+
+	// Note: For Navigator, the above can not have the same name!!!
+	// Note: This is not the same as Java constructors!!
+}
+
+</script>
+
+</head>
+<body>
+<form name=testNumberForm>
+<table>
+<tr>
+	<td> 
+		<input type=text name=number> 
+	</td>
+	<td>
+		<input TYPE="radio" NAME="testType" onclick="currentTest=primeTester;" CHECKED> Is Prime <br>
+		<input TYPE="radio" NAME="testType" onclick="currentTest=evenTester;"> Is Even <br>
+		<input TYPE="radio" NAME="testType" onclick="currentTest=squareTester;"> Is Square
+	</td>
+	<td>
+		<input type=button value="Ask?" onclick="checkNumber();">
+	</td>
+	<td>
+		<input type=text name=answer>
+	</td>
+</tr>
+</table>
+</form>
+</body>
+</html>

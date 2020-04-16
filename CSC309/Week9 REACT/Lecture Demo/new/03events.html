@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Events</title>
+ 
+  <script src="lib/react.js"></script>
+  <script src="lib/react-dom.js"></script>
+  <script src="lib/babel.min.js"></script>
+ 
+  <script type="text/babel">
+    // https://reactjs.org/docs/handling-events.html
+    // https://reactjs.org/docs/events.html
+    class MySimpleButton extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+      render(){
+        return (
+          <button>I am a simple button</button>
+        );
+      }
+    }
+
+    class MyEventLabelledButton extends React.Component {
+      constructor(props) {
+        super(props);
+        this.buttonClickHandler = this.buttonClickHandler.bind(this);
+      }
+      // all React events are handled with a SyntheticEvent argument which include lots of stuff...
+      // See: https://reactjs.org/docs/events.html, or instead of my listing them, see the console
+      buttonClickHandler(e){
+        // console.log(e.target);
+	// console.log(this);
+        alert(this.props.buttonLabel+" pressed");
+      }
+      render(){
+        return (
+          <button onClick={ this.buttonClickHandler  } >
+            {this.props.buttonLabel} 
+          </button>
+        );
+      }
+    }
+
+    class MyComponent extends React.Component {
+      constructor(props) {
+        super(props);
+      }
+
+      render(){
+          // Yea, this is not HTML!!
+          return (  
+            <div style={{border:"1px solid black"}} > 
+              <MyEventLabelledButton buttonLabel="Labelled button 0" />
+              <MyEventLabelledButton buttonLabel="Labelled button 1" />
+              <MyEventLabelledButton buttonLabel="Labelled button 2" />
+              <MyEventLabelledButton buttonLabel="Labelled button 3" />
+            </div>
+          );
+      }
+    }
+
+    ReactDOM.render( <MyComponent />, document.getElementById("C1"));
+  </script>
+</head>
+<body>
+  <div id="C1"></div>
+</body>
+</html>

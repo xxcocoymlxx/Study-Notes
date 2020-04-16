@@ -1,0 +1,74 @@
+<html lang="en">
+  <head>
+    <title>GuessGame</title>
+  </head>
+  <body>
+
+    <script src="https://fb.me/react-15.0.0.js"></script>
+    <script src="https://fb.me/react-dom-15.0.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script type="text/babel">
+
+    class GuessGame extends React.Component {
+      constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this); // Make this work in the event handlers
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {secretNumber: 6, history: [], text: ''};
+      }
+    
+      render() {
+        return (
+          <div>
+            <h3>GuessGame</h3>
+            <form onSubmit={this.handleSubmit}>
+              <input onChange={this.handleChange} value={this.state.text} />
+              <button>Guess</button>
+            </form>
+            <Results hi={this.state.history} target={this.state.secretNumber} />
+            { "After state change: "+ JSON.stringify(this.state) } 
+          </div>
+        );
+      }
+    
+      handleChange(e) {
+        // Schedule a change to state, not apparent yet!
+        this.setState({text: e.target.value});
+        console.log(JSON.stringify(this.state));
+      }
+    
+      handleSubmit(e) {
+        e.preventDefault();
+        this.setState((prevState) => ({
+          history: prevState.history.concat(parseInt(prevState.text)),
+          text: ''
+        }));
+      }
+    }
+    
+    class Results extends React.Component {
+      compare(item) {
+         if(item==this.props.target)return("correct");
+         if(item>this.props.target)return("large");
+         if(item<this.props.target)return("small");
+      }
+      render() {
+        console.log(JSON.stringify("Re doing the list"));
+        // console.log(JSON.stringify(this.props));
+        return (
+          <ul>
+            {this.props.hi.map((item,index) => (
+              <li key={index}>Guess {item} was { this.compare(item) } </li>
+            ))}
+          </ul>
+        );
+      }
+    }
+    
+    ReactDOM.render(<GuessGame />, document.getElementById('guess-game'));
+    </script>
+
+    <div id="guess-game"></div>
+    <div id="guess-game2"></div>
+  </body>
+</html>

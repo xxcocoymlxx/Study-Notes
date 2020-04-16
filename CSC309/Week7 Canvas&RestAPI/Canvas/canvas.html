@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"> 
+    <head>
+        <meta charset="UTF-8" />
+        <title>The 2D Canvas</title>
+		<script type="text/javascript">
+		
+
+    function drawAxis(context){
+		context.save();
+
+		context.lineWidth=3;
+
+		context.strokeStyle ='rgba(255,255,0,1)'; 
+        context.beginPath(); // the positive x-axis, yellow line
+    			context.moveTo(0,0);
+				context.lineTo(100,0); 
+		context.stroke();
+
+		context.strokeStyle ='rgba(255,0,255,1)'; 
+                context.beginPath(); // the positive y-axis, purple line
+                context.moveTo(0,0);
+		context.lineTo(0,100); 
+		context.stroke();
+
+		context.restore();
+	}
+
+
+    function ol(){
+                var theCanvas=document.getElementById("theCanvas");
+                var context=theCanvas.getContext("2d");
+                var width=context.canvas.width, height=context.canvas.height;
+
+
+                context.fillStyle = 'rgba(0,0,0,1)';
+                context.fillRect(0, 0, width, height);
+                context.fillStyle = 'rgba(255,0,0,1)'; // can also use '#ff0000', but then cant set alpha
+                // context.fillStyle = '#ff0000';
+                context.fillRect(0, 0, 100, 100);
+
+                context.fillStyle = 'rgba(0,0,200,.5)';
+                context.fillRect(25, 25, 100, 100);
+
+                context.beginPath();
+                context.arc(80,90, 70, 0, Math.PI, true);
+                context.closePath();
+
+                context.strokeStyle = "#FF0000";
+				context.lineWidth=5;
+                context.stroke();
+
+                // context.fillStyle = "#707070";
+                context.fillStyle = "rgba(127, 127, 127,1)";
+                context.fill();
+
+                context.beginPath();
+                context.arc(150,150, 30, 0, 2*Math.PI, false);
+                context.closePath();
+
+                context.fillStyle = "rgba(255, 127, 127,1)";
+                context.fill();
+
+		// Example using translate and rotate. Simple way to think about this
+		// is that the coordinate system is modified by translate and rotate.
+		// The current coordinate system is the accumulation of the stack of 
+		// translate and rotate previous. You can save and restore the coordinate
+		// system as well.
+
+		context.lineWidth=1;
+		context.save();
+		context.translate(200,200);
+               	context.beginPath();
+               	context.arc(0,0, 5, 0, 2*Math.PI, true); 
+               	context.closePath();
+                context.fillStyle = 'rgba(0,255,0,1)';
+                context.fill();
+		drawAxis(context);// Just to show you where the origin is after translate
+		context.restore();
+
+		var numSteps = 10;
+		for(var i=0;i<numSteps;i++){
+			context.save();
+			context.translate(200,200);
+			context.rotate(i*2*Math.PI/numSteps);
+
+				if(i==3)drawAxis(context); // so you can see where the axis is
+
+                	context.fillStyle = 'rgba(0,255,0,1)';
+                	context.fillRect(-10, 20, 20,100);
+                	context.strokeStyle = "#FF0000";
+                	context.strokeRect(-10, 20, 20,100);
+
+			context.translate(0,140); // Move (0,0) to the end of the square we just drew
+                	context.beginPath();
+                	context.arc(0,0, 10, Math.PI,0, true); // Remember, y increases down
+                	context.closePath();
+                	context.stroke();
+			context.fill();
+
+				if(i==3)drawAxis(context); // so you can see where the axis is
+
+			context.restore();
+		}
+
+		drawAxis(context);// Just to show you where the origin is (top left)
+            }
+        </script>
+    </head>
+    <body onload="ol();" >
+        <canvas id="theCanvas" width="400" height="400" />
+    </body>
+</html>

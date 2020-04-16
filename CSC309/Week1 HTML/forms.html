@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Forms</title>
+    </head>
+<!--------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------->
+    <body>
+        <ul>
+            <li> Note: There are <b>MANY</b> forms on this page. Submit, only submits data from one form. Each form can have many different inputs on it.
+            </li> 
+<!--------------------------------------------------------------------------->
+            <li> A simple form
+                <!-- The default is method="get" and action = 当前网页 -->
+                <form method="get" action="http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi" >
+                <input type="submit" />
+                </form>
+            </li> 
+<!--------------------------------------------------------------------------->
+
+            <li> With some hidden variables
+                <form method="get" action="http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi" >
+                    <!-- note: type = hidden -->
+                    <input type=hidden name="favoriteNumber" value="7" />
+                    <input type="submit" />
+                </form>
+
+                <xmp>
+                Causes browser to go to:
+                http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi?favoriteNumber=7
+                </xmp>
+
+            </li> 
+
+<!--------------------------------------------------------------------------->
+            <li> With a text field
+                <form method="get" action="http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi" >
+                    Knock Knock...
+                    <input type="text" name="answer" />
+                    <input type="submit" />
+                </form>
+<xmp>
+Who's there 
+causes a request to ...
+http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi?answer=Who%27s+there
+
+http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi?answer=coco
+
+Note: answer = your input in the text field
+</xmp>
+            </li> 
+
+<!--------------------------------------------------------------------------->
+            <li> Method = <b>GET</b> above, note the URL. Variables and values end up in URL.
+            </li> 
+
+<!--------------------------------------------------------------------------->
+            <li> Method = <b>POST</b> below, note the URL (and where the data ends up). Variables and values end up
+                in STDIN (are part of the http message body).
+                <form method="post" action="http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi" >
+                Knock Knock...
+                    <input type="text" name="answer" />
+                    <input type=hidden name="favoriteNumber" value="7" />
+                    <input type="submit" />
+                </form>
+<xmp>
+Note that the variables are not in the url this time...
+http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi
+
+at the bottom of the page:
+STDIN
+answer=hello&favoriteNumber=7
+</xmp>
+            </li> 
+<!--------------------------------------------------------------------------->
+
+            <li> Different input types.<br/>
+                <i>Note:</i> A single form with many inputs follows.
+                <form method="post" action="http://www.cs.toronto.edu/~arnold/cgi-bin/environment.cgi" >
+                    <ul>
+                    <li> Checkboxes for Music Preference
+
+                            <br/>
+
+                            <label>
+                                <input type="checkbox" name="musicpref_rnb" />
+                                 R and B
+                            </label>
+
+                            <br/>
+
+                            <label>
+                                <input type="checkbox" name="musicpref_jazz" /> Jazz
+                            </label>
+
+                            <br/>
+
+                            <label>
+                                <input type="checkbox" name="musicpref_blues" CHECKED="checked" />
+                                Blues
+                            </label>
+
+                            <br/>
+
+                            <label>
+                                <input type="checkbox" name="musicpref_newage" CHECKED="checked" /> 
+                                New Age
+                            </label>
+                
+                    </li> 
+
+                    <li> Radio buttons
+                        <p>Choose a Category of Room:
+                            <ol>
+                                <!--------------------------------->
+                                <li>
+                                    <label>
+                                        <input type="radio" name="category" value="liv" /> 
+                                            Living 
+                                    </label>
+                                </li>
+
+                                <!--------------------------------->
+
+                                <li>
+                                    <label>
+                                        <input type="radio" name="category" value="din" CHECKED="checked"/> 
+                                            Dining  
+                                    </label>
+                                </li>
+
+                                <!--------------------------------->
+
+                                <li>
+                                    <label>
+                                        <input type="radio" name="category" value="bed" /> 
+                                            Bedroom 
+                                    </label>
+                                </li> 
+                                <!--------------------------------->
+
+                            </ol>
+                        </p>
+                    </li> 
+
+
+
+                    <li> Text
+                        <br/>
+                        <label for="fn"> First name: </label> 
+                        <input id="fn" type="text" name="first_name" value="first name" size="25" /> 
+
+                        <br/>
+                        <label for="ln"> Last name: </label>
+                        <input id="ln" type="text" name="last_name" value="last name" size="25" /> 
+
+                        <br/>
+                        <label for="st"> State: </label> 
+                        <input id="st" type="text" name="state" value="CA" size="2" /> 
+
+                    </li> 
+
+
+
+                    <li> Text Area
+                        <label>Describe your problem here:<br/>
+                            <textarea name="problem_description" cols=40 rows="4" wrap="SOFT">
+                                For faster responce, include a full description of your problem...
+                            </textarea>
+                        </label>
+                      
+
+
+                    </li> 
+                      <li> Selection (allow multiple, display 4)
+                        <p>
+                            <label for="fruit"> Choose a fruit: </label>
+                            <select id="fruit" name="fruit_choices" multiple="multiple" size="4" >
+                                <option>Apples </option>
+                                <option selected="selected" >Bananas </option>
+                                <option>Cherries </option>
+                                <option>Oranges </option>
+                                <option>Pineapple </option>
+                                <option>Figs </option>
+                                <option>Guava </option>
+                            </select>
+                        </p>
+                    </li> 
+                    </ul>
+                    <input type="submit" value="Submit all this stuff!">
+                </form>
+            </li> 
+        </ul>
+    </body>
+</html>
