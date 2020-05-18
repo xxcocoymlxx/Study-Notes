@@ -1,0 +1,91 @@
+
+======= PROCESS LOG =======
+Name:Mengning Yang and Licheng Xu
+UtorID:yangme16 and xulichen
+Student Number:1002437552 and 1000666843
+
+This file is where you will tell us details about the process you went through in creating your project. This is where we want a record of your thoughts, rough notes, failed attempts, things that you tried to get to work that didn't work, etc. e.g. "My first step was to figure out what my main classes will be. I figured out they were ... And then I tried to write code for ... This code didn't work because ..."
+
+You have two options for the format (you can also mix and match the two) -
+
+(1)
+A day-to-day journal format.
+
+e.g.
+On Friday, I tried to add [this feature].
+I looked at [this website], which was helpful.
+I managed to almost finish adding it, but [this went wrong].
+I wanted to add it because [...], but decided not to in the end, because [...].
+If I had more time, I would [...]
+
+OR
+
+(2)
+Instead of dividing it up by days, you can divide it up
+by task/feature. 
+
+e.g.
+Task 1: Completing ToDoList
+I tried to add this by [...]. What worked well was [...]
+What didn't work the way I wanted it to was [...]
+
+Task 2: Adding Monster enhancement
+I tried to add this by [...]. What worked well was [...]
+What didn't work the way I wanted it to was [...]
+
+===========================
+
+YOUR LOG STARTS HERE
+
+[Part 1 the maze game]:
+Task 1: class player
+for the 1st part, we need to build the player class. by 'p1 = Player(name, 0, 0)', we could know the attribute should be __init__(self,name,x,y). and it has 2 methods move and get_direction. at first, we think the def move() should be how far will the player move, which is self.x += new_position[0]. then as the code runs, the player moves strangely. after checking code 'p1.move((0,0)) p2.move((0,1))' in 2 palyers, we find that move() means where will player goes,which is x = new_position[0].
+
+Task2: undo 
+undo is the most difficult part in part 1, our idea is to build a stack to record every movement of player and as user calls undo, program pop it and move back. but we record the movement before the code 'if (0 <= new_x < self.width) and (0 <= new_y < self.height):', so the stack will record the invalid command(where the player is blocked by wall). then as we use undo, the player (x) will disappear sometimes. another mistake we made here is at the start we record the movement in the method move() of class Player, but as we run undo_last_move(), we will also run player.move(),which means as player undo, it will also push the undo movement to the stack.
+
+Task 3: maze game with 2 players
+  2player is very similar with 1player. the only difference is we need to give a random letter to computerplayer for get_direction(). our idea is to get a random number by random.randint(), then use the number key to get the letter from a dict.
+
+
+[Part2 the to do list]:
+  for part 2, the 1st problem is how to avoid crush for delete_task(), so we use the code 'try:  ... except: ...'(at the beginning we thought if we type delete_task('some letter') should be TypeError, after test we find that it's ValueError.)
+   the functionality of undo and redo is similar to part 1 (redo is undo of the undo stack. we forgot 'd',which means delete, will also reset the redo stack, but we finally found out the error. at the start we were worried about the index of the item in commands and redo stack. will the operation of undo and redo change the index and should we put it back according to the len(todolist)-1 as it recorded in tascks? luckly, the test showed that undo and redo will not affect the index.
+
+[part3 of the to do list]:
+Task 1: Save feature
+First of all we want to add a save and a load option. So we will write two methods under the class ToDoList. The first method is save. The input will be the filename that user wants the to do list to be saved at. If the filename is not None, meaning user has a file to save the to do list. Then we simply open the file with writing mode,use a for loop to get each task in self.tasks, and use the task to get the priority and index of the task in task_info dict, then create a string with “task priority index” and write it into the file and close the file (also saves the file). If the user does not have an existing file to save the to do list, then we will prompt the user to ask what the name of the file would be to save the to do list. While the filename does not end with’.txt’(wrong format), the user will be kept asking to re-enter the filename and finally save the to do list to a new external file with the name the user entered. We also added a try block here, if something wrong happens, we will use a try block to handle the error and inform the user that the file is not saved successfully and what the error is, otherwise also inform the user that the file saved successfully. And the code under Finally: f.close() will always run whatever the condition is. 
+Here we added an helper function called print_menu, every time the function is called, it will print all the options for the user such as ‘v’’d’’r’, here we also added ’s’ for save and 'vo' to view whole list in order of priorities into the menu.
+
+Task 2: Load feature
+First of all we will ask the user to give me an existing filename and open the file with reading mode, because we just want to load the existing file into the self.tasks and priority dict and do not want to change the original file yet. So we use a for loop to get every task and its priority in the file and use the method we already wrote add_task and set_priority to transfer all the information into the self.tasks and priority dict so the user can further modify the to do list. We also used a try block here because we don’t know what the format is of the file or other potential errors. (But here we assume that the format of the file will be “task priority index” because it’s a to do list file and we save the to do list as this format) So when some error happens, under the exception, we will inform the user that the loading failed and the program will not crash, under the else, user will be informed that the file saved successfully and finally the file will always close under any conditions.
+Here we also wrote a helper function, get_all_txt, we used os.listdir() from os module to load all the files in the current folder (where the to do list file is saved) and use .endwith(‘.txt’) to get all the txt files. Append all the txt files into a new list and print the list for the user to choose the existing file she/he wants to open. 
+
+Task 3: add priorities 
+This is the hardest part of part3, because there are so many components to handle，the tasks, the priorities and the indexes. First of all I thought it must involve using dictionaries to record the priorities and tasks where priorities as keys and tasks as values,if there are more than one tasks with the same priority, simply make the value a list and append the new task into the list. Now the user will have option ‘v’ and ‘vo’, by typing in ‘v’, the user will see all the tasks by the order the adding tasks, so I will keep the self.tasks and append tasks into the list each time there is a new task. I also created a dict called priority, where when the user will type in the info with a string format of task,priority. So i can use split() to separate these two components. so I wrote a method called set_priority to add the user’s inout into the priority dict and self.tasks. If the priority is not already in the priority dict, meaning that there's no such task yet, so simply add the priority:task key value pair into the dict. If p is already in self.priority, then the task will be appended in the task list within the particular priority key. For deleting the task, we need to get the number that user typed in to get the index of the task and pop that task but also need to delete the priority pair in the dict. Then how do we get the priority? at first i thought i can use a for loop to go rhtpugh all the tasks until it finds the task that user wants to delete then just remove that task from the tasks list under that key value. if the length of the task list == [] simply remove the key:value pair. But then i though if i want to undo the detete command, there is no way to go back because i already deleted that key value which is the priority. So i can not undo anymore. So i thought i would create another dictionary to store all the information i have so far. anytime I want something from the previous i always have backup. So i made another dict called task_info where it stores all the info of every task. it has tasks as keys and (priority,index) as values, the 1st parameter is the priority, the 2nd parameter is the task's index in the priority dictionary, only adding and storing info into this dict, never deleting, so when i want to get some tasks’s info i can easily find them. so when i am adding in a task i also need to add in into these task_info dict.so i modified the set_priority method. These time this method will take in 3 parameters, which are task, priority and index. Its basically the same as the structure i explained in earlier, only adding all the info to the task_info dict also. so for the del_priority method, we can get all the info from the task_info dict and remove them. for the undo method in this part, we need to consider the priority too. so i wrote another method called insert_task, this is only for undo and redo where all the info of a task is already stored in the task_info dict. I will add task back into the tasks list, get the priority stored in the task_info dict, get the index of task in priority dict that's stored in the task_info and insert the task back in this method. Otherwise, the concept of redo and undo is pretty much the same with part 2.
+
+Task 4: print all the tasks according to the order of priority 
+I wrote another method called get_priority_list, where it will get all the priorities in the priority dict and sort them from lowest to highest and reverse them to get all priority from highest to lowest. And i will according to the order in the new list to use a for loop to go though the priority dict to append all the tasks into a new list of tasks that are ordered according to their priority from highest to lowest.
+
+
+Task 5: changes in the __main__
+Here i added asking the user if he/she have an existing file to load from, while the filename is not valid, the user will be kept asking for the filename. but it there are no existing files found in that current folder an message will be printed “'Sorry, cound not find any existing files…’”. if there is an existing file and the filename is valid simply call the load function to open the file and load all the information to the temporary to do list. also i added another elif c == ‘vo’, and i will print all the task according to their oder of priority.
+I also added a option for ‘q’ which stands for quit the to do list.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

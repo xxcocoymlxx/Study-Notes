@@ -1,0 +1,45 @@
+1. See swap.py.
+
+
+----------
+
+2.
+There are a few ways to do this. One is bottom-up. Calculate what is returned by calls that are one step away from the base case. Then use those to calculate calls that are two levels from the base case, etc. Note that some of the lower-level calls are not ultimately used.
+
+
+Level 1:
+rec(1, 0) = rec(0, 0) + rec(0, -1) = 1 + 1 = 2
+rec(0, 1) = rec(-1, 1) + rec(-1, 0) = 1 + 1 = 2
+rec(-1, 2) = rec(-2, 2) + rec(-2, -1) = 1 + 1 = 2
+
+Level 2:
+rec(1, 1) = rec(0, 1) + rec(0, 0) = 2 + 1 = 3
+rec(2, 0) = rec(1, 0) + rec(1, -1) = 2 + 1 = 3
+rec(0, 2) = rec(-1, 2) + rec(-1, 1) = 2 + 1 = 3
+
+Level 3:
+rec(2, 1) = rec(1, 1) + rec(1, 0) = 3 + 2 = 5
+rec(1, 2) = rec(0, 2) + rec(0, 1) = 3 + 2 = 5
+
+Level 4:
+rec(2, 2) = rec(1, 2) + rec(1, 1) = 5 + 3 = 8
+
+You could also check rectree.pdf for a tree representation.
+
+----------
+
+3. See pal.py.
+
+
+----------
+
+4.
+The inorder for the tree rooted at c is: d c
+So the inorder for the tree rooted at b is: d c b
+
+The inorder for the tree rooted at g is: h g
+So the inorder for the tree rooted at f is: f h g
+So the inorder for the tree rooted at e is: e f h g
+
+And the whole inorder is now: d c b a e f h g
+

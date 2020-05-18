@@ -1,0 +1,43 @@
+Question 1
+
+Preorder: 8, 2, 1, 9
+Inorder: 2, 1, 8, 9
+
+The preorder tells us that the root of the tree is 8. The inorder tells us that 2 and 1 are somewhere on the left and 9 is on the right. Let's do the 9 first...
+
+8->xxx (not sure of left subtree yet)
+8->9
+
+Now, let's look at what's left:
+
+Preorder: 2, 1
+Inorder: 2, 1
+
+This is the left subtree of 8. From the preorder, the root of this subtree is 2, and the inorder tells us that 1 is the right child of 2. This gives us the final tree t:
+
+8->2
+8->9
+2->None (2 has no left child)
+2->1
+
+-----
+
+Question 2
+
+Return True iff every node in the binary tree has at most one child.
+OR Return True iff every node in the binary tree has zero or one child.
+OR Return True iff no node in the binary tree has two children.
+
+
+-----
+
+Question 3
+
+See ll_merge_solution.py.
+
+-----
+
+Question 4
+
+See nonleaf_count_solution.py.
+

@@ -1,0 +1,23 @@
+Question 1
+
+Root 6
+Right child of 6 is 7
+left child of 6 is 5
+left child of 5 is 4
+left child of 4 is 1
+right child of 1 is 2
+right child of 2 is 3
+
+-----
+
+Question 2
+
+See bt.py.
+
+
+-----
+
+Question 3
+
+See ll.py.
+

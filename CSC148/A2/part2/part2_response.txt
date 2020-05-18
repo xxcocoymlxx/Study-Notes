@@ -1,0 +1,16 @@
+Explain what has_key2 does instead and when will it return True and when will it return False?
+
+Your discussion of has_key2 here:
+
+【has_key2】 
+has_key2 returns True/False directly based on results of only one branch (right, centre or left), also it puts its base case ‘if s == "$"’ at the top, so it returns True when it is an empty string, but base case should be checked when it has reached its innermost recursion, where s == "$" means it is already the end of the string.
+1.returns True when it is an empty string. 
+2.returns True when the whole string is found.
+3.returns True when part of the string (first few letters of the string) is found in the tree.
+4.returns False when last few letters of a string is asked whether of not are in the tree.
+
+
+【has_key】
+The variable ‘found’ is re-assigned in every layer of recursion, it only returns true when every layer of recursion returns True meaning that the whole string is found in the tree.
+1.only returns true when the whole string is fount in the tree.
+2.returns False when it is an empty string. 

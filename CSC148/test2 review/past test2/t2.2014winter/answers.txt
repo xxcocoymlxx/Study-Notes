@@ -1,0 +1,17 @@
+1. Yes.
+
+The empty tree has a sorted inorder traversal. Now, assume t is not the empty tree. t's left child has a sorted inorder traversal whose maximum element is <= root; t's right child has a sorted inorder traversal whose minimum element is >= root. So, the left inorder + root + right inorder is a sorted list.
+
+
+-----
+
+2. See expr.py.
+
+-----
+
+3. See remove.py and remove2.py.
+
+-----
+
+4. See ll_sol.py.
+

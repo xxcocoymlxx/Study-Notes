@@ -1,0 +1,5 @@
+Q：compare this to the implementation that uses a Python list. Discuss the time complexity of the queue methods for each implementation.
+A:
+for Python list-based queue, it is so much faster to do its job than the linked list. I am not sure why but I searched it online and it is because python list does not have to search through the whole list one by one? The time complexity is linear. 
+
+for linked list queue,time complexity for enqueue is also linear O(n), but it is much slower than the python list-based queue. When appending item in, it will search through the whole list until the end to add the item. So when the input get larger, the time it takes grows linearly. Time complexity for dequeue is constant O(1), because I only remove the first item in the list, so no matter how long my list is the action it takes is always the same, so it is O(1).

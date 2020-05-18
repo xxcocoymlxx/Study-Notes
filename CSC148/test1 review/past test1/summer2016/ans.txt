@@ -1,0 +1,17 @@
+Question 1
+
+See dups.py
+
+
+Question 2
+
+See depth.py
+
+
+Question 3
+
+Return a list consisting of the elements of lst at depth 1, followed by elements of lst at depth 2, followed by elements of lst at depth 3, etc.
+
+Question 4
+
+See divide.py

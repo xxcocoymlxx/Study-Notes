@@ -1,0 +1,20 @@
+
+===========================
+REMINDER ABOUT ACADEMIC HONESTY
+===========================
+
+Please put an [x] beside all the statements that you agree with below:
+
+[_x_] I agree that ALL work I am handing in is my own.
+
+[_x_] I agree that I did NOT show others my code, or view other people's code to help me with any aspect of this project.
+
+[_x_] I am aware that it is okay for me to consult other resources for help and guidance, but if I am copying pieces of code directly from a resource, I MUST cite the source in my code.
+
+[_x_] I am aware that if my code bears an unreasonable similarity to someone else's code, I will be called in for a meeting which could lead to a meeting with the Dean's office and possible disciplinary consequences such as receiving a 0 on the assignment.
+
+[_x_] I am aware that any academic offence will be written on my transcript and may affect my future chances and opportunities in academic and professional contexts.
+
+Please write your name below to signify that you agree with all of the above:
+Mengning Yang and Licheng Xu
+---------------------

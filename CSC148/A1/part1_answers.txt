@@ -1,0 +1,80 @@
+
+------------------------------------------------
+Answer the questions below for the 1-player game
+------------------------------------------------
+
+TASK 1 Become familiar with the MazeGame class
+
+Read the MazeGame class carefully and answer the following questions about it.
+
+Q1: What attribute stores the players of the game?
+
+YOUR ANSWER HERE: Line 9 the attribute [player] stores the players of the game
+
+Q2: If a player is at coordinates (0,1) and the grid has a width of 2 and height of 4, what does this grid currently look like?
+
+(_)(_)
+(x)(_)
+(_)(_)
+(_)(_)
+
+Q3: List all the places where a Player is stored or a method is called on a Player.
+
+line 19 self.player stores player
+line 9 method __init__ is called on a player
+
+------------------------
+
+TASK 2 Become familiar with function main
+
+Now look at function main and answer these questions:
+
+Q1: Where is a MazeGame constructed?
+
+line 173 g = MazeGame(width, height, p1)
+
+Q2: List all the places where a Player is stored or a method is called on a Player.
+line 169 p1 = Player(name, 0, 0) is where a player is stored 
+line 173 method MazeGame is called on a player 
+line 176 method move is called on a player
+
+------------------------------------------------
+Answer the questions below for the 2-player game
+------------------------------------------------
+
+TASK 1 Become familiar with the MazeGame class
+
+Read the MazeGame class in this file carefully, because it's slightly different than the single player version. Answer the following questions about it.
+
+Q1: What attribute stores the players of the game?
+line 9  attribute [player1] and [player2]stores the players of the game
+
+Q2: If turn is 15, whose turn is it?
+player2’s turn
+
+Q3: List all the places where a Player is stored or a method is called on a Player.
+line 19 players are store in self.players 
+line 9 method __init__ is called on a player
+line 81 method get_new_position is called on a player 
+line 102 method update_grid is called on a player
+
+------------------------
+
+TASK 2 Become familiar with function main
+
+Now look at function main, notice any differences from the previous file, and answer these questions:
+
+Q1: Where and how is a MazeGame constructed?
+line 206 g = MazeGame(width, height, p1, p2)
+it’s constructed by asking the user for the width and height of the grid and also the player’s information and create the players. pass these instances into the MazeGame.
+
+Q2: How are the Players constructed?
+players are constructed by first asking that the user’s name is and by passing in the user’s name and player type ‘u’ and coordinates (0,0) to create p1. And ask the user who does the user want to play the game with a computer or another user, by passing in the user’s answers to create the p2 like p2 = make_player(name, player_type.lower(), 0, 1). 
+
+Q3: List all the places where a Player is stored or a method is called on a Player.
+line 197 player1 is stored in p1
+line 202 player2 is stored in p2
+line 206 function MazeGame is called on players 
+line 209 method move is called on player1
+line 210 method move is called on player2
+
