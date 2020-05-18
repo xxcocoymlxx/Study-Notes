@@ -1,0 +1,65 @@
+0
+[BEGIN DESCRIPTION]
+There is nothing interesting here.
+[END DESCRIPTION]
+1
+[BEGIN DESCRIPTION]
+You wake up lost in some unfamiliar place. All you know is you need to find a way home. And fast!
+[END DESCRIPTION]
+2
+[BEGIN DESCRIPTION]
+There is some sort of an information desk with a receptionist sitting behind it. But they look very busy and don't seem to notice you at all.
+[END DESCRIPTION]
+[BEGIN ACTIONS]
+Clear your throat to get the receptionist's attention, 2.1
+Bang the table to get the receptionist's attention, 2.1
+Wait quietly until the receptionist notices you, 2.2
+[END ACTIONS]
+2.1
+[BEGIN DESCRIPTION]
+The receptionist scowls at you and says: You are disrupting my quiet time. Please leave.
+[END DESCRIPTION]
+2.2
+[BEGIN DESCRIPTION]
+The receptionist eventually looks up and notices you. "Are you lost? The way home is straight ahead to the East. But you need to find three gems first to be able to open the Escape door," she says.
+[END DESCRIPTION]
+3
+[BEGIN DESCRIPTION]
+You find a treasure chest. There are two buttons on it: a red button, and a green button.
+[END DESCRIPTION]
+[BEGIN ACTIONS]
+Press the red button, 3.1
+Press the green button, 3.2
+[END ACTIONS]
+3.1
+[BEGIN DESCRIPTION]
+The chest opens up automatically. You found a red gem!
+[END DESCRIPTION]
+3.2
+[BEGIN DESCRIPTION]
+Game Over: The chest explodes, exploding you along with you.
+[END DESCRIPTION]
+4
+[BEGIN DESCRIPTION]
+You find a treasure chest with a guard sleeping beside it.
+[END DESCRIPTION]
+[BEGIN ACTIONS]
+Attack the guard, 4.1
+Try to quietly steal the treasure, 4.2
+[END ACTIONS]
+4.1
+[BEGIN DESCRIPTION]
+Game Over: What are you attacking the guard with? You have no weapons! The guard obviously wins the fight, without even getting up from his chair.
+[END DESCRIPTION]
+4.2
+[BEGIN DESCRIPTION]
+You found a green gem!
+[END DESCRIPTION]
+5
+[BEGIN DESCRIPTION]
+You found a blue gem!
+[END DESCRIPTION]
+-1
+[BEGIN DESCRIPTION]
+You find yourself standing in front of a huge door labelled "Escape". It seems like the key to opening it is three gems.
+[END DESCRIPTION]

@@ -1,0 +1,6 @@
+Q1 = input("You find id difficult to introduce yourself to other people.")
+Q2 = input("You often fet so lost in thoughts that you ignore or forget your surroundings.")
+Q3 = input("You try to respond to your emails as soon as possible and cannot strand a messy inbox.")
+Q4 = input("You find it easy to stay relaxed even when there is some pressure.")
+Q5 = input("You do not usually initiate conversations.")
+Q6 = input("You rarely do something just out of sheer curiosity.")

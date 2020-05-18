@@ -1,0 +1,63 @@
+
+NOTE: YOU SHOULD ONLY BE WORKING ON THIS PART IF YOU'RE ENROLLED IN
+LECTURE SECTION 2 FROM 6-7PM! DOUBLE-CHECK ACORN TO MAKE SURE.
+
+======= PROCESS LOG =======
+Name:Mengning Yang
+UtorID:yangme16
+Student Number:1002437552
+
+This file is where you will tell us details about the process you
+went through in creating your project.
+
+You have two options for the format (you can also mix and match the two) –
+
+(1)
+A day-to-day journal format.
+
+e.g.
+On Friday, I tried to add [this feature].
+I looked at [this website], which was helpful.
+I managed to almost finish adding it, but [this went wrong].
+I wanted to add it because [...], but decided not to in the end, because [...].
+If I had more time, I would [...]
+
+OR
+
+(2)
+Instead of dividing it up by days, you can divide it up
+by each feature.
+
+e.g.
+Feature 1: Time limit
+I tried to add this by [...]. What worked well was [...]
+What didn't work the way I wanted it to was [...]
+How it is used in the game: [...]
+
+Feature 2: New items
+I tried to add this by [...]. What worked well was [...]
+What didn't work the way I wanted it to was [...]
+How it is used in the game: [...]
+===========================
+
+YOUR LOG STARTS HERE:
+
+I choose to divide it up by each feature.
+
+Feature 1:Player will have the choice to quit the game.
+I added another elif in the main function where the decision == ‘quit’, and then exit the game.I also made the choice ‘quit’ available for the player to see when the game is running. 
+
+Feature 2:Player will start at an random location instead of (0,0).
+I wrote 2 helper functions called mapfile_hight(filename) and mapfile_width(filename) to get the map’s height and width. And I was inspired from part 1, the random location of the gems. I set the player’s starting point as p_x = random.randint(0,w-1) and p_y = random.randint(0,h-1) in the main function,where w = mapfile_hight('map.txt') and h = mapfile_width('map.txt') and it worked. I definitely adds more fun to the game, some times when i open the game, i am already facing the choice of getting gems, or sometimes when I open the game, i press 2 and then i got exploded.
+
+
+Feature 3:sent back to the origin.
+If the player has gotten to certain location ID, the player will be sent back to the origin (0,0) and start over again.
+I tried to add another option in generate_map where the map_data[i][i2] == ‘4’, the map will show as ’(z)’ . And in update_map, I tried when map_visual[py+dy][px+dx] == ‘(z)’,map_visual[py+dy][px+dx] = map_visual[0][0], but when the player reaches ‘(z)’, the player’s ID didn’t change the ‘(z)’, and the player’s ID disappeared. Seems like this is not the place to change the player’s current location and I think it will involve a few more other functions to make it work. But i can’t seen to solve the issue.
+
+Feature 4:steps limit
+I really want to try this one but I really don’t know how. If I have more time, I will definitely look it up.
+
+Feature 5:
+I also wanted to set some locations that once the player reaches that location, the player will get hurt and will need gems to cure himself\herself. 
+
