@@ -1,0 +1,282 @@
+% Template to use to complete Problem Set 1.
+% If you are using ShareLaTeX, you'll want to upload this file to your account.
+% Before modifying this file, we recommend trying to compile it as-is
+% to see what the basic template gives.
+
+%the class name
+\documentclass[12pt]{article}
+%some imported useful packages here
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcounter{ProblemNum}
+\newcounter{SubProblemNum}[ProblemNum]
+\renewcommand{\theProblemNum}{\arabic{ProblemNum}}
+\renewcommand{\theSubProblemNum}{\alph{SubProblemNum}}
+\newcommand*{\anyproblem}[1]{\newpage\subsection*{#1}}
+\newcommand*{\problem}[1]{\stepcounter{ProblemNum} %
+\anyproblem{Problem \theProblemNum. \; #1}}
+\newcommand*{\soln}[1]{\subsubsection*{#1}}
+\newcommand*{\solution}{\soln{Solution}}
+\renewcommand*{\part}{\stepcounter{SubProblemNum} %
+\soln{Part (\theSubProblemNum)}}
+
+
+% Document metadata
+\title{Problem Set \#1  \hspace{3cm} CSC236 Fall 2018}
+\author{Mengning Yang, Licheng Xu, Chenxu Liu}
+\date{Sept, 27, 2018}
+
+
+% Document starts here
+\begin{document}
+\maketitle
+
+
+
+\noindent \rule{\textwidth}{1pt}
+
+
+
+
+
+\vfill
+We declare that this assignment is solely our own work, and is in accordance
+with the University of Toronto Code of Behaviour on Academic Matters.
+
+\noindent \rule{\textwidth}{1pt}
+
+This submission has been prepared using \LaTeX.
+
+\newpage
+
+
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(Warmup - this problem will NOT be marked)} Let $n\in\mathbb{N}$. Describe the largest set of values $n$ for which you think $2^n<n!$. Use some form of induction to prove that your description is correct. 
+\vskip2pt
+\noindent (Here $m!$ stands for $m$ factorial, the product of first $m$ non-negative integers. By convention, $0!=1$.)
+
+%%Write your solution here
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(4 Marks)} Let $n\in\mathbb{N}\setminus\{0\}$. Using some form of induction, prove that for all such $n$, there exists and odd natural $m$ and a natural $k$ such that $n=2^km$.\\
+
+%%Write your solution here
+\noindent
+Predicate:P(n): for all $n\in\mathbb{N}\setminus\{0\}$, there exists and odd natural $m$ and a natural $k$ such that $n = 2^km$.\\
+
+\noindent
+Base case:\\
+$1 = 1*2^0$, 1 is odd, and 0 is a natural number.\\
+Therefore, $P(1)$ is True.\\\\
+Induction step:\\
+By Induction Hypothesis, assume $P(1),P(2).....P(k)$ are true, where n = k, $k\in \mathbb{N}$\\
+
+\noindent
+(i) If k is even, $k+1$ is odd,\\
+$k+1$ = 1 * odd number = $2^0$ * odd number\\
+Therefore, $P(k+1)$ is True.\\\\
+(ii) If $k$ is odd, then $k +1$ is even.\\
+\noindent
+let $k+1 = 2m$, where $m\in [1,k]$\\
+(note: we have assumed that $P(1),P(2).....P(k)$ are true)\\
+
+\noindent
+let $m=2^ab$, where a is a natural number, $b$ is a odd natural number\\
+by assumption, P(m) is true.\\
+\begin{align*}
+k + 1 &= 2*2^ab \\
+&= 2^{a+1}b\\
+\end{align*}
+Therefore, P(k+1) is true.
+
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(6 Marks)}  Denote $\mathbb{Z}[x]$ the set of polynomials on one variable $x$ with integer coefficients.
+For example, $p(x)=x^2-3x+42$ is such a polynomial, whereas $q(x)=-1.5x^3+97x$ is not. Also recall polynomials on one variable with integer coefficients can be added and multiplied with each other using usual rules of high school algebra. (You are allowed to use only the rules of elementary algebra and what is taught is this course in your solution. Any other approaches with receive no credit).
+
+\vskip5pt
+Let's define the set $S\subseteq \mathbb{Z}[x]$ using the following rules:
+
+\begin{enumerate}
+\item $2\in S$.
+\item $x\in S$.
+\item $\forall p(x)\in\mathbb{Z}[x], \forall q(x)\in S,\,\, p(x)q(x)\in S$.
+\item $\forall p(x),q(x) \in S,\,\, p(x)+q(x)\in S$.
+\end{enumerate}
+
+\vskip5pt
+
+Also define the set $T=\{2p(x)+xq(x)|p(x),q(x)\in\mathbb{Z}[x]\}$.
+
+\vskip5pt
+
+Using some form of induction, prove $S=T$.\\\\
+
+%%Write your solution here
+\noindent
+For this question, we need to prove:
+${T} \subset {S}$ and ${S} \subset {T}$\\
+
+\noindent
+\section  {prove ${T} \subset {S}$:}
+let $t \in T$ and $t=2p_{(x)}+xq_{(x)},\forall p_{(x)},q_{(x)} \in \mathbb{Z}_{[x]}$\\
+
+Let $q_{(x)}=0$ and $p_{(x)}=1$, then
+
+\[t=2\times1+x\times0=2+0=2\]
+\[\therefore 2 \in T\]
+
+By same reason, we could get $ x\in T$.\\
+
+Therefore, T follows first two rules of S.\\
+
+$\forall h \in \mathbb{Z}_{[x]}$ and $\forall t \in T$,we can get:
+
+\[ h\times t=
+h_{(x)}
+\times
+(2p_{(x)}+xq_{(x)})\]
+\[=2(h_{(x)}p_{(x)})+
+x(h_{(x)}q_{(x)})\]
+
+
+$\because 2,h,p,q\in \mathbb{Z}_{[x]}$\\
+
+$\therefore$
+$(h_{(x)}p_{(x)})$, 
+$(h_{(x)}q_{(x)})
+\in \mathbb{Z}_{[x]}$\\
+
+\noindent
+Therefore, $h\times t \in T$ and T follows the 3rd rule.\\
+
+$\forall t_1, t_2 \in T$,we can get:
+
+\[ t_{1}+ t_{2}=
+(2p_{1(x)}+xq_{1(x)})
++
+(2p_{2(x)}+xq_{2(x)})\]
+\[=2(p_{1(x)}+p_{2(x)})+
+x(q_{1(x)}+q_{2(x)})\]
+
+$\because p,q\in \mathbb{Z}_{[x]}$\\
+
+$\therefore$
+$(p_{1(x)}+p_{2(x)})$, 
+$(q_{1(x)}+q_{2(x)})
+\in \mathbb{Z}_{[x]}$\\
+
+\noindent
+Therefore, $t_{1}+ t_{2} \in T$ and T follows the 4th rule, and we can get ${T} \subset {S}$.
+
+
+\noindent
+\section  {prove ${S} \subset {T}$:}
+
+Base case:\
+
+First, let's consider which new elements will 2 and x will generate by rule 3 and rule 4:\\
+let $p_{(x)},q_{(x)} \in \mathbb{Z}_{[x]}$, then\\
+
+according to rule 3 we can get:
+
+$2p_{(x)}$, $xq_{(x)}$\\
+
+according to rule 4 we can get:
+
+$2p_{(x)}+2p_{(x)}=4p_{(x)}=2p_{(x)}$,$xq_{(x)}+xq_{(x)}=x\cdot q_{(x)}=xq_{(x)}$, and $2p_{(x)}+xq_{(x)}$ \\
+
+\noindent
+(because p and q are two polynomials with integer coefficients, it times a integer does not matter). \\
+
+2 and $x \in T$ is proved.\\
+
+$\because p_{(x)},q_{(x)} \in \mathbb{Z}_{[x]}$,
+$\therefore 2p_{(x)}$,$xq_{(x)}$, and $2p_{(x)}+xq_{(x)}$ are also in T\\
+
+the basic case has been proved.\\
+
+
+Induction step:\\
+
+Let $s_1$ and $s_2 $ be two elements in S, and by Induction Hypothesis, $s_1,s_2\in T$ which means $s_1=2p_{1(x)}+xq_{1(x)}$ and 
+$s_2=2p_{2(x)}+xq_{2(x)}$, where $p_i,q_i \in \mathbb{Z}_{[x]}$\\
+
+\noindent
+Let $h\in \mathbb{Z}_{[x]}$,$h\cdot s_1= h\times t=
+h_{(x)}
+\times
+(2p_{1(x)}+xq_{1(x)})
+=2(h_{(x)}p_{1(x)})+
+x(h_{(x)}q_{1(x)})=2z_(x)+xz_(x) \in T$\\
+
+\noindent
+$s_{1}+ s_{2}=
+(2p_{1(x)}+xq_{1(x)})
++
+(2p_{2(x)}+xq_{2(x)})
+=2(p_{1(x)}+p_{2(x)})+
+x(q_{1(x)}+q_{2(x)})$
+\[=2z_{(x)}+xz_{(x)} \in T\]
+\[s_1,s_2 \in T => f(s_1,s_2) \in T\]
+so we get $S\subset T$.
+Then we have
+\[S\subset T \quad and \quad T\subset\]
+\[Therefore,  S=T\]
+
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%
+\problem{}
+\textsc{(6 marks)} Let $P$ be a convex polygon with consecutive vertices $v_1, v_2, ..., v_n$.
+          Use some form of induction to show that when $P$ is triangulated into $n - 2$ triangles, 
+          the $n - 2$ triangles can be numbered $1, 2, ..., n - 2$ so that $v_i$ is a vertex of 
+          triangle $i$ for $i = 1, 2, ..., n-2$. \\
+
+
+%%Write your solution here
+          Predicate P(t): Convex polygon t with n vertices can be triangulated into $n-2$ triangles.\\
+          
+          Use structural induction to prove that P(t) is true for all convex polygons.\\
+          
+          \noindent
+          1. A polygon t bounded by 3 straight lines is a triangle.
+          Then t has 3 vertices and one triangle.\\
+          2. When a new vertex outside of the current polygon is added to t, t will form one more triangle.\\
+          
+          Let V(t) be number of vertices in t, and let T(t) be number of triangles in t, we want to prove:
+          
+          \[ T(t) = V(t) - 2\]
+          
+          for all convex polygons.\\
+          
+          Base case:\\
+          A single triangle has 3 vertices. Number of triangles equals number of vertices - 2. So base case holds.\\
+          
+          Induction step:\\
+          t1 adds one more vertex to form polygon t.\\
+          By Induction Hypothesis, assume t1 is a polygon, P(t1) holds, i.e., T(t1) = V(t1) - 2\\
+          Then we have\\
+          \begin{align*}
+                        V(t) &= V(t1) + 1 \\
+                        T(t) &= T(t1) + 1
+         \end{align*}
+         \begin{align*}
+                    V(t)&= (T(t1) + 2) + 1 \\
+                             &= (T(t1) + 1) + 2 \\
+                             &= T(t) + 2 \\
+                    T(t) &= V(t) - 2
+          \end{align*}
+\end{document}

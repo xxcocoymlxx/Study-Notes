@@ -1,0 +1,282 @@
+% Template to use to complete Problem Set 1.
+% If you are using ShareLaTeX, you'll want to upload this file to your account.
+% Before modifying this file, we recommend trying to compile it as-is
+% to see what the basic template gives.
+
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcounter{ProblemNum}
+\newcounter{SubProblemNum}[ProblemNum]
+\renewcommand{\theProblemNum}{\arabic{ProblemNum}}
+\renewcommand{\theSubProblemNum}{\alph{SubProblemNum}}
+\newcommand*{\anyproblem}[1]{\newpage\subsection*{#1}}
+\newcommand*{\problem}[1]{\stepcounter{ProblemNum} %
+\anyproblem{Problem \theProblemNum. \; #1}}
+\newcommand*{\soln}[1]{\subsubsection*{#1}}
+\newcommand*{\solution}{\soln{Solution}}
+\renewcommand*{\part}{\stepcounter{SubProblemNum} %
+\soln{Part (\theSubProblemNum)}}
+
+
+% Document metadata
+\title{Problem Set \#2  \hspace{3cm} CSC236 Fall 2018}
+\author{Mengning Yang, Licheng Xu, Chenxu Liu}
+\date{October, 12, 2018}
+
+
+% Document starts here
+\begin{document}
+\maketitle
+
+
+
+\noindent \rule{\textwidth}{1pt}
+
+
+\vfill
+We declare that this assignment is solely our own work, and is in accordance
+with the University of Toronto Code of Behaviour on Academic Matters.
+
+\noindent \rule{\textwidth}{1pt}
+
+This submission has been prepared using \LaTeX.
+
+\newpage
+
+
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(Warmup - this problem will NOT be marked)}.
+\\
+
+\noindent Show that $\log{n!} \in\mathcal{O}(n\log{n})$.
+\vskip2pt
+\noindent (Here $m!$ stands for $m$ factorial, the product of first $m$ non-negative integers. By convention, $0!=1$.)
+%%Write your solution here
+
+
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+ \textsc{(4 Marks)}  Suppose you are coding an algorithm for finding the maximum sum of two elements in a list of positive integers.  Suppose you have access to a helper function sort(L) that takes in a list of positive integers and returns a list
+of the same elements but sorted in non-decreasing order. Moreover, suppose \verb|sort(L)| runs in time $\Theta(n \log{n})$ (e.g.,
+\verb|mergesort|).
+Write a Python program \verb|fastMaxSum| calling \verb|sort(L)| as a helper function that runs in time $\Theta(n \log{n})$. Justify
+why it has this running time.\\
+
+
+%%Write your solution here
+
+\noindent
+\begin{verbatim}
+def fastMaxSum(L:list of int): -> int
+    if len(L) < 2:
+        return L
+    else:
+        NewLst = sort(L)
+        GetResult = NewLst[-1] + NewLst[-2]
+        return GetResult\\
+\end{verbatim}
+\noindent Justify:\\
+\indent \qquad The run  time of the function \verb|fastMaxSum| is T(\verb|fastMaxSum(L)|) = T(\verb|sort(L)|)+T(\verb|GetResult|)\\
+
+$\because$ The run time of adding two elements of the list is a constant time,\\
+\indent \indent  T(\verb|fastMaxSum(L)|) = T(\verb|sort(L)|)+ a constant\\
+\indent \indent So it will not affect the run time of the whole function.\\
+
+$\therefore$ T(\verb|fastMaxSum(L)|) = T(\verb|sort(L)|)=$\theta(n \log{n})$
+
+    
+\problem{}
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\textsc{(6 Marks) }\textbf{Practice  $\Theta$}. 
+  $$\forall k\in\mathbb{N}, 1^k+2^k+\dots+n^k\in\Theta({n^{k+1}}).$$\\
+  
+  
+%%Write your solution here
+\noindent To show $\forall k \in \mathbb{N}, 1^k + 2^k + \cdot\cdot\cdot + n^k \in \Theta(n ^ {k + 1})$, we need to show\\
+$\forall k \in \mathbb{N}, 1^k + 2^k + \cdot\cdot\cdot + n^k \in \bigcirc (n ^ {k + 1})$, and\\
+$\forall k \in \mathbb{N}, 1^k + 2^k + \cdot\cdot\cdot + n^k \in \Omega (n ^ {k + 1})$ \\\\
+To show $\bigcirc (n ^ {k + 1})$
+\begin{align*}
+\text{let}\ S &= 1^k + 2^k + \cdot\cdot\cdot + (n-1)^k + n^k , \text{for}\ n_0 = 1\\
+S &\leq n^k + n^k + \cdot\cdot\cdot + n^k\\
+S &\leq n * n^k\\
+S &\leq n^{k+1}\\
+\end{align*}
+Therefore $S\in \bigcirc(n^{k+1})$\\
+
+\newpage 
+\noindent
+To show $S\in \Omega(n^{k+1})$\\
+Let $S = 1^k + 2^k + \cdot\cdot\cdot + (n-1)^k + n^k $, for $n_0 = 2$\\
+we have two cases here, when n is odd and when n is even\\\\
+\noindent 
+case 1 : n is even, so $\frac{n}{2}$ is an Integer, so we have
+\begin{align*}
+S &= 1^k + 2^k + \cdot\cdot\cdot + (n-1)^k + n^k, \text{for}\ n_0 = 2\\
+\because 1^k + 2^k + \cdot\cdot\cdot + (\frac{n}{2}-1)^k &\geq 0\\
+S &\geq (\frac{n}{2})^k + (\frac{n}{2}+1)^k \cdot\cdot\cdot + (n-1)^k + n^k\\
+&\geq (\frac{n}{2})^k + (\frac{n}{2})^k \cdot\cdot\cdot + (\frac{n}{2})^k\\
+&\geq n/2 * (n/2)^k\\
+&\geq n^{k+1}/2^{k+1}\\
+&\geq c*n^{k+1}\\
+&\geq n^{k+1}\\
+\end{align*}
+case 2, when n is odd
+\begin{align*}
+S &= 1^k + 2^k + \cdot\cdot\cdot + (n-1)^k + n^k, \text{for}\ n_0 = 2\\
+&\geq(\frac{n+1}{2})^k + (\frac{n+1}{2}+1)^k\cdot\cdot\cdot + n^k\\
+&\geq (\frac{n+1}{2})^k + (\frac{n+1}{2})^k \cdot\cdot\cdot + (\frac{n+1}{2})^k\\
+&\geq (\frac{n+1}{2}) * (\frac{n+1}{2})^k\\
+&=(\frac{n+1}{2})^{k+1}\\
+&\geq (\frac{n}{2})^{k+1}\\
+&\geq n^{k+1}/2^{k+1}\\
+&\geq c*n^{k+1}\\
+&\geq n^{k+1}\\
+\end{align*}
+So we have $S\in \Omega (n^{k+1})$\\
+Therefore $s\in \Theta (n^{k+1})$
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+\problem{}
+\textsc{(10 marks)} \textbf{Recursive functions}. 
+
+Consider the following recursively defined function:
+
+\[   
+T(n)= 
+     \begin{cases}
+       c_0&\quad n = 0\\
+       c_1 &\quad n = 1 \\
+       aT(n-1)+bT(n-2)&\quad n\ge 2\\
+     \end{cases}
+\]
+
+where $a,b$ are real numbers.
+
+\vskip5pt
+
+Denote (*) the following relation:
+
+$$T(n) = aT(n-1)+bT(n-2) \quad n\ge 2\eqno (*)$$
+\vskip5pt
+We say a function $f(n)$ satisfies (*) iff $f(n)=af(n-1)+bf(n-2)$ is a true statement for $n\ge 2$.
+
+\vskip5pt
+
+Prove the following:
+
+\begin{enumerate}
+\item [(i)] For all functions $f,g:\mathbb{N}\to\mathbb{R}$, for any two real numbers $\alpha, \beta$, if $f(n)$ and $g(n)$ satisfy (*) for $n\ge 2$ then also $h(n)=\alpha f(n)+\beta g(n)$ satisfies it  for $n\ge 2$.
+\item [(ii)] Let $q \ne 0$ be a real number. Show that if $f(n)=q^n$ satisfies (*)  for $n\ge 2$ then $q$ is a root of quadratic equation $x^2-ax-b=0$.
+\item [(iii)] State and prove the converse of (ii). Use this statement and part (i) to show that if $q_1, q_2$ are the roots of $x^2-ax-b=0$ then $h(n)=Aq_1^n+Bq_2^n$ satisfies (*) for any two numbers $A,B$.
+\item [(iv)] Consider $h(n)$ from part (iii). What additional condition should we impose on the roots $q_1, q_2$ so $h(n)$ serves as a closed-form solution for $T(n)$ with $A,B$ uniquely determined?
+\item [(v)] Use the previous parts of this exercise to solve the following recurrence in closed form:
+\[   
+T(n)= 
+     \begin{cases}
+      5&\quad n = 0\\
+      17&\quad n = 1 \\
+       5T(n-1)-6T(n-2)&\quad n\ge 2\\
+     \end{cases}
+\]
+
+\end{enumerate}
+
+%%Write your solution here
+\noindent
+(i)\\
+We know that $f(n)$ and $g(n)$ satisfy (*) for $n\ge 2$\\
+\[
+\begin{cases}
+$f(n)=af(n-1)+bf(n-2)$\\
+$f(n)=ag(n-1)+bg(n-2)$
+\end{cases}\\\\
+\]
+So we can substitute f(n) and f(n) into h(n):\\
+$ h(n) = \alpha f(n)+\beta g(n) $\\
+\indent \quad $ = \alpha [af(n-1)+bf(n-2)]+\beta [ag(n-1)+bg(n-2)]$\\
+\indent \quad $ = \alpha af(n-1)+\alpha bf(n-2)+\beta ag(n-1)+\beta bg(n-2)$\\
+\indent \quad $ = a[\alpha f(n-1)+ \beta f(n-2)]+b [\alpha g(n-1)+\beta g(n-2)]$\\
+\indent \quad $ = ah(n-1) + bh(n-2)$\\
+
+\indent $\therefore h(n) = \alpha f(n)+\beta g(n) $ satisfies (*) for $n\ge 2$.\\\\
+
+\noindent
+(ii)when n = 2
+\begin{align*}
+    f(2) &= af(2-1) + bf(2-2)\\
+    &=af(1) + bf(0)\\
+    \text{since} \ f (n) &= q^n\\
+    f(2)&= q^2 = aq^1 + bq^0\\
+    q^2 &=aq +b\\
+    q^2 - aq - b &= 0\\
+\end{align*}
+When x = q, the quadratic formula holds true, therefore q is a root of $x^2 -ax-b = 0$\\
+
+\newpage
+\noindent
+(iii)\\
+part 1: To state and prove the converse of (ii): If $q$ is a root of the equation $x^2 - ax -b = 0$, then $f(n) = q^n$ satisfies $(*)$ for $n\ge 2$ where $q\neq 0 \in \mathbb{R}$\\
+note: since $q$ is a root of the equation $x^2 - ax -b = 0$, we have
+\begin{align*}
+    x^2 - ax -b &= 0\\
+    q^2 - aq - b &= 0\\
+    q^2 &= aq +b\\
+    q^2*q^{n-2} &= aq * q^{n-2} + bq^{n-2}\\
+    q^n &= aq^{n-1} + bq^{n-2}
+\end{align*}
+Therefore $q^n = f(n)$ satisfies $(*)$ for $n\ge 2$ where $q\neq 0 \in \mathbb{R}$\\\\
+part 2: \\
+we have showed that $q_1$ and $q_2$ are roots of $x^2 - ax - b = 0$ and $q^n = f(n)$ satisfies $(*)$ for $n\ge 2$\\
+So we have $q^n_1 = f(n)$, $q^n_2 = g(n)$ also satisfy$(*)$ for $n\ge 2$\\
+By (i), we have $h(n) = Af(n) + Bg(n) = Aq^n_1 + Bq^n_2$ which also satisfies $(*)$ for $n\ge 2$.\\\\
+
+\noindent
+(iv) Since $q_1, q_2$ are the roots of $x^2-ax-b=0$ then\\
+\begin{align*}
+q_1 &= \frac{-(-a)+\sqrt{(-b)^2-(4)(1)(-b)}}{(2)(1)}\\
+&=\frac{a+\sqrt{b^2+4b}}{2}\\
+q_2 &= \frac{-(-a)-\sqrt{(-b)^2-(4)(1)(-b)}}{(2)(1)}\\
+&=\frac{a-\sqrt{b^2+4b}}{2}
+\end{align*}
+Also, since $h(n)=Aq_1^n+Bq_2^n$ is a closed form of $T(n)$\\
+as $n=1$, $T(1)=Aq_1^1+Bq_2^1 = Aq_1+Bq_2 = C_1$\\
+as $n=0$, $T(0)=Aq_1^0+Bq_2^0 = A+B = C_0$\\\\
+
+\newpage
+\noindent
+(v)We know that $h(n) = Aq_1^n+Bq_2^n$ is a closed form of $T(n)$, in order to find the closed form of the recurrence we have to find the values of $q_1, q_2$,  $A$ and $B$.\\
+from (i), we can get $h(n) = ah(n-1) + bh(n-2)$
+\begin{align*}
+\because T(n) = h(n)\\
+\because 5T(n-1)-6T(n-2)&\quad n\ge 2\\
+\therefore a = 5, b = -6\\
+\text{Then, we can get}\\
+q_1 = \frac{5+\sqrt{25-24}}{2} = 3\\
+q_2 = \frac{5-\sqrt{25-24}}{2} = 2\\
+\text{Since}\  T(1)= Aq_1+Bq_2 = C_1 = 17\\
+T(0)= A+B = C_0 = 5\\
+\text{We can get:}
+\begin{cases}
+3A + 2B = 17\\
+A + B = 5\\
+\end{cases}
+\Rightarrow
+\begin{cases}
+A = 7\\
+B = -2\\
+\end{cases}\\
+\therefore T(n) = h(n) = (7)3^n - (2)2^n = (7)3^n - 2^{n+1}
+\end{align*}
+\end{document}
