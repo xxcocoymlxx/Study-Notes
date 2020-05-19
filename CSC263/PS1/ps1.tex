@@ -1,0 +1,277 @@
+\documentclass{assignment-263}
+
+\anum{1}
+\course{CSC263}
+\duedate{January 28, 2019}
+\filename{ps1sol.pdf, ps1sol.tex, moving\_min.py}
+
+
+\begin{document}
+
+\think
+\text Authors: Junwen Shen(1004299190), Mengning Yang(1002437552), Jianhao Tian(1001354465)
+\begin{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item \textbf{[4]}
+Recall this code from lecture.
+
+\begin{python}
+Search42(L):
+  z = L.head
+  while z != None and z.key != 42:
+     z = z.next
+  return z
+\end{python}
+
+Rather than supposing that each key in the list is an integer chosen uniformly at random from 1 to 100, let's instead suppose that the list length $n$ is at least 42 and that the list keys are a random permutation of $1, 2, 3, \ldots, n$.
+
+Under these new assumptions, what is the expected number of times that line 3 is executed? 
+
+Give your answer in \textbf{exact form}, i.e., \textbf{not} in asymptotic
+		notations. Show your work!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Solutions:\\
+The expected number: $E[t_n]=\sum_{t=1}^{n+1} t*Pr(t_n=t)$ and $n\geq 42$,\\
+since $Pr(t_n=t)=\begin{cases} 
+(1-\frac{1}{n})^{t-1}*\frac{1}{n},  & 1\leq t\leq n \\
+(1-\frac{1}{n}), & t=n+1
+\end{cases}$,\\
+$E[t_n]=\sum_{t=1}^n t*Pr(t)+(n+1)(1-\frac{1}{n})^n$\\
+$=\frac{1}{n}*\sum_{t=1}^n t(1-\frac{1}{n})^{t-1}+(n+1)(1-\frac{1}{n})^n$\\
+Let $S=\sum_{t=1}^n t(1-\frac{1}{n})^{t-1}\cdots\cdots 1$\\
+then $(1-\frac{1}{n})*S=\sum_{t=1}^n t*(1-\frac{1}{n}))^t\cdots\cdots 2$\\
+and subtract equation $1$ by equation $2$,\\
+$\frac{1}{n}*S=\sum_{t=1}^n t(1-\frac{1}{n})^{t-1}-\sum_{t=1}^n t(1-\frac{1}{n})^t$\\
+$=\sum_{t=0}^{n-1}-n(1-\frac{1}{n})^n$\\
+$=\frac{1-(1-\frac{1}{n})^n}{1-(1-\frac{1}{n})}-n(1-\frac{1}{n})^n$\\
+$=n-2n(1-\frac{1}{n})^n$\\
+Therefore, the expected number $E[t_n]=n-2n(1-\frac{1}{n})^n+(n+1)(1-\frac{1}{n})^n=n+(1-n)(1-\frac{1}{n})^n$\\
+
+\item \textbf{[12]}
+		Consider the following algorithm that describes the procedure of a
+		casino game called ``\texttt{Survive263}''. The index of the array $A$ starts
+		at $0$. Let $n$ denote the length of $A$.
+
+\begin{python}
+   Survive263(A):
+      '''
+      Pre: A is a list of integers, len(A) > 263, and it is generated 
+           according to the distribution specified below.
+      '''
+      winnings = -5.00   # the player pays 5 dollars for each play
+      for i from n-1 downto 0:
+         winnings = winnings + 0.01  # winning 1 cent
+         if A[i] == 263:
+            print("Boom! Game Over.")
+            return winnings
+      print("You survived!")
+      return winnings
+\end{python}
+
+		The input array $A$ is generated in the following specific way: for
+		$A[0]$ we pick an integer from $\{0, 1\}$ uniformly at random; for
+		$A[1]$ we pick an integer from $\{0, 1, 2\}$ uniformly at random;
+		for $A[2]$ we pick an integer from $\{0, 1, 2, 3\}$ uniformly at
+		random, etc. That is, for $A[i]$ we pick  an integer from
+		$\{0,\ldots, i+1\}$ uniformly at random. All choices are independent
+		from each other. Now, let's analyse the player's expected winnings
+		from the game by answering the following questions. 
+		All your answers
+		should be in \textbf{exact form}, i.e., \textbf{not} in asymptotic
+		notations.
+
+		\begin{enumerate}[(a)]
+
+			\item Consider the case where the player \textbf{loses the most}
+				(i.e., minimum winnings), what is the return value of
+				\texttt{Survive263} in this case? What is the probability that this case
+				occurs? Justify your answer carefully: show your work and
+				explain your calculation.\\
+%%%%%%%%%%%%%%%%%%%%%%%   your answer goes here     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer:\\
+The return value where the player loses the most is -4.99. This happens at the first iteration of the loop. The probability that this case occurs is $\frac{1}{n+2}$, because we know that n $>$ 263 and i $\geq$ 262, for A[i] we pick an integer from $\{0,\ldots, i+1\}$ uniformly at random, so there are n+2 integers to be picked from.\\
+			\item Consider the case where the player \textbf{wins the most}
+				(i.e., maximum winnings), what is the return value of
+				\texttt{Survive263} in this case? What is the probability that this case
+				occurs? Justify your answer carefully: show your work and
+				explain your calculation.\\
+%%%%%%%%%%%%%%%%%%%%%%%   your answer goes here     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer:\\
+The return value where the player wins the most is -5.00+0.01n. This happens when the loop runs n times and has successfully survived the game. \\
+The probability that this case occurs:\\
+Case 1: When $i \geq 262$\\
+				We already know from (a), P(A[i]=263)=$\frac{1}{n+2}$\\
+				So, $P(A[i]\neq 263) = 1 - (\frac{1}{n+2})= 1 - \frac{1}{n+2} = \frac{n+1}{n+2}$\\
+				What we want is to find the probability that very iteration of the loop $P(A[i]\neq 263)$, and because every event is independent and identically distributed, we multiply the probability of each iteration.\\
+				$\prod_{i=262}^{n-1} \frac{n+1}{n+2} = \frac{263}{n+1}$\\
+				
+Case 2: When $i < 262$\\
+                $P(A[i]\neq 263) = 1$, because 263 is impossible to show up again, once the player has passed this point, the game is not going to be over until the loop terminates. What we want is to find the probability that very iteration of the loop $P(A[i]\neq 263)$, and because every event is independent and identically distributed, we multiply the probability of each iteration.\\
+				$\prod_{i=0}^{i=261} P(A[i]\neq 263) = 1$\\
+				Finally, multiply $\frac{263}{n+1}$ and 1 = $\frac{263}{n+1}$.\\
+			\item Now consider the \textbf{average case}, what is the
+				\textbf{expected value} of the winnings of a player (i.e.,
+				the expected return value of \texttt{Survive263}) according to
+				the input distribution specified above? Justify your answer
+				carefully: show your work and explain your calculation.\\
+%%%%%%%%%%%%%%%%%%%%%%%   your answer goes here     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer:\\
+The expected value of winning is E(-5.00+0.01m) = -5.00+0.01E(m) where m is the number of loop iterations.\\
+The goal is to find E(m), the average number of times the loop runs.\\
+Suppose the loop runs n times, there are two cases:\\
+1) the loop runs n times and survives 263\\
+2) the loop runs n-1 times and survives 263, but the loop meets 263 on the nth iteration and the game ends\\
+In order to end the average number of times the loop runs, we have the equation E(m) = $\sum_{k=1}^{n} k*P(k)$ where k is the kth iteration of the loop.\\
+When k = 1, i = n-1. When k = 2, i = n-2 ... So i = n - k.\\
+When i = n-1, P(only one iteration of the loop will run) = $\frac{1}{n-1+2}$ by the results we got from part (a)\\
+When i = n-2, P(two iterations of the loop will run) =  $\frac{1}{n-1+2}*\frac{1}{n-2+2}$\\
+(the first iteration of the loop does not meet 263, the second iteration of the loop meets 263)\\
+When i = n-3, P(three iterations of the loop will run) =  $\frac{n}{n-1+2}*\frac{n-1}{n-2+2}*\frac{1}{n-3+2}$\\
+(the first and second iteration of the loop does not meet 263, the third iteration of the loop meets 263)\\ and so on...\\
+After simplification, they all equals to $\frac{1}{n+1}$ when n-k = i $\geq 262 \ \text{and}\ k \leq n - 262$. So we can conclude that if the loop runs k times and $k \leq n - 262$, the probability is $\frac{1}{n+1}$.\\
+Another case is that after $(n - 261)^{th}$ iterations, if the game is still not over yet, then the loop will never meet 263 and the loop will run until i = 0. So the probability of the loop terminates when k is between n-261 to n-1 is 0.\\
+And finally, the loop runs n-1 times and survives 263, but the loop meets 263 on the nth iteration and the game ends, the probability that the loop meets 263 at the last iteration is $\frac{263}{n+1}$, which we got from part (2).\\
+So we come up with the following equation:\\
+$E(m) = \sum_{k=1}^{k=n-262}k*\frac{1}{n+1} + \sum_{k=n-262}^{n-1}k*0 + nP(n)$\\
+$E(m) = \sum_{k=1}^{k=n-262}k*\frac{1}{n+1} + \sum_{k=n-262}^{n-1}k*0 + n\frac{263}{n+1}$\\
+$E(m) = \frac{1}{n+1}\frac{(1+n-262)(n-262)}{2} + 0 + \frac{263n}{n+1} $\\
+$E(m) = \frac{n^2+3n+68382}{2(n+1)} $\\
+Therefore, $E(winnings) = -5.00+0.01\frac{n^2+3n+68382}{2(n+1)}$\\
+
+			\item Suppose that you are the owner of the casino and that you want to
+				determine a length of the input list $A$ so that the
+				expected winnings of a player is between $-1.01$ and $-0.99$
+				dollars (so that the casino is expected to make about 1
+				dollar from each play). What value could be picked for the
+				length of $A$? You are allowed to use math tools such as a
+				calculator or WolframAlpha to get your answer.\\
+%%%%%%%%%%%%%%%%%%%%%%%   your answer goes here     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer:\\
+$E(winnings) = -1.01 =  -5.00+0.01\frac{n^2+3n+68382}{2(n+1)}$\\
+$401 = \frac{n^2+3n+68382}{2(n+1)}$, n = 96.15 or 702.85. Because len(A) has to be greater than 263, so the length of the input list is 702.85.\\
+$E(winnings) = -0.99 =  -5.00+0.01\frac{n^2+3n+68382}{2(n+1)}$\\
+$399 = \frac{n^2+3n+68382}{2(n+1)}$, n = 96.79 or 698.2. Because len(A) has to be greater than 263, so the length of the input list is 698.2.\\
+Therefore, the length of the input list would be between 699 and 702.\\
+
+		\end{enumerate}
+
+	\end{enumerate}
+
+\program
+
+\begin{enumerate}
+\item[3.] \textbf{[12]} 
+In this question, you will solve the {\bf Moving Minimum Problem}. The function \verb|solve_moving_min| takes a list of commands that operate on the current collection of data; your task is to process the commands in order and return the required list of results. There are two kinds of commands: \verb|insert| commands and \verb|get_min| commands.
+
+An \verb|insert| command is a string of the form \verb|insert x|, where \verb|x| is an integer. (Note the space between \verb|insert| and \verb|x|.) This command adds \verb|x| to the collection.
+
+A \verb|get_min| command is simply the string \verb|get_min|. The first \verb|get_min| command results in the smallest element currently in the collection; the next \verb|get_min| command results in the second-smallest element currently in the collection; and so on. That is, the \verb|j|th \verb|get_min| command results in the \verb|j|th-smallest element in the collection at the time of the command. You can assume that the collection has at least \verb|j| elements at the time of the \verb|j|th \verb|get_min| command.
+
+Your goal is to implement \verb|insert| and \verb|get_min| each in $O(\lg n)$ time, where $n$ is the number of elements currently in the collection. The list returned by \verb|solve_moving_min| consists of the results, in order, from each \verb|get_min| command.
+
+Let's go through an example. Here is a sample call of \verb|solve_moving_min|:
+
+\begin{verbatim}
+solve_moving_min(
+  ['insert 10',
+   'get_min',
+   'insert 5',
+   'insert 2',
+   'insert 50',
+   'get_min',
+   'get_min',
+   'insert -5'
+  ])
+\end{verbatim}
+
+This corresponds to the following steps:
+\begin{itemize}
+\item The collection begins empty, with no elements.
+\item We insert 10. The collection contains just the integer 10.
+\item We then have our first \verb|get_min| command. The result is the smallest element currently in the collection, which is 10.
+\item We insert 5. The collection now contains 10 and 5.
+\item We insert 2. The collection now contains 10, 5, and 2.
+\item We insert 50. The collection now contains 10, 5, 2, and 50.
+\item Now we have our second \verb|get_min| command. The result is the second-smallest element currently in the collection, which is 5.
+\item Now we have our third \verb|get_min| command. The result is the third-smallest element currently in the collection, which is 10.
+\item We insert -5. The collection now contains 10, 5, 2, 50, and -5.
+\end{itemize}
+
+\verb|solve_moving_min| returns \verb|[10, 5, 10]| (the three values produced by the \verb|get_min| commands).
+   
+Requirements:
+\begin{itemize}
+\item Your code must be written in Python 3, and the filename must be \verb|moving_min.py|.
+\item We will grade only the \verb|solve_moving_min| function; please do not change its signature in the starter code. include as many helper functions as you wish.
+   \end{itemize}
+   
+\textbf{Write-up}: in your \verb|ps1sol.pdf/ps1sol.tex| files, briefly and informally argue why your code is correct, and has the desired runtime.\\
+Solution:\\
+\begin{python}
+def insert(sorted_list, number):
+  '''
+  Pre: sorted_list is a sorted list of numbers
+  Post: return a sorted list with number in it
+  '''  
+  if len(sorted_list) == 0:
+    return [number]
+  if len(sorted_list) == 1:
+    if sorted_list[0] > number:
+      return [number, sorted_list[0]]
+    elif sorted_list[0] < number:
+      return [sorted_list[0], number]
+    else:
+      return [sorted_list[0], number]
+  else:
+    mid = len(sorted_list) // 2
+    if number > sorted_list[:mid][-1]:
+        return sorted_list[:mid] + insert(sorted_list[mid:], number)
+    else:
+      return insert(sorted_list[:mid], number) + sorted_list[mid:]
+\end{python}
+\begin{python}
+def get_min(sorted_list, count):
+  '''
+  Pre: sorted_list is a sorted list
+  Post: return the count-th number in sorted_list
+  '''  
+  return sorted_list[count]
+\end{python}
+\begin{python}
+def solve_moving_min(commands):
+  '''
+  Pre: commands is a list of commands
+  Post: return list of get_min results
+  '''
+  sorted_list = []
+  final_list = []
+  count = 0
+  for command in commands:
+    if command == "get_min":
+      final_list.append(get_min(sorted_list, count))
+      count += 1
+    else:
+      number = int(command.split()[1])
+      sorted_list = insert(sorted_list, number)
+  return final_list  
+\end{python}
+\end{enumerate}
+\textbf{Correctness}:\\
+For function \verb|insert|, when length of list is 0 or 1, the return of insert will satisfies post-condition. for recursive path, if number is bigger than the last element of the first half sorted list, then insert number into the second half of sorted list, and the function's return will satisfies the post-condition. If number is smaller than the last element of the first half sorted list, then insert number into the first half of sorted list, and the function's return will also satisfies the post-condition.\\
+\\
+For \verb|get_min| the function returns the count-th samlles element in sorted list, which satisfies the post-condition.\\
+\\
+For function \verb|solve_moving_min|, the function creats a sorted list as the insert command keep append numbers into the collection, and get min well return the count-th smallest element in the sorted list where count is the times that insert has been called.\\
+\\
+\textbf{Run time}:\\
+For function \verb|insert| , the function uses constant time for the base case, in the recursive path, the function divide the input into half size, so the run time for insert is T(n) = T(n/2) + c, by master theorem, the upper-bond run time for insert is O($logn$).\\
+\\
+For function \verb|get_min|, the function simply returns the count-th element in the list, so the upper-bond run time for this function should be constant.
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
