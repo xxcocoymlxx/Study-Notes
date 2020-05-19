@@ -1,0 +1,149 @@
+Output from make (no output means no compile errors/warnings):
+jobprotocol.c: In function ‘start_job’:
+jobprotocol.c:56:22: error: ‘stdout_fd’ undeclared (first use in this function); did you mean ‘stdout’?
+      jn->stdout_fd = stdout_fd[PIPE_READ];
+                      ^~~~~~~~~
+                      stdout
+jobprotocol.c:56:22: note: each undeclared identifier is reported only once for each function it appears in
+jobprotocol.c:57:22: error: ‘stderr_fd’ undeclared (first use in this function); did you mean ‘stdout_fd’?
+      jn->stderr_fd = stderr_fd[PIPE_READ];
+                      ^~~~~~~~~
+                      stdout_fd
+jobprotocol.c:84:23: warning: passing argument 1 of ‘fileno’ from incompatible pointer type [-Wincompatible-pointer-types]
+      if ((dup2(fileno(stdout),stdout[PIPE_WRITE])==-1)|| (dup2(fileno(stderr),stderr[PIPE_WRITE])==-1)){
+                       ^~~~~~
+In file included from jobprotocol.h:1:0,
+                 from jobprotocol.c:3:
+/usr/include/stdio.h:786:12: note: expected ‘FILE * {aka struct _IO_FILE *}’ but argument is of type ‘int *’
+ extern int fileno (FILE *__stream) __THROW __wur;
+            ^~~~~~
+jobprotocol.c:84:71: warning: passing argument 1 of ‘fileno’ from incompatible pointer type [-Wincompatible-pointer-types]
+      if ((dup2(fileno(stdout),stdout[PIPE_WRITE])==-1)|| (dup2(fileno(stderr),stderr[PIPE_WRITE])==-1)){
+                                                                       ^~~~~~
+In file included from jobprotocol.h:1:0,
+                 from jobprotocol.c:3:
+/usr/include/stdio.h:786:12: note: expected ‘FILE * {aka struct _IO_FILE *}’ but argument is of type ‘int *’
+ extern int fileno (FILE *__stream) __THROW __wur;
+            ^~~~~~
+jobprotocol.c: In function ‘empty_job_list’:
+jobprotocol.c:198:22: warning: passing argument 1 of ‘delete_job_node’ from incompatible pointer type [-Wincompatible-pointer-types]
+  if (delete_job_node(joblist) == -1) return -1;
+                      ^~~~~~~
+In file included from jobprotocol.c:3:0:
+jobprotocol.h:137:5: note: expected ‘JobNode * {aka struct job_node *}’ but argument is of type ‘JobList * {aka struct job_list *}’
+ int delete_job_node(JobNode*);
+     ^~~~~~~~~~~~~~~
+jobprotocol.c: In function ‘convert_to_crlf’:
+jobprotocol.c:332:21: warning: passing argument 1 of ‘is_buffer_full’ from incompatible pointer type [-Wincompatible-pointer-types]
+  if (is_buffer_full(buf) == 1) return -2;//there's no space for a new character.
+                     ^~~
+In file included from jobprotocol.c:3:0:
+jobprotocol.h:226:5: note: expected ‘Buffer * {aka struct job_buffer *}’ but argument is of type ‘char *’
+ int is_buffer_full(Buffer *);
+     ^~~~~~~~~~~~~~
+jobprotocol.c:351:2: error: expected ‘;’ before ‘}’ token
+  }
+  ^
+jobprotocol.c:335:7: warning: variable ‘temp’ set but not used [-Wunused-but-set-variable]
+  char temp[BUFSIZE];
+       ^~~~
+jobprotocol.c: In function ‘find_unix_newline’:
+jobprotocol.c:373:37: warning: passing argument 2 of ‘memchr’ makes integer from pointer without a cast [-Wint-conversion]
+  char * newstr = (char *)memchr(buf,"\n",n);
+                                     ^~~~
+In file included from jobprotocol.h:4:0,
+                 from jobprotocol.c:3:
+/usr/include/string.h:90:14: note: expected ‘int’ but argument is of type ‘char *’
+ extern void *memchr (const void *__s, int __c, size_t __n)
+              ^~~~~~
+jobprotocol.c:374:6: error: ‘newsre’ undeclared (first use in this function); did you mean ‘newstr’?
+  if (newsre == NULL) return -1;//没找到
+      ^~~~~~
+      newstr
+jobprotocol.c:375:15: warning: return makes integer from pointer without a cast [-Wint-conversion]
+  return newstr+1;
+         ~~~~~~^~
+jobprotocol.c: In function ‘read_to_buf’:
+jobprotocol.c:383:38: error: ‘inbuf’ undeclared (first use in this function)
+  while (nbytes = read(fd,buffer->buf+inbuf, BUFSIZE-(buffer->inbuf))>0){
+                                      ^~~~~
+jobprotocol.c: In function ‘get_next_msg’:
+jobprotocol.c:410:10: error: a label can only be part of a statement and a declaration is not a statement
+          int r = remove_newline(buf, buf->inbuf);//return the index of the null terminator
+          ^~~
+jobprotocol.c:410:33: warning: passing argument 1 of ‘remove_newline’ from incompatible pointer type [-Wincompatible-pointer-types]
+          int r = remove_newline(buf, buf->inbuf);//return the index of the null terminator
+                                 ^~~
+jobprotocol.c:313:5: note: expected ‘char *’ but argument is of type ‘Buffer * {aka struct job_buffer *}’
+ int remove_newline(char *buf, int inbuf){
+     ^~~~~~~~~~~~~~
+jobprotocol.c:413:23: warning: passing argument 2 of ‘strncpy’ from incompatible pointer type [-Wincompatible-pointer-types]
+           strncpy(ptr,buf,r);//copy第一个null terminator的位置前的东西去ptr里
+                       ^~~
+In file included from jobprotocol.h:4:0,
+                 from jobprotocol.c:3:
+/usr/include/string.h:124:14: note: expected ‘const char * restrict’ but argument is of type ‘Buffer * {aka struct job_buffer *}’
+ extern char *strncpy (char *__restrict __dest,
+              ^~~~~~~
+jobprotocol.c:421:10: error: a label can only be part of a statement and a declaration is not a statement
+          int r = remove_newline(buf, buf->inbuf);//return the index of the null terminator
+          ^~~
+jobprotocol.c:421:14: error: redefinition of ‘r’
+          int r = remove_newline(buf, buf->inbuf);//return the index of the null terminator
+              ^
+jobprotocol.c:410:14: note: previous definition of ‘r’ was here
+          int r = remove_newline(buf, buf->inbuf);//return the index of the null terminator
+              ^
+jobprotocol.c:421:33: warning: passing argument 1 of ‘remove_newline’ from incompatible pointer type [-Wincompatible-pointer-types]
+          int r = remove_newline(buf, buf->inbuf);//return the index of the null terminator
+                                 ^~~
+jobprotocol.c:313:5: note: expected ‘char *’ but argument is of type ‘Buffer * {aka struct job_buffer *}’
+ int remove_newline(char *buf, int inbuf){
+     ^~~~~~~~~~~~~~
+jobprotocol.c:424:23: warning: passing argument 2 of ‘strncpy’ from incompatible pointer type [-Wincompatible-pointer-types]
+           strncpy(ptr,buf,r);//copy第一个null terminator的位置前的东西去ptr里
+                       ^~~
+In file included from jobprotocol.h:4:0,
+                 from jobprotocol.c:3:
+/usr/include/string.h:124:14: note: expected ‘const char * restrict’ but argument is of type ‘Buffer * {aka struct job_buffer *}’
+ extern char *strncpy (char *__restrict __dest,
+              ^~~~~~~
+jobprotocol.c: In function ‘shift_buffer’:
+jobprotocol.c:438:34: error: ‘consumed’ undeclared (first use in this function)
+  memmove(buffer->buf,buffer->buf+consumed,inbuf);
+                                  ^~~~~~~~
+jobprotocol.c:438:43: error: ‘inbuf’ undeclared (first use in this function); did you mean ‘buf’?
+  memmove(buffer->buf,buffer->buf+consumed,inbuf);
+                                           ^~~~~
+                                           buf
+jobprotocol.c: In function ‘get_next_msg’:
+jobprotocol.c:450:2: error: #endif without #if
+ #endif
+  ^~~~~
+jobprotocol.c:448:1: error: expected declaration or statement at end of input
+ }
+ ^
+jobprotocol.c:406:6: warning: unused variable ‘where’ [-Wunused-variable]
+  int where;
+      ^~~~~
+jobprotocol.c: In function ‘remove_newline’:
+jobprotocol.c:324:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+jobprotocol.c: In function ‘get_next_msg’:
+jobprotocol.c:448:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+At top level:
+jobprotocol.c:445:5: warning: ‘is_buffer_full’ defined but not used [-Wunused-function]
+ int is_buffer_full(Buffer *buffer){
+     ^~~~~~~~~~~~~~
+jobprotocol.c:437:6: warning: ‘shift_buffer’ defined but not used [-Wunused-function]
+ void shift_buffer(Buffer *buffer){
+      ^~~~~~~~~~~~
+In file included from jobprotocol.c:3:0:
+jobprotocol.h:41:12: warning: ‘total_clients’ defined but not used [-Wunused-variable]
+ static int total_clients = 0;
+            ^~~~~~~~~~~~~
+Makefile:25: recipe for target 'jobprotocol.o' failed
+make: *** [jobprotocol.o] Error 1

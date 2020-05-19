@@ -1,0 +1,39 @@
+EE
+======================================================================
+ERROR: test_server_kill__no_running_jobs (__main__.TestServer)
+Send the server kill with invalid PID. Receive "Job %d not found".
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_kill_watch_test.py", line 19, in test_server_kill__no_running_jobs
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+======================================================================
+ERROR: test_server_kill__valid_job (__main__.TestServer)
+Send the server kill with valid PID. Received "exited due to signal"
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_kill_watch_test.py", line 27, in test_server_kill__valid_job
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.040s
+
+FAILED (errors=2)

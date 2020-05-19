@@ -1,0 +1,1 @@
+make_stage: does not call close exactly 4 times.

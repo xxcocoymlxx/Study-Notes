@@ -1,0 +1,57 @@
+E.EFF..
+======================================================================
+ERROR: test_server_run__exec_with_args (__main__.TestServer)
+Send the server "run" with arguments. Output must reflect arguments.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_run_kill_test.py", line 81, in test_server_run__exec_with_args
+    stdoutput, stderror, status = _exec(['./jobclient1', 'run fastjob ArgProvided'])
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 503, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1554, in _communicate
+    self.stdout.errors)
+  File "/usr/lib/python3.6/subprocess.py", line 740, in _translate_newlines
+    data = data.decode(encoding, errors)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x85 in position 31: invalid start byte
+
+======================================================================
+ERROR: test_server_run__invalid_exec (__main__.TestServer)
+Send the server "run" with invalid executable. Command should fail. (exec error.)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_run_kill_test.py", line 20, in test_server_run__invalid_exec
+    stdoutput, stderror, status = _exec(['./jobclient1', 'run no_exec_by_this_name'])
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 503, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1554, in _communicate
+    self.stdout.errors)
+  File "/usr/lib/python3.6/subprocess.py", line 740, in _translate_newlines
+    data = data.decode(encoding, errors)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x85 in position 31: invalid start byte
+
+======================================================================
+FAIL: test_server_run__job_termination_announced (__main__.TestServer)
+Verify that job close is appropriately announced.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_run_kill_test.py", line 73, in test_server_run__job_termination_announced
+    self.assertIn('Exited with status 0', stdoutput)
+AssertionError: 'Exited with status 0' not found in '[SERVER] Job 25898 created\n\n\x7f[JOB 25898] Peter Piper and Peppers\n\n\n'
+
+======================================================================
+FAIL: test_server_run__stderr_sent_to_client (__main__.TestServer)
+Send the server "run", verify that output is sent to client.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_run_kill_test.py", line 63, in test_server_run__stderr_sent_to_client
+    self.assertIn(')*', stdoutput)
+AssertionError: ')*' not found in '[SERVER] Job 25903 created\n\n\x7f[JOB 25903] Peter Piper and Peppers\n\n\n'
+
+----------------------------------------------------------------------
+Ran 7 tests in 18.196s
+
+FAILED (failures=2, errors=2)

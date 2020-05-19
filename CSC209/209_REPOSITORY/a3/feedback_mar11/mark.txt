@@ -1,0 +1,1 @@
+make_stage: does not call fork and pipe exactly once each.

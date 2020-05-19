@@ -1,0 +1,10 @@
+student_repos/yangme16/t09/write_test_file.c: In function ‘main’:
+student_repos/yangme16/t09/write_test_file.c:18:10: warning: implicit declaration of function ‘time’; did you mean ‘utimes’? [-Wimplicit-function-declaration]
+  srandom(time(NULL));
+          ^~~~
+          utimes
+student_repos/yangme16/t09/time_reads.c: In function ‘main’:
+student_repos/yangme16/t09/time_reads.c:61:13: warning: implicit declaration of function ‘time’; did you mean ‘utimes’? [-Wimplicit-function-declaration]
+     srandom(time(NULL));
+             ^~~~
+             utimes

@@ -1,0 +1,23 @@
+F.F
+======================================================================
+FAIL: test_echo_messages (__main__.TestBufServer)
+server should echo full messages to clients
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "chat_test.py", line 46, in test_echo_messages
+    self.assertIn(b'beautiful day in the neighborhood', client_p.stdout)
+AssertionError: b'beautiful day in the neighborhood' not found in b''
+
+======================================================================
+FAIL: test_username_prepended (__main__.TestBufServer)
+server should prepend user name on messages
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "chat_test.py", line 35, in test_username_prepended
+    self.assertIn(b'Musashi: ', client_p.stdout)
+AssertionError: b'Musashi: ' not found in b''
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.017s
+
+FAILED (failures=2)

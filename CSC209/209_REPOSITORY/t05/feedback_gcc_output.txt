@@ -1,0 +1,5 @@
+gcc -Wall -std=gnu99 -c bitmap_printer.c
+gcc -Wall -std=gnu99 -c bitmap.c
+gcc -Wall -std=gnu99 -o bitmap_printer bitmap_printer.o bitmap.o
+gcc -Wall -std=gnu99 -c metadata_tester.c
+gcc -Wall -std=gnu99 -o metadata_tester metadata_tester.o bitmap.o

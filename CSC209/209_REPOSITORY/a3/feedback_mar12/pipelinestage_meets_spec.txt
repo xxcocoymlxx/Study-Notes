@@ -1,0 +1,37 @@
+EE
+======================================================================
+ERROR: test_exactly_2_primes (__main__.SieveTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 161, in _t
+    stdout, stderr, returncode = self._run_exec(args=args, input_=input_, timeout=timeout, check=check)
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 101, in _run_exec
+    **kwargs)
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 496, in _exec
+    shell=shell)
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './pipeline_stage_tester': './pipeline_stage_tester'
+
+======================================================================
+ERROR: test_large_prime (__main__.SieveTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 161, in _t
+    stdout, stderr, returncode = self._run_exec(args=args, input_=input_, timeout=timeout, check=check)
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 101, in _run_exec
+    **kwargs)
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 496, in _exec
+    shell=shell)
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './pipeline_stage_tester': './pipeline_stage_tester'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.044s
+
+FAILED (errors=2)

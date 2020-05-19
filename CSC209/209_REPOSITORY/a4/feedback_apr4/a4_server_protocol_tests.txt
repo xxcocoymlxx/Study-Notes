@@ -1,0 +1,51 @@
+EFFF
+======================================================================
+ERROR: test_server_accepts_ctrl_c (__main__.TestServer)
+Server terminates cleanly (killing jobs and closing sockets) when ctrl-C is received.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 45, in test_server_accepts_ctrl_c
+    stdoutput, stderror, status = _exec(['./jobclient6'])
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 509, in _exec
+    raise e from e
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 503, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1515, in _communicate
+    self._check_timeout(endtime, orig_timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 871, in _check_timeout
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['./jobclient6']' timed out after 10 seconds
+
+======================================================================
+FAIL: test_server_buffers_commands (__main__.TestServer)
+Client sends fragments of commands that should be pieced together. Requires "jobs" support.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 37, in test_server_buffers_commands
+    self.assertIn('[SERVER] No currently running jobs', stdoutput)
+AssertionError: '[SERVER] No currently running jobs' not found in '[SERVER] Invalid command: \n\n\n[SERVER] Invalid command: bs\n\n\n'
+
+======================================================================
+FAIL: test_server_recognizes_invalid_command (__main__.TestServer)
+Send the server a mis-formatted command from a client. Verify that it responds with "Invalid command: %s"
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 21, in test_server_recognizes_invalid_command
+    self.assertIn('[SERVER] Invalid command: jobsZ', stdoutput)
+AssertionError: '[SERVER] Invalid command: jobsZ' not found in '[SERVER] No currently running jobs\n\n\n'
+
+======================================================================
+FAIL: test_server_response_includes_network_newline (__main__.TestServer)
+Verify that the response sent has a network newline
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 29, in test_server_response_includes_network_newline
+    self.assertIn('Network newline detected', stdoutput)
+AssertionError: 'Network newline detected' not found in 'No network newline in the last two characters read.\n'
+
+----------------------------------------------------------------------
+Ran 4 tests in 17.087s
+
+FAILED (failures=3, errors=1)

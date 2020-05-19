@@ -1,0 +1,17 @@
+Script started on Fri 22 Mar 2019 06:10:54 PM EDT
+yangme16@dh2020pc18:~/209_repo/t10$ randclient 127.0.0.1
+bash: randclient: command not found
+yangme16@dh2020pc18:~/209_repo/t10$ run randclient 127.0.0.1
+bash: run: command not found
+yangme16@dh2020pc18:~/209_repo/t10$ ./randclient 127.0.0.1
+connect: Connection refused
+yangme16@dh2020pc18:~/209_repo/t10$ ./randclient 127.0.0.1
+connect: Connection refused
+yangme16@dh2020pc18:~/209_repo/t10$ ./randclient 127.0.0.1
+yangme16@dh2020pc18:~/209_repo/t10$ ./randclient 127.0.0.1
+yangme16@dh2020pc18:~/209_repo/t10$ y[Kquit
+bash: quit: command not found
+yangme16@dh2020pc18:~/209_repo/t10$ exit
+exit
+
+Script done on Fri 22 Mar 2019 06:18:56 PM EDT

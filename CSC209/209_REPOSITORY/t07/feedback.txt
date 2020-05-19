@@ -1,0 +1,7 @@
+This tutorial only requires correctly completing 3 out of the 6 questions to receive a full grade.
+Q2 Expected:
+	Total orderings = 10
+Q4: Did not produce a valid diagram.
+
+Congratulations: You completed At least 3 of the questions correctly.
+3 / 3

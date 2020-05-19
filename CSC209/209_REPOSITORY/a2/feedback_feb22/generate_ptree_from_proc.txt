@@ -1,0 +1,45 @@
+.E.E
+======================================================================
+ERROR: test_treegen_in_proc_multiple_children_multiple_grandchildren (__main__.TestTreeGenerationProc)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 161, in _t
+    stdout, stderr, returncode = self._run_exec(args=args, input_=input_, timeout=timeout, check=check)
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 101, in _run_exec
+    **kwargs)
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 503, in _exec
+    raise e from e
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 499, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1515, in _communicate
+    self._check_timeout(endtime, orig_timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 871, in _check_timeout
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['./compare_tree', '1']' timed out after 2 seconds
+
+======================================================================
+ERROR: test_treegen_in_proc_one_child (__main__.TestTreeGenerationProc)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 161, in _t
+    stdout, stderr, returncode = self._run_exec(args=args, input_=input_, timeout=timeout, check=check)
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 101, in _run_exec
+    **kwargs)
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 503, in _exec
+    raise e from e
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 499, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1515, in _communicate
+    self._check_timeout(endtime, orig_timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 871, in _check_timeout
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['./compare_tree', '712']' timed out after 2 seconds
+
+----------------------------------------------------------------------
+Ran 4 tests in 4.111s
+
+FAILED (errors=2)

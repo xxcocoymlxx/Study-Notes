@@ -1,0 +1,25 @@
+E
+======================================================================
+ERROR: test_small_prime (__main__.SieveTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 161, in _t
+    stdout, stderr, returncode = self._run_exec(args=args, input_=input_, timeout=timeout, check=check)
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 101, in _run_exec
+    **kwargs)
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 506, in _exec
+    raise e from e
+  File "/home/furkan/csc209-w19/grading/mark_a3/marking_scripts/test_helpers.py", line 502, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1515, in _communicate
+    self._check_timeout(endtime, orig_timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 871, in _check_timeout
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['./pfact_fake', '39']' timed out after 5 seconds
+
+----------------------------------------------------------------------
+Ran 1 test in 5.013s
+
+FAILED (errors=1)

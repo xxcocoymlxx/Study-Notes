@@ -1,0 +1,15 @@
+design (6 / 7)
+  failed test_write_in_each_process
+
+output (11 / 11)
+
+
+arguments (5 / 5)
+
+
+filter (5 / 5)
+
+
+our_filter (0 / 2)
+  failed test_small_prime
+27.00 / 30

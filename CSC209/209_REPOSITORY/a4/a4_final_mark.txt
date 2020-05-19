@@ -1,0 +1,16 @@
+server_protocol (5 / 6)
+  failed test_server_accepts_ctrl_c
+
+jobs (3 / 3)
+
+
+run (5 / 7)
+  failed test_server_run__exec_with_args
+  failed test_server_run__stdout_only_sent_to_watching_client
+
+kill_and_watch (1 / 1)
+
+
+watch (0 / 1)
+  failed test_server_unwatch
+14.00 / 18

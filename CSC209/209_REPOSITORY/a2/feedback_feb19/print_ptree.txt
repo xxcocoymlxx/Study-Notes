@@ -1,0 +1,24 @@
+FF..........
+======================================================================
+FAIL: test_print_empty_name (__main__.TestCommandline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 190, in _t
+    self.assertEqual(stdout, expected_stdout)
+AssertionError: '29531: (null)\n' != '29531\n'
+- 29531: (null)
++ 29531
+
+
+======================================================================
+FAIL: test_print_empty_tree (__main__.TestCommandline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 193, in _t
+    self.assertEqual(returncode, expected_status)
+AssertionError: -11 != 0
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.092s
+
+FAILED (failures=2)

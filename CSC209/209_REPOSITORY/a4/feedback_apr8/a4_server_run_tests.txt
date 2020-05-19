@@ -1,0 +1,23 @@
+F....F.
+======================================================================
+FAIL: test_server_run__exec_with_args (__main__.TestServer)
+Send the server "run" with arguments. Output must reflect arguments.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_run_kill_test.py", line 82, in test_server_run__exec_with_args
+    self.assertIn('Argument: ArgProvided', stdoutput)
+AssertionError: 'Argument: ArgProvided' not found in '[SERVER] No such file or directory\n'
+
+======================================================================
+FAIL: test_server_run__stdout_only_sent_to_watching_client (__main__.TestServer)
+Run a job. Connect second client. Second client should get no messages.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_run_kill_test.py", line 54, in test_server_run__stdout_only_sent_to_watching_client
+    self.assertNotIn('Peter Piper', stdoutput)
+AssertionError: 'Peter Piper' unexpectedly found in '[JOB 18666] Peter Piper and Peppers\n[JOB 18666] Exited with status 0\n[SERVER] No currently running jobs\n'
+
+----------------------------------------------------------------------
+Ran 7 tests in 18.191s
+
+FAILED (failures=2)

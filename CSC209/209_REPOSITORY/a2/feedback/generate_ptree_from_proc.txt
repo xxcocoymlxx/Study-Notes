@@ -1,0 +1,35 @@
+.FFF
+======================================================================
+FAIL: test_treegen_in_proc_multiple_children_multiple_grandchildren (__main__.TestTreeGenerationProc)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 184, in _t
+    self.assertEqual(stderr, expected_stderr)
+AssertionError: 'the file /proc/3521 does not exist\n' != ''
+- the file /proc/3521 does not exist
+
+
+======================================================================
+FAIL: test_treegen_in_proc_no_children (__main__.TestTreeGenerationProc)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 184, in _t
+    self.assertEqual(stderr, expected_stderr)
+AssertionError: 'the file /proc/3523 does not exist\n' != ''
+- the file /proc/3523 does not exist
+
+
+======================================================================
+FAIL: test_treegen_in_proc_one_child (__main__.TestTreeGenerationProc)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 184, in _t
+    self.assertEqual(stderr, expected_stderr)
+AssertionError: 'the file /proc/3524 does not exist\n' != ''
+- the file /proc/3524 does not exist
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.104s
+
+FAILED (failures=3)

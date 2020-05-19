@@ -1,0 +1,3 @@
+No errors detected
+See checkpasswd_tests.txt for test output (9 out of 10 successful tests required to obtain 3/3).
+3.0 / 3.0

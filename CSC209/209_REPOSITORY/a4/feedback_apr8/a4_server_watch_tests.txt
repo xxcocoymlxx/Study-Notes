@@ -1,0 +1,14 @@
+F.
+======================================================================
+FAIL: test_server_unwatch (__main__.TestServer)
+watch a currently watched job.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_watch_test.py", line 33, in test_server_unwatch
+    self.assertIn('created', stdoutput)
+AssertionError: 'created' not found in ''
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.061s
+
+FAILED (failures=1)

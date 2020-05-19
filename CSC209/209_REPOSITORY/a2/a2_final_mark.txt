@@ -1,0 +1,13 @@
+commandline (9 / 9)
+
+
+print_ptree (9 / 9)
+
+
+generate_from_files (10 / 10)
+  failed test_treegen_in_tests_cmdline_args
+  failed test_treegen_in_tests_cmdline_not_exist
+
+generate_from_proc (2 / 2)
+
+30.00 / 30

@@ -1,0 +1,14 @@
+........F
+======================================================================
+FAIL: test_write_in_each_process (__main__.SieveDesignTest)
+Test that write is called by each process except the last.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "a3_design_tests.py", line 165, in test_write_in_each_process
+    any('write' in call[0] for call in self.trace_obj.process_log[pid]))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.030s
+
+FAILED (failures=1)

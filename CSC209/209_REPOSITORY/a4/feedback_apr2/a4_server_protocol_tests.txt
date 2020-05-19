@@ -1,0 +1,73 @@
+EEEE
+======================================================================
+ERROR: test_server_accepts_ctrl_c (__main__.TestServer)
+Server terminates cleanly (killing jobs and closing sockets) when ctrl-C is received.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 43, in test_server_accepts_ctrl_c
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+======================================================================
+ERROR: test_server_buffers_commands (__main__.TestServer)
+Client sends fragments of commands that should be pieced together. Requires "jobs" support.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 35, in test_server_buffers_commands
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+======================================================================
+ERROR: test_server_recognizes_invalid_command (__main__.TestServer)
+Send the server a mis-formatted command from a client. Verify that it responds with "Invalid command: %s"
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 19, in test_server_recognizes_invalid_command
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+======================================================================
+ERROR: test_server_response_includes_network_newline (__main__.TestServer)
+Verify that the response sent has a network newline
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 27, in test_server_response_includes_network_newline
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+----------------------------------------------------------------------
+Ran 4 tests in 4.045s
+
+FAILED (errors=4)

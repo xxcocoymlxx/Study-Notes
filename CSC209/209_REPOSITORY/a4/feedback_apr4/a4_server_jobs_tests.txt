@@ -1,0 +1,14 @@
+F.
+======================================================================
+FAIL: test_server_jobs__multiple_running_jobs (__main__.TestServer)
+Send the server "jobs" after starting two long-running jobs. Response should include created pids
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_jobs_test.py", line 44, in test_server_jobs__multiple_running_jobs
+    self.assertTrue(pidcount == 2)
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.046s
+
+FAILED (failures=1)

@@ -1,0 +1,62 @@
+====================START TEST 1 (pp_marks.sh)
+In this test, all assignment/tutorial directories and feedback.txt files are present.
+Expected Results: 
+Assignment Total: 44 / 60
+Tutorial Total: 11 / 33
+
+Output received:
+a1: 10 / 15
+a2: 12 / 15
+a3: 10 / 15
+a4: 12 / 15
+
+t01: 1 / 3
+t02: 1 / 3
+t03: 1 / 3
+t04: 1 / 3
+t05: 1 / 3
+t06: 1 / 3
+t07: 1 / 3
+t08: 1 / 3
+t09: 1 / 3
+t10: 1 / 3
+t11: 1 / 3
+
+Assignment Total: 44 / 60
+Tutorial Total: 11 / 33
+
+SUCCESS: script output is correct.
+====================END TEST
+
+====================START TEST 2 (pp_marks.sh)
+In this test, some assignment/tutorial directories and feedback.txt files are missing.
+Output received:
+a1: 10 / 15
+a2: - / -
+a3: - / -
+a4: 10 / 15
+
+t01: 1 / 3
+t02: 1 / 3
+t03: 1 / 3
+t04: - / -
+t05: 1 / 3
+t06: 1 / 3
+t07: - / -
+t08: 1 / 3
+t09: 1 / 3
+t10: 1 / 3
+t11: 1 / 3
+
+Assignment Total: 20 / 30
+Tutorial Total: 9 / 27
+
+SUCCESS: Output is correct.
+====================END TEST
+
+====================START TEST 1 (gdb)
+SUCCESS: Ran gdb and set a breakpoint.
+====================END TEST
+
+No errors detected
+3 / 3

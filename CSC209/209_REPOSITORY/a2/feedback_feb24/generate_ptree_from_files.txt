@@ -1,0 +1,25 @@
+......F.F..........
+======================================================================
+FAIL: test_treegen_in_tests_cmdline_args (__main__.TestTreeGeneration)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 190, in _t
+    self.assertEqual(stdout, expected_stdout)
+AssertionError: 'Encountered incorrect process name when traversing through tree.\n' != '1'
+- Encountered incorrect process name when traversing through tree.
++ 1
+
+======================================================================
+FAIL: test_treegen_in_tests_cmdline_not_exist (__main__.TestTreeGeneration)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/furkan/csc209-w19/grading/mark_a2/marking_scripts/test_helpers.py", line 190, in _t
+    self.assertEqual(stdout, expected_stdout)
+AssertionError: 'Encountered a non-NULL next_siblin[216 chars]t.\n' != '1'
+- Encountered a non-NULL next_sibling or child_procs pointer which was supposed to be NULL (the next_sibling pointer of the last sibling, or the child_procs pointer of a process with no children, should be NULL); Possible reason: Extra TreeNodes present.
++ 1
+
+----------------------------------------------------------------------
+Ran 19 tests in 0.118s
+
+FAILED (failures=2)

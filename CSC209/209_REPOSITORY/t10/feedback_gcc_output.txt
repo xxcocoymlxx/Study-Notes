@@ -1,0 +1,7 @@
+gcc -DPORT=30001 -g -Wall -std=gnu99 -c readserver.c
+gcc -DPORT=30001 -g -Wall -std=gnu99 -c socket.c
+gcc -DPORT=30001 -g -Wall -std=gnu99 -o readserver readserver.o socket.o
+gcc -DPORT=30001 -g -Wall -std=gnu99 -c randclient.c
+gcc -DPORT=30001 -g -Wall -std=gnu99 -o randclient randclient.o socket.o
+gcc -DPORT=30001 -g -Wall -std=gnu99 -c bufserver.c
+gcc -DPORT=30001 -g -Wall -std=gnu99 -o bufserver bufserver.o socket.o

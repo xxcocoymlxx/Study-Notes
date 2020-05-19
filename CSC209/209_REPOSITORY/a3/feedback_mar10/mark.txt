@@ -1,0 +1,3 @@
+make_stage: does not call fork and pipe exactly once each.
+make_stage: does not call close exactly 4 times.
+filter: should NOT close either file descriptor.

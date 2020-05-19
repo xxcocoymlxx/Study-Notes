@@ -1,0 +1,23 @@
+F.......F
+======================================================================
+FAIL: test_all_pipes_are_closed (__main__.SieveDesignTest)
+Assert pipes are closed.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "a3_design_tests.py", line 120, in test_all_pipes_are_closed
+    self.assertGreaterEqual(counter, 2)
+AssertionError: 0 not greater than or equal to 2
+
+======================================================================
+FAIL: test_write_in_each_process (__main__.SieveDesignTest)
+Test that write is called by each process except the last.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "a3_design_tests.py", line 165, in test_write_in_each_process
+    any('write' in call[0] for call in self.trace_obj.process_log[pid]))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.060s
+
+FAILED (failures=2)

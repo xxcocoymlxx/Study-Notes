@@ -1,0 +1,14 @@
+F...
+======================================================================
+FAIL: test_server_accepts_ctrl_c (__main__.TestServer)
+Server terminates cleanly (killing jobs and closing sockets) when ctrl-C is received.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_test.py", line 51, in test_server_accepts_ctrl_c
+    self.assertIn("[SERVER] Shutting down", stdoutput)
+AssertionError: '[SERVER] Shutting down' not found in ''
+
+----------------------------------------------------------------------
+Ran 4 tests in 9.121s
+
+FAILED (failures=1)

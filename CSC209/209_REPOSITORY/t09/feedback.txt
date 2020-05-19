@@ -1,0 +1,5 @@
+1sec run: 393883 reads were done in 1 seconds. 741198 reads were done in 1 seconds. 1108921 reads were done in 1 seconds. 1752738 reads were done in 1 seconds. 2550889 reads were done in 1 seconds. 3345498 reads were done in 1 seconds. 4145278 reads were done in 1 seconds. 4919788 reads were done in 1 seconds.
+2sec run: 787092 reads were done in 2 seconds. 2002823 reads were done in 2 seconds. 3194979 reads were done in 2 seconds.
+4919788 vs 3194979  -- time_read values did not scale appropriately (but no marks deducted)
+No errors detected
+3 / 3

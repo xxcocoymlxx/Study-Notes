@@ -1,0 +1,39 @@
+EE
+======================================================================
+ERROR: test_server_unwatch (__main__.TestServer)
+watch a currently watched job.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_watch_test.py", line 29, in test_server_unwatch
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+======================================================================
+ERROR: test_server_watch (__main__.TestServer)
+Second client watching.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_watch_test.py", line 18, in test_server_watch
+    with ongoing_process([os.path.join('.', 'jobserver')]) as p:
+  File "/usr/lib/python3.6/contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 530, in ongoing_process
+    shell=shell
+  File "/usr/lib/python3.6/subprocess.py", line 709, in __init__
+    restore_signals, start_new_session)
+  File "/usr/lib/python3.6/subprocess.py", line 1344, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: './jobserver': './jobserver'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.034s
+
+FAILED (errors=2)

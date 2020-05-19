@@ -1,0 +1,43 @@
+EE
+======================================================================
+ERROR: test_server_kill__no_running_jobs (__main__.TestServer)
+Send the server kill with invalid PID. Receive "Job %d not found".
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_kill_watch_test.py", line 21, in test_server_kill__no_running_jobs
+    stdoutput, stderror, status = _exec(['./jobclient1', 'kill 42'])
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 509, in _exec
+    raise e from e
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 503, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1515, in _communicate
+    self._check_timeout(endtime, orig_timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 871, in _check_timeout
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['./jobclient1', 'kill 42']' timed out after 10 seconds
+
+======================================================================
+ERROR: test_server_kill__valid_job (__main__.TestServer)
+Send the server kill with valid PID. Received "exited due to signal"
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "server_kill_watch_test.py", line 33, in test_server_kill__valid_job
+    stdoutput, stderror, status = _exec(['./jobclient1', 'watch {}'.format(pid), 'kill {}'.format(pid)])
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 509, in _exec
+    raise e from e
+  File "/home/furkan/csc209-w19/grading/mark_a4/marking_scripts/test_helpers.py", line 503, in _exec
+    stdout, stderr = proc.communicate(timeout=timeout, input=input_)
+  File "/usr/lib/python3.6/subprocess.py", line 843, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 1515, in _communicate
+    self._check_timeout(endtime, orig_timeout)
+  File "/usr/lib/python3.6/subprocess.py", line 871, in _check_timeout
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['./jobclient1', 'watch 25927', 'kill 25927']' timed out after 10 seconds
+
+----------------------------------------------------------------------
+Ran 2 tests in 22.061s
+
+FAILED (errors=2)
