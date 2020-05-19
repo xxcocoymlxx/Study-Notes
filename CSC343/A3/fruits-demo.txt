@@ -1,0 +1,80 @@
+
+dbsrv1:~/csc343db$ 
+dbsrv1:~/csc343db$ 
+dbsrv1:~/csc343db$ 
+dbsrv1:~/csc343db$ psql csc343h-yangme16
+psql (9.5.18)
+Type "help" for help.
+
+csc343h-yangme16=> \i fruits.ddl
+psql:fruits.ddl:10: NOTICE:  drop cascades to 6 other objects
+DETAIL:  drop cascades to table fruits.store
+drop cascades to table fruits.membership
+drop cascades to type fruits.drink_size
+drop cascades to table fruits.beverage
+drop cascades to table fruits.orders
+drop cascades to table fruits.beverage_inventory
+DROP SCHEMA
+CREATE SCHEMA
+SET
+CREATE TABLE
+CREATE TABLE
+CREATE TYPE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 3
+INSERT 0 5
+INSERT 0 5
+INSERT 0 5
+INSERT 0 5
+csc343h-yangme16=> select * from store;
+   city    | phone_number | manager 
+-----------+--------------+---------
+ Vancouver | 6896678372   | Mark
+ Toronto   | 6897382672   | Larry
+ Quebec    | 6896671111   | Arnold
+(3 rows)
+
+csc343h-yangme16=> select * from beverage;
+   name   |  size   | price | calories 
+----------+---------+-------+----------
+ kiwilime | large   |  7.56 |      900
+ kiwilime | regular |  5.33 |      700
+ apple    | large   |  6.58 |      850
+ apple    | regular |  4.97 |      650
+ orange   | regular |  5.12 |      700
+(5 rows)
+
+csc343h-yangme16=> select * from orders;
+ id | beverage_name | beverage_size | loyalty_card_id | order_date 
+----+---------------+---------------+-----------------+------------
+  1 | apple         | regular       |            1234 | 2018-05-06
+  2 | kiwilime      | large         |            1234 | 2018-05-06
+  3 | orange        | regular       |            7891 | 2018-08-03
+  4 | apple         | regular       |            2468 | 2018-07-07
+  5 | orange        | regular       |            1396 | 2018-06-19
+(5 rows)
+
+csc343h-yangme16=> select * from membership;
+  id  | transaction_number | home_store 
+------+--------------------+------------
+ 1234 |                 56 | Vancouver
+ 2468 |                 38 | Toronto
+ 7891 |                 24 | Quebec
+ 1396 |                 11 | Toronto
+ 5468 |                 29 | Vancouver
+(5 rows)
+
+csc343h-yangme16=> select * from beverage_inventory;
+   city    | order_id | beverage_count 
+-----------+----------+----------------
+ Toronto   |        4 |             41
+ Quebec    |        3 |             62
+ Vancouver |        1 |             42
+ Vancouver |        2 |             68
+ Toronto   |        5 |             61
+(5 rows)
+
+csc343h-yangme16=> \q
+dbsrv1:~/csc343db$ 
