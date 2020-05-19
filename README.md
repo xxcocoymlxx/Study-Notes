@@ -2,8 +2,8 @@
 
 Some of my study notes for courses I've taken.
 
-CSC108: Introduction to Computer Programming
-CSC148: Introduction to Computer Science
+- CSC108: Introduction to Computer Programming
+- CSC148: Introduction to Computer Science
 CSC207: Software Design
 CSC209: Software Tools and Systems Programming
 CSC236: Introduction to the Theory of Computation
